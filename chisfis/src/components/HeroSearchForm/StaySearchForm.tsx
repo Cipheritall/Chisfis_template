@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from "react";
 import LocationInput from "./LocationInput";
+import FromLocationInput from "./FromLocationInput";
+import setOnHou from "./FromLocationInput";
+
 import GuestsInput, { GuestsInputProps } from "./GuestsInput";
 import { FocusedInputShape } from "react-dates";
 import StayDatesRangeInput from "./StayDatesRangeInput";
@@ -56,20 +59,25 @@ const StaySearchForm: FC<StaySearchFormProps> = ({
     return (
       <form className="w-full relative mt-8 flex flex-col md:flex-row md:items-center rounded-3xl lg:rounded-full shadow-xl dark:shadow-2xl bg-white dark:bg-neutral-900 divide-y divide-neutral-200 md:divide-y-0">
         <LocationInput
-          defaultValue={locationInputValue}
-          onChange={(e) => setLocationInputValue(e)}
+          defaultValue="To"
           onInputDone={() => setDateFocused("startDate")}
         />
-        <StayDatesRangeInput
+        
+        {/* <StayDatesRangeInput
           defaultValue={dateRangeValue}
           defaultFocus={dateFocused}
           onFocusChange={(focus) => setDateFocused(focus)}
           onChange={(data) => setDateRangeValue(data)}
+        /> */}
+        
+         <FromLocationInput
+          defaultValue="From"
+          onInputDone={() => setDateFocused("startDate")}
         />
-        <GuestsInput
+        {/* <GuestsInput
           defaultValue={guestValue}
           onChange={(data) => setGuestValue(data)}
-        />
+        /> */}
         {/* BUTTON SUBMIT OF FORM */}
         <div className="px-4 py-4 lg:py-0">
           <ButtonSubmit />

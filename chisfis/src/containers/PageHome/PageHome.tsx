@@ -131,13 +131,13 @@ function PageHome() {
 
       <div className="container relative space-y-24 mb-24 lg:space-y-32 lg:mb-32">
         {/* SECTION HERO */}
-        <SectionHero className="pt-10 lg:pt-28 pb-16" />
+        <SectionHero className="pt-10 lg:pt-32 pb-16" />
 
         {/* SECTION 1 */}
-        <SectionSliderNewCategories categories={DEMO_CATS} />
+        {/* <SectionSliderNewCategories categories={DEMO_CATS} /> */}
 
         {/* SECTION2 */}
-        <SectionOurFeatures />
+        {/* <SectionOurFeatures /> */}
 
         {/* SECTION */}
         <div className="relative py-16">

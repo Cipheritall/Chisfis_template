@@ -66,6 +66,10 @@ const LocationInput: FC<LocationInputProps> = ({
     // CLICK OUT_SIDE
     setShowPopover(false);
   };
+  const setOnHou = () => {
+    alert("a");
+  };
+  
 
   const handleSelectLocation = (item: string) => {
     setValue(item);
@@ -77,7 +81,7 @@ const LocationInput: FC<LocationInputProps> = ({
     return (
       <>
         <h3 className="block mt-2 sm:mt-0 px-4 sm:px-8 font-semibold text-base sm:text-lg text-neutral-800 dark:text-neutral-100">
-          Recent searches
+          {/* Recent searches */}
         </h3>
         <div className="mt-2">
           {[
@@ -87,8 +91,8 @@ const LocationInput: FC<LocationInputProps> = ({
             "Ikebukuro, Toshima, Tokyo",
           ].map((item) => (
             <span
-              onClick={() => handleSelectLocation(item)}
-              key={item}
+              // onClick={() => handleSelectLocation(item)}
+              // key={item}
               className="flex px-4 sm:px-8 items-center space-x-3 sm:space-x-4 py-4 sm:py-5 hover:bg-neutral-100 dark:hover:bg-neutral-700 cursor-pointer"
             >
               <span className="block text-neutral-400">
@@ -195,25 +199,23 @@ const LocationInput: FC<LocationInputProps> = ({
         <div className="flex-grow">
           <input
             className={`block w-full bg-transparent border-none focus:ring-0 p-0 focus:outline-none focus:placeholder-neutral-300 xl:text-lg font-semibold placeholder-neutral-800 dark:placeholder-neutral-200 truncate`}
-            placeholder={placeHolder}
+            placeholder="To"
             value={value}
             autoFocus={showPopover}
             onChange={(e) => setValue(e.currentTarget.value)}
             ref={inputRef}
           />
-          <span className="block mt-0.5 text-sm text-neutral-400 font-light ">
-            <span className="line-clamp-1">{!!value ? placeHolder : desc}</span>
-          </span>
+          
           {value && showPopover && (
             <ClearDataButton onClick={() => setValue("")} />
           )}
         </div>
       </div>
-      {showPopover && (
+      {/* {showPopover && (
         <div className="absolute left-0 z-40 w-full min-w-[300px] sm:min-w-[500px] bg-white dark:bg-neutral-800 top-full mt-3 py-3 sm:py-6 rounded-3xl shadow-xl max-h-96 overflow-y-auto">
-          {value ? renderSearchValue() : renderRecentSearches()}
+          {value ? renderSearchValue() : renderSearchValue()}
         </div>
-      )}
+      )} */}
     </div>
   );
 };

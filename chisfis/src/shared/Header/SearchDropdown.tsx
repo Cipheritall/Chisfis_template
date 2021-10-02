@@ -2,6 +2,7 @@ import { Popover, Transition } from "@headlessui/react";
 import Input from "shared/Input/Input";
 import React, { Fragment } from "react";
 
+
 const SearchDropdown = () => {
   const inputRef = React.createRef<HTMLInputElement>();
 
@@ -35,14 +36,8 @@ const SearchDropdown = () => {
                   static
                   className="absolute right-0 z-10 w-screen max-w-sm mt-3"
                 >
-                  <form action="" method="POST">
-                    <Input
-                      ref={inputRef}
-                      type="search"
-                      placeholder="Type and press enter"
-                    />
-                    <input type="submit" hidden value="" />
-                  </form>
+                  
+                  
                 </Popover.Panel>
               </Transition>
             </>
