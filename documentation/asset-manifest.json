@@ -1,0 +1,27 @@
+{
+  "files": {
+    "main.css": "./static/css/main.e901b993.chunk.css",
+    "main.js": "./static/js/main.74d5ae7b.chunk.js",
+    "main.js.map": "./static/js/main.74d5ae7b.chunk.js.map",
+    "runtime-main.js": "./static/js/runtime-main.5898d5d9.js",
+    "runtime-main.js.map": "./static/js/runtime-main.5898d5d9.js.map",
+    "static/js/2.e522f8e8.chunk.js": "./static/js/2.e522f8e8.chunk.js",
+    "static/js/2.e522f8e8.chunk.js.map": "./static/js/2.e522f8e8.chunk.js.map",
+    "static/js/3.8ac47f39.chunk.js": "./static/js/3.8ac47f39.chunk.js",
+    "static/js/3.8ac47f39.chunk.js.map": "./static/js/3.8ac47f39.chunk.js.map",
+    "index.html": "./index.html",
+    "static/css/main.e901b993.chunk.css.map": "./static/css/main.e901b993.chunk.css.map",
+    "static/js/2.e522f8e8.chunk.js.LICENSE.txt": "./static/js/2.e522f8e8.chunk.js.LICENSE.txt",
+    "static/media/install1.d93a7147.png": "./static/media/install1.d93a7147.png",
+    "static/media/install2.cf48a527.png": "./static/media/install2.cf48a527.png",
+    "static/media/install3.42f389ea.png": "./static/media/install3.42f389ea.png",
+    "static/media/install4.883b1309.png": "./static/media/install4.883b1309.png",
+    "static/media/logo.c6afcaa5.svg": "./static/media/logo.c6afcaa5.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.5898d5d9.js",
+    "static/js/2.e522f8e8.chunk.js",
+    "static/css/main.e901b993.chunk.css",
+    "static/js/main.74d5ae7b.chunk.js"
+  ]
+}
