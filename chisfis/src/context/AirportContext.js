@@ -12,7 +12,7 @@ export const AirportProvider = ({ children }) => {
       const querySnapshot = await getDocs(q);
       querySnapshot.forEach((doc) => {
         // doc.data() is never undefined for query doc snapshots
-        console.log(doc.id, " => ", doc.data());
+        // console.log(doc.id, " => ", doc.data());
         setAirports({ id: doc.id, ...doc.data() });
       });
     } catch (err) {
@@ -20,7 +20,7 @@ export const AirportProvider = ({ children }) => {
     }
   };
   useEffect(() => {
-    getAairportData();
+    // getAairportData();
   }, []);
   return (
     <AirportContext.Provider value={{ airports }}>
