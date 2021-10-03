@@ -23,6 +23,7 @@
     "Account": "^0.0.0",
     "add": "^2.0.6",
     "component": "^1.1.0",
+    "firebase": "^9.1.1",
     "google-map-react": "^2.1.10",
     "moment": "^2.29.1",
     "react": "^17.0.2",
