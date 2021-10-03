@@ -47,7 +47,9 @@ const StaySearchForm: FC<StaySearchFormProps> = ({
     null
   );
 
-  const airpots = useContext(AirportContext);
+  const airports = useContext(AirportContext);
+  //console.log(airports);
+
   const [searchToResults, setSearchToResults] = useState([]);
   const [searchFromResults, setSearchFromResults] = useState([]);
 
@@ -66,7 +68,7 @@ const StaySearchForm: FC<StaySearchFormProps> = ({
 
     let searchToResults = [];
     if (value) {
-      searchToResults = sampleAirpots.filter((v) =>
+      searchToResults = airports.filter((v) =>
         v.name.toLowerCase().startsWith(value.toLowerCase())
       );
     }
@@ -78,7 +80,7 @@ const StaySearchForm: FC<StaySearchFormProps> = ({
 
     let searchFromResults = [];
     if (value) {
-      searchFromResults = sampleAirpots.filter((v) =>
+      searchFromResults = airports.filter((v) =>
         v.name.toLowerCase().startsWith(value.toLowerCase())
       );
     }
@@ -87,9 +89,9 @@ const StaySearchForm: FC<StaySearchFormProps> = ({
 
   const renderForm = () => {
     return (
-      <form className='w-full relative mt-8 flex flex-col md:flex-row md:items-center rounded-3xl lg:rounded-full shadow-xl dark:shadow-2xl bg-white dark:bg-neutral-900 divide-y divide-neutral-200 md:divide-y-0'>
+      <form className="w-full relative mt-8 flex flex-col md:flex-row md:items-center rounded-3xl lg:rounded-full shadow-xl dark:shadow-2xl bg-white dark:bg-neutral-900 divide-y divide-neutral-200 md:divide-y-0">
         <LocationInput
-          defaultValue=''
+          defaultValue=""
           onInputDone={() => setDateFocused("startDate")}
           onChange={(value) => handleToChange(value)}
           searchResults={searchToResults}
@@ -103,7 +105,7 @@ const StaySearchForm: FC<StaySearchFormProps> = ({
         />
 
         <FromLocationInput
-          defaultValue=''
+          defaultValue=""
           onInputDone={() => setDateFocused("startDate")}
           onChange={(value) => handleFromChange(value)}
           searchResults={searchFromResults}
@@ -113,7 +115,7 @@ const StaySearchForm: FC<StaySearchFormProps> = ({
           onChange={(data) => setGuestValue(data)}
         /> */}
         {/* BUTTON SUBMIT OF FORM */}
-        <div className='px-4 py-4 lg:py-0'>
+        <div className="px-4 py-4 lg:py-0">
           <ButtonSubmit />
         </div>
       </form>

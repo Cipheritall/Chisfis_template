@@ -6,6 +6,7 @@ export const AirportContext = createContext({});
 
 export const AirportProvider = ({ children }) => {
   const [airports, setAirports] = useState([]);
+  let tempArr = [];
   const getAairportData = async () => {
     try {
       const q = query(collection(db, "users"));
@@ -13,15 +14,18 @@ export const AirportProvider = ({ children }) => {
       querySnapshot.forEach((doc) => {
         // doc.data() is never undefined for query doc snapshots
         // console.log(doc.id, " => ", doc.data());
-        setAirports({ id: doc.id, ...doc.data() });
+        tempArr.push({ id: doc.id, ...doc.data() });
+        //console.log(airports);
       });
+      setAirports(tempArr);
+      //console.log(airports);
     } catch (err) {
       console.log(err);
     }
   };
   useEffect(() => {
-    // getAairportData();
-  }, []);
+    getAairportData();
+  }, [airports]);
   return (
     <AirportContext.Provider value={{ airports }}>
       {children}
