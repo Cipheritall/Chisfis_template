@@ -11,6 +11,8 @@ import moment from "moment";
 import { FC, useContext } from "react";
 import { AirportContext } from "context/AirportContext";
 import { FilterIcon } from "@heroicons/react/solid";
+import { collection, query, where } from "firebase/firestore";
+import { db } from "firebase";
 
 export interface DateRage {
   startDate: moment.Moment | null;
@@ -47,7 +49,7 @@ const StaySearchForm: FC<StaySearchFormProps> = ({
     null
   );
 
-  const airports = useContext(AirportContext);
+  //const airports = useContext(AirportContext);
   //console.log(airports);
 
   const [searchToResults, setSearchToResults] = useState([]);
@@ -63,16 +65,21 @@ const StaySearchForm: FC<StaySearchFormProps> = ({
   }, []);
   //
 
-  const handleToChange = (value) => {
+  const handleToChange = async(value) => {
     // console.log(sampleAirpots);
+const citiesRef = await collection(db, "users");
+const q = await query(citiesRef, where("name", ">=" , value) , where("name", "<=", value + "\uf8ff")
+);
+
+console.log(q);
 
     let searchToResults = [];
     if (value) {
-      searchToResults = airports.filter((v) =>
+      searchToResults = sampleAirpots.filter((v) =>
         v.name.toLowerCase().startsWith(value.toLowerCase())
       );
     }
-    setSearchToResults(searchToResults);
+    //setSearchToResults();
   };
 
   const handleFromChange = (value) => {
@@ -80,7 +87,7 @@ const StaySearchForm: FC<StaySearchFormProps> = ({
 
     let searchFromResults = [];
     if (value) {
-      searchFromResults = airports.filter((v) =>
+      searchFromResults = sampleAirpots.filter((v) =>
         v.name.toLowerCase().startsWith(value.toLowerCase())
       );
     }
