@@ -3,7 +3,7 @@ import MyRouter from "routers/index";
 import { db } from "./firebase";
 
 import { collection, addDoc } from "firebase/firestore";
-import { AirportProvider } from "context/AirportContext";
+// import { AirportProvider } from "context/AirportContext";
 const airports = require("./airports.json");
 function App() {
   // const addData = () => {
