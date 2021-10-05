@@ -74,34 +74,32 @@ const StayDatesRangeInput: FC<StayDatesRangeInputProps> = ({
     const focused = focusedInput === "startDate";
     return (
       <div
-        className={`relative flex flex-1 ${fieldClassName} flex-shrink-0 items-center space-x-3 cursor-pointer ${
+        className={`relative flex ${fieldClassName} flex-shrink-0 items-center space-x-3 cursor-pointer ${
           focused ? "shadow-2xl rounded-full dark:bg-neutral-800" : " "
         }`}
-        onClick={() => handleDateFocusChange("startDate")}
-      >
-        <div className="text-neutral-300 dark:text-neutral-400">
+        onClick={() => handleDateFocusChange("startDate")}>
+        <div className='text-neutral-300 dark:text-neutral-400'>
           <svg
-            xmlns="http://www.w3.org/2000/svg"
-            className="nc-icon-field"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
+            xmlns='http://www.w3.org/2000/svg'
+            className='nc-icon-field'
+            fill='none'
+            viewBox='0 0 24 24'
+            stroke='currentColor'>
             <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
+              strokeLinecap='round'
+              strokeLinejoin='round'
               strokeWidth={1.5}
-              d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
+              d='M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z'
             />
           </svg>
         </div>
-        <div className="flex-grow">
-          <span className="block xl:text-lg font-semibold">
+        <div className='flex-grow'>
+          <span className='block xl:text-lg font-semibold'>
             {stateDate.startDate
               ? stateDate.startDate.format("DD MMM")
               : "Check in"}
           </span>
-          <span className="block mt-1 text-sm text-neutral-400 leading-none font-light">
+          <span className='block mt-1 text-sm text-neutral-400 leading-none font-light'>
             {stateDate.startDate ? "Check in" : `Add date`}
           </span>
           {stateDate.startDate && focused && (
@@ -116,34 +114,32 @@ const StayDatesRangeInput: FC<StayDatesRangeInputProps> = ({
     const focused = focusedInput === "endDate";
     return (
       <div
-        className={`relative flex flex-1 ${fieldClassName} flex-shrink-0 items-center space-x-3 cursor-pointer ${
+        className={`relative flex ${fieldClassName} flex-shrink-0 items-center space-x-3 cursor-pointer ${
           focused ? "shadow-2xl rounded-full dark:bg-neutral-800" : " "
         }`}
-        onClick={() => handleDateFocusChange("endDate")}
-      >
-        <div className="text-neutral-300 dark:text-neutral-400">
+        onClick={() => handleDateFocusChange("endDate")}>
+        <div className='text-neutral-300 dark:text-neutral-400'>
           <svg
-            xmlns="http://www.w3.org/2000/svg"
-            className="nc-icon-field"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
+            xmlns='http://www.w3.org/2000/svg'
+            className='nc-icon-field'
+            fill='none'
+            viewBox='0 0 24 24'
+            stroke='currentColor'>
             <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
+              strokeLinecap='round'
+              strokeLinejoin='round'
               strokeWidth={1.5}
-              d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
+              d='M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z'
             />
           </svg>
         </div>
-        <div className="flex-grow">
-          <span className="block xl:text-lg font-semibold">
+        <div className='flex-grow'>
+          <span className='block xl:text-lg font-semibold'>
             {stateDate.endDate
               ? stateDate.endDate.format("DD MMM")
               : "Check out"}
           </span>
-          <span className="block mt-1 text-sm text-neutral-400 leading-none font-light">
+          <span className='block mt-1 text-sm text-neutral-400 leading-none font-light'>
             {stateDate.endDate ? "Check out" : `Add date`}
           </span>
           {stateDate.endDate && focused && (
@@ -155,8 +151,8 @@ const StayDatesRangeInput: FC<StayDatesRangeInputProps> = ({
   };
 
   return (
-    <div className="relative flex-shrink-0 flex z-10 [ lg:nc-flex-2 ] ">
-      <div className="absolute inset-x-0 bottom-0">
+    <div className='relative flex-shrink-0 flex z-10 [ lg:nc-flex-2 ] '>
+      <div className='absolute inset-x-0 bottom-0'>
         <DateRangePicker
           startDate={stateDate.startDate}
           endDate={stateDate.endDate}
@@ -179,8 +175,7 @@ const StayDatesRangeInput: FC<StayDatesRangeInputProps> = ({
       </div>
 
       <div
-        className={`flex flex-col lg:flex-row lg:items-center w-full flex-shrink-0 relative  ${wrapClassName}`}
-      >
+        className={`flex flex-col lg:flex-row lg:items-center w-full flex-shrink-0 relative  ${wrapClassName}`}>
         {renderInputCheckInDate()}
 
         {renderInputCheckOutDate()}
