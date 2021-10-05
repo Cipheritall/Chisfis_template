@@ -21,8 +21,10 @@ export interface SectionGridFeaturePlacesProps {
 const SectionGridFeaturePlaces: FC<SectionGridFeaturePlacesProps> = ({
   stayListings = DEMO_DATA,
   gridClass = "",
-  heading = "Featured places to stay",
-  subHeading = "Popular places to stay that Chisfis recommends for you",
+  heading = "Discounted COVID-19 tests",
+  subHeading = ` We’ve brought together a number of options with exclusive discounts to help you book the test you 
+  need to travel easily and safely. The table below shows the types of tests available from each supplier 
+  and their discount codes. Tests are PCR unless otherwise indicated`,
   headingIsCenter,
   tabs = ["New York", "Tokyo", "Paris", "London"],
 }) => {
@@ -31,7 +33,7 @@ const SectionGridFeaturePlaces: FC<SectionGridFeaturePlacesProps> = ({
   };
 
   return (
-    <div className="nc-SectionGridFeaturePlaces relative">
+    <div className='nc-SectionGridFeaturePlaces relative'>
       <HeaderFilter
         tabActive={"New York"}
         subHeading={subHeading}
@@ -40,11 +42,10 @@ const SectionGridFeaturePlaces: FC<SectionGridFeaturePlacesProps> = ({
         onClickTab={() => {}}
       />
       <div
-        className={`grid gap-6 md:gap-8 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 ${gridClass}`}
-      >
+        className={`grid gap-6 md:gap-8 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 ${gridClass}`}>
         {DEMO_DATA.map((stay) => renderCard(stay))}
       </div>
-      <div className="flex mt-16 justify-center items-center">
+      <div className='flex mt-16 justify-center items-center'>
         <ButtonPrimary>Show me more</ButtonPrimary>
       </div>
     </div>

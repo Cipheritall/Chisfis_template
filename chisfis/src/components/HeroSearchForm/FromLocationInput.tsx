@@ -12,7 +12,12 @@ export interface LocationInputProps {
   desc?: string;
   className?: string;
   autoFocus?: boolean;
-  searchResults?: { code: string; name: string }[];
+  searchResults?: {
+    code: string;
+    country: string;
+    city: string;
+    name: string;
+  }[];
 }
 
 const LocationInput: FC<LocationInputProps> = ({
@@ -122,8 +127,8 @@ const LocationInput: FC<LocationInputProps> = ({
       <>
         {searchResults.map((item) => (
           <span
-            onClick={() => handleSelectLocation(item.name)}
-            key={item.name}
+            onClick={() => handleSelectLocation(item.city)}
+            key={item.code}
             className='flex px-4 sm:px-8 items-center space-x-3 sm:space-x-4 py-4 sm:py-5 hover:bg-neutral-100 dark:hover:bg-neutral-700 cursor-pointer'>
             <span className='block text-neutral-400'>
               <svg
@@ -147,7 +152,7 @@ const LocationInput: FC<LocationInputProps> = ({
               </svg>
             </span>
             <span className='block font-medium text-neutral-700 dark:text-neutral-200'>
-              {item.name}
+              {item.city}
             </span>
           </span>
         ))}
@@ -198,7 +203,7 @@ const LocationInput: FC<LocationInputProps> = ({
           )}
         </div>
       </div>
-      {showPopover && (
+      {value && showPopover && (
         <div className='absolute left-0 z-40 w-full min-w-[300px] sm:min-w-[500px] bg-white dark:bg-neutral-800 top-full mt-3 py-3 sm:py-6 rounded-3xl shadow-xl max-h-96 overflow-y-auto'>
           {value ? renderSearchValue() : renderSearchValue()}
         </div>
