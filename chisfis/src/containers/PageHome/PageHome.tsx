@@ -122,16 +122,16 @@ const DEMO_CATS_2: TaxonomyType[] = [
 
 function PageHome() {
   return (
-    <div className="nc-PageHome relative overflow-hidden">
+    <div className='nc-PageHome relative overflow-hidden'>
       <Helmet>
         <title>Chisfis || Booking React Template</title>
       </Helmet>
       {/* GLASSMOPHIN */}
       <BgGlassmorphism />
 
-      <div className="container relative space-y-24 mb-24 lg:space-y-32 lg:mb-32">
+      <div className='container relative space-y-24 mb-24 lg:space-y-32 lg:mb-32'>
         {/* SECTION HERO */}
-        <SectionHero className="pt-10 lg:pt-32 pb-16" />
+        <SectionHero className='pt-10 lg:pt-32 pb-16' />
 
         {/* SECTION 1 */}
         {/* <SectionSliderNewCategories categories={DEMO_CATS} /> */}
@@ -140,24 +140,29 @@ function PageHome() {
         {/* <SectionOurFeatures /> */}
 
         {/* SECTION */}
-        <div className="relative py-16">
+
+        <div className='relative py-16'>
+          <BackgroundSection />
+          <SectionHowItWork />
+        </div>
+
+        {/* SECTION 1 */}
+
+        {/* SECTION */}
+        <div className='relative py-16'>
           <BackgroundSection />
           <SectionGridFeaturePlaces />
         </div>
 
-        {/* SECTION */}
-        <SectionHowItWork />
-
-        {/* SECTION 1 */}
-        <div className="relative py-16">
-          <BackgroundSection className="bg-orange-50 dark:bg-black dark:bg-opacity-20 " />
+        <div className='relative py-16'>
+          <BackgroundSection className='bg-orange-50 dark:bg-black dark:bg-opacity-20 ' />
           <SectionSliderNewCategories
             categories={DEMO_CATS_2}
-            categoryCardType="card4"
+            categoryCardType='card4'
             itemPerRow={4}
-            heading="Suggestions for discovery"
-            subHeading="Popular places to stay that Chisfis recommends for you"
-            sliderStyle="style2"
+            heading='Suggestions for discovery'
+            subHeading='Popular places to stay that Chisfis recommends for you'
+            sliderStyle='style2'
           />
         </div>
 
@@ -165,8 +170,8 @@ function PageHome() {
         <SectionSubscribe2 />
 
         {/* SECTION */}
-        <div className="relative py-16">
-          <BackgroundSection className="bg-orange-50 dark:bg-black dark:bg-opacity-20 " />
+        <div className='relative py-16'>
+          <BackgroundSection className='bg-orange-50 dark:bg-black dark:bg-opacity-20 ' />
           <SectionGridAuthorBox />
         </div>
 
@@ -174,16 +179,16 @@ function PageHome() {
         <SectionGridCategoryBox />
 
         {/* SECTION */}
-        <div className="relative py-16">
+        <div className='relative py-16'>
           <BackgroundSection />
           <SectionBecomeAnAuthor />
         </div>
 
         {/* SECTION 1 */}
         <SectionSliderNewCategories
-          heading="Explore by types of stays"
-          subHeading="Explore houses based on 10 types of stays"
-          categoryCardType="card5"
+          heading='Explore by types of stays'
+          subHeading='Explore houses based on 10 types of stays'
+          categoryCardType='card5'
           itemPerRow={5}
         />
 
@@ -191,7 +196,7 @@ function PageHome() {
         <SectionVideos />
 
         {/* SECTION */}
-        <div className="relative py-16">
+        <div className='relative py-16'>
           <BackgroundSection />
           <SectionClientSay />
         </div>

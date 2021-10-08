@@ -71,6 +71,9 @@ const StaySearchForm: FC<StaySearchFormProps> = ({
   const [searchFromResults, setSearchFromResults] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [roundTrip, setRoundTrip] = useState(false);
+  const [fullyVaccinated, setFullyVaccinated] = useState(false);
+  const [fromLocation, setFromLocation] = useState("");
+  const [toLocation, setToLocation] = useState("");
 
   //
   useEffect(() => {
@@ -186,15 +189,14 @@ const StaySearchForm: FC<StaySearchFormProps> = ({
       setSearchFromResults(searchFromResults);
     }
     if (value) {
-      searchFromResults = AirportJson.filter((v) =>
-        v.city.toLowerCase().startsWith(value.toLowerCase())
+      searchFromResults = AirportJson.filter(
+        (v) =>
+          v.city.toLowerCase().startsWith(value.toLowerCase()) ||
+          v.country.toLowerCase().startsWith(value.toLowerCase()) ||
+          v.name.toLowerCase().startsWith(value.toLowerCase())
       );
       setSearchFromResults(searchFromResults);
     }
-  };
-
-  const searchSubmit = () => {
-    console.log("sumbit");
   };
 
   const docOptions = [
@@ -205,6 +207,17 @@ const StaySearchForm: FC<StaySearchFormProps> = ({
       defaultChecked: false,
     },
   ];
+
+  const searchSubmit = () => {
+    console.log("sumbit");
+    console.log("RoundTrip:" + roundTrip);
+    console.log("Vaccinated:" + fullyVaccinated);
+    console.log("From Loction:" + fromLocation);
+    console.log("To Loction:" + toLocation);
+    console.log(
+      "Date Range:" + dateRangeValue.startDate + " " + dateRangeValue.endDate
+    );
+  };
 
   const renderForm = () => {
     return (
@@ -224,6 +237,23 @@ const StaySearchForm: FC<StaySearchFormProps> = ({
               htmlFor='same-drop-off'
               className='ml-2 sm:ml-3 block text-sm font-medium text-gray-700 dark:text-neutral-300'>
               Round Trip
+            </label>
+          </div>
+
+          <div className='flex  items-center'>
+            <input
+              id='same-drop-off'
+              name='drop-off-type'
+              type='checkbox'
+              value='fully_vaccinated'
+              className='focus:ring-action-primary h-6 w-6 text-primary border-primary rounded border-neutral-500 bg-white dark:bg-neutral-700  dark:checked:bg-primary-500'
+              checked={fullyVaccinated}
+              onChange={() => setFullyVaccinated(!fullyVaccinated)}
+            />
+            <label
+              htmlFor='same-drop-off'
+              className='ml-2 sm:ml-3 block text-sm font-medium text-gray-700 dark:text-neutral-300'>
+              Fully Vaccinated
             </label>
           </div>
           <div className='flex  items-center'>
@@ -281,79 +311,6 @@ const StaySearchForm: FC<StaySearchFormProps> = ({
               </Popover>
             </div>
           </div>
-          <div className='flex  items-center'>
-            <div className='flex items-center text-neutral-500 dark:text-neutral-400 text-sm space-x-2'>
-              <span className='text-sm text-neutral-500 dark:text-neutral-400 font-normal'>
-                <svg
-                  xmlns='http://www.w3.org/2000/svg'
-                  className='h-5 w-5'
-                  fill='none'
-                  viewBox='0 0 24 24'
-                  stroke='currentColor'>
-                  <path
-                    strokeLinecap='round'
-                    strokeLinejoin='round'
-                    strokeWidth={1.5}
-                    d='M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z'
-                  />
-                  <path
-                    strokeLinecap='round'
-                    strokeLinejoin='round'
-                    strokeWidth={1.5}
-                    d='M15 11a3 3 0 11-6 0 3 3 0 016 0z'
-                  />
-                </svg>
-              </span>
-              <Popover className='relative'>
-                {({ open, close }) => (
-                  <>
-                    <Popover.Button
-                      className={`flex items-center justify-center px-4 py-2 text-sm rounded-full border border-neutral-300 dark:border-neutral-700 focus:outline-none ${
-                        open ? "!border-primary-500 " : ""
-                      }`}>
-                      <span>Vaccinated</span>
-                    </Popover.Button>
-                    <Transition
-                      as={Fragment}
-                      enter='transition ease-out duration-200'
-                      enterFrom='opacity-0 translate-y-1'
-                      enterTo='opacity-100 translate-y-0'
-                      leave='transition ease-in duration-150'
-                      leaveFrom='opacity-100 translate-y-0'
-                      leaveTo='opacity-0 translate-y-1'>
-                      <Popover.Panel className='absolute z-10 w-screen max-w-sm px-4 mt-3 left-0 sm:px-0 lg:max-w-md'>
-                        <div className='overflow-hidden rounded-2xl shadow-xl bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-700'>
-                          <div className='relative flex flex-col px-5 py-6 space-y-5'>
-                            {docOptions.map((item) => (
-                              <div key={item.name} className=''>
-                                <Checkbox
-                                  name={item.name}
-                                  label={item.name}
-                                  subLabel={item.description}
-                                />
-                              </div>
-                            ))}
-                          </div>
-                          {/* <div className='p-5 bg-neutral-50 dark:bg-neutral-900 dark:border-t dark:border-neutral-800 flex items-center justify-between'>
-                          <ButtonThird
-                            onClick={close}
-                            sizeClass='px-4 py-2 sm:px-5'>
-                            Clear
-                          </ButtonThird>
-                          <ButtonPrimary
-                            onClick={close}
-                            sizeClass='px-4 py-2 sm:px-5'>
-                            Apply
-                          </ButtonPrimary>
-                        </div> */}
-                        </div>
-                      </Popover.Panel>
-                    </Transition>
-                  </>
-                )}
-              </Popover>
-            </div>
-          </div>
         </div>
         <form className='w-full relative flex flex-col md:flex-row md:items-center rounded-3xl lg:rounded-full shadow-xl dark:shadow-2xl bg-white dark:bg-neutral-900 divide-y divide-neutral-200 md:divide-y-0'>
           <FromLocationInput
@@ -361,13 +318,14 @@ const StaySearchForm: FC<StaySearchFormProps> = ({
             // onInputDone={() => setDateFocused("startDate")}
             onChange={(value) => handleFromChange(value)}
             searchResults={searchFromResults}
+            onSelect={setFromLocation}
           />
           <LocationInput
             defaultValue=''
             onInputDone={() => setDateFocused("startDate")}
             onChange={(value) => handleToChange(value)}
             searchResults={searchToResults}
-            isLoading={isLoading}
+            onSelect={setToLocation}
           />
 
           <StayDatesRangeInput
