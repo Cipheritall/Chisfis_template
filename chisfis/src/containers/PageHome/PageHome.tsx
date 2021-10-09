@@ -161,6 +161,7 @@ function PageHome() {
   });
 
   const [isLoaded, setIsLoaded] = useState(false);
+  const [resLoaded, setResLoaded] = useState(false);
 
   const handleToChange = async (value) => {
     let searchToResults = [];
@@ -256,6 +257,7 @@ function PageHome() {
       console.log(err);
     }
     setIsLoaded(false);
+    setResLoaded(true);
   };
 
   return (
@@ -419,112 +421,145 @@ function PageHome() {
         {/* <SectionOurFeatures /> */}
 
         {/* SECTION */}
-        <div className='relative py-16'>
-          <BackgroundSection />
-          {!isLoaded ? (
-            <div className={`nc-SectionSliderNewCategories relative`}>
-              {/* <h3 className='text-2xl font-semibold'>Departure</h3> */}
-              <div className='mt-6'>
-                <Tab.Group>
-                  <Tab.List className='flex'>
-                    <Tab as={Fragment}>
-                      {({ selected }) => (
-                        <button
-                          className={`px-4 py-1.5 sm:px-6 sm:py-2.5 rounded-full focus:outline-none ${
-                            selected
-                              ? "bg-neutral-800 text-white"
-                              : "text-neutral-6000 dark:text-neutral-400"
-                          }`}>
-                          Departure
-                        </button>
-                      )}
-                    </Tab>
-                    {roundTrip && (
+        {toTravelRest["TravelRestrictions"].length !== 0 || isLoaded ? (
+          <div className='relative py-16'>
+            <BackgroundSection />
+            {!isLoaded ? (
+              <div className={`nc-SectionSliderNewCategories relative`}>
+                {/* <h3 className='text-2xl font-semibold'>Departure</h3> */}
+                <div className='mt-6'>
+                  <Tab.Group>
+                    <Tab.List className='flex'>
                       <Tab as={Fragment}>
                         {({ selected }) => (
                           <button
-                            className={`px-4 py-1.5 sm:px-6 sm:py-2.5  rounded-full flex items-center justify-center focus:outline-none  ${
+                            className={`px-4 py-1.5 sm:px-6 sm:py-2.5 rounded-full focus:outline-none ${
                               selected
                                 ? "bg-neutral-800 text-white"
-                                : " text-neutral-6000 dark:text-neutral-400"
+                                : "text-neutral-6000 dark:text-neutral-400"
                             }`}>
-                            <span className='mr-2.5'>Return</span>
+                            Departure
                           </button>
                         )}
                       </Tab>
-                    )}
-                  </Tab.List>
+                      {roundTrip && (
+                        <Tab as={Fragment}>
+                          {({ selected }) => (
+                            <button
+                              className={`px-4 py-1.5 sm:px-6 sm:py-2.5  rounded-full flex items-center justify-center focus:outline-none  ${
+                                selected
+                                  ? "bg-neutral-800 text-white"
+                                  : " text-neutral-6000 dark:text-neutral-400"
+                              }`}>
+                              <span className='mr-2.5'>Return</span>
+                            </button>
+                          )}
+                        </Tab>
+                      )}
+                    </Tab.List>
 
-                  <div className='w-14 border-b border-neutral-200 my-5'></div>
-                  <Tab.Panels>
-                    <Tab.Panel className='space-y-5'>
-                      <div className='listingSection__wrap bg-white'>
-                        <div>
-                          <h2 className='text-2xl font-semibold'>
-                            Travel restrictions{" "}
-                          </h2>
-                          <span className='block mt-2 text-neutral-500 dark:text-neutral-400'>
-                            Questions are at the heart of making things great.
-                          </span>
-                        </div>
-                        <div className='w-14 border-b border-neutral-200 dark:border-neutral-700'></div>
+                    <div className='w-14 border-b border-neutral-200 my-5'></div>
+                    <Tab.Panels>
+                      <Tab.Panel className='space-y-5'>
+                        <div className='listingSection__wrap elative bg-white dark:bg-neutral-900 border border-neutral-100 dark:border-neutral-800 rounded-2xl overflow-hidden hover:shadow-xl transition-shadow '>
+                          <div>
+                            <h2 className='text-2xl font-semibold'>
+                              Travel restrictions{" "}
+                            </h2>
+                            <span className='block mt-2 text-neutral-500 dark:text-neutral-400'>
+                              Questions are at the heart of making things great.
+                            </span>
+                          </div>
+                          <div className='w-14 border-b border-neutral-200 dark:border-neutral-700'></div>
 
-                        <div className='grid grid-cols-1 lg:grid-cols-2 gap-y-6 gap-x-10 text-sm text-neutral-700 dark:text-neutral-300 '>
-                          {/* TIEN ICH 1 */}
-                          {fromTravelRest["TravelRestrictions"].map((item) => (
-                            <div
-                              key={item}
-                              className='flex items-center space-x-4 '>
-                              <div className='w-10 flex-shrink-0'>
-                                <img src={carUtilities2} alt='' />
-                              </div>
-                              <span>{item}</span>
-                            </div>
-                          ))}
+                          <div className='grid grid-cols-1 lg:grid-cols-2 gap-y-6 gap-x-10 text-sm text-neutral-700 dark:text-neutral-300 '>
+                            {/* TIEN ICH 1 */}
+                            {fromTravelRest["TravelRestrictions"].map(
+                              (item) => (
+                                <div
+                                  key={item}
+                                  className='flex items-center space-x-4 '>
+                                  <div className='w-10 flex-shrink-0'>
+                                    <img src={carUtilities2} alt='' />
+                                  </div>
+                                  <span>{item}</span>
+                                </div>
+                              )
+                            )}
+                          </div>
                         </div>
-                      </div>
 
-                      <div className='listingSection__wrap bg-white'>
-                        <div>
-                          <h2 className='text-2xl font-semibold'>
-                            Form and Documents{" "}
-                          </h2>
-                          <span className='block mt-2 text-neutral-500 dark:text-neutral-400'>
-                            Questions are at the heart of making things great.
-                          </span>
+                        <div className='listingSection__wrap elative bg-white dark:bg-neutral-900 border border-neutral-100 dark:border-neutral-800 rounded-2xl overflow-hidden hover:shadow-xl transition-shadow '>
+                          <div>
+                            <h2 className='text-2xl font-semibold'>
+                              Form and Documents{" "}
+                            </h2>
+                            <span className='block mt-2 text-neutral-500 dark:text-neutral-400'>
+                              Questions are at the heart of making things great.
+                            </span>
+                          </div>
+                          <div className='w-14 border-b border-neutral-200 dark:border-neutral-700'></div>
+                          {/* 6 */}
+                          <div className='grid grid-cols-1 lg:grid-cols-2 gap-y-6 gap-x-10 text-sm text-neutral-700 dark:text-neutral-300 '>
+                            {/* TIEN ICH 1 */}
+                            {fromTravelRest["TravelRestrictions"].map(
+                              (item) => (
+                                <div
+                                  key={item}
+                                  className='flex items-center space-x-4 '>
+                                  <div className='w-10 flex-shrink-0'>
+                                    <img src={carUtilities2} alt='' />
+                                  </div>
+                                  <span>{item}</span>
+                                </div>
+                              )
+                            )}
+                          </div>
                         </div>
-                        <div className='w-14 border-b border-neutral-200 dark:border-neutral-700'></div>
-                        {/* 6 */}
-                        <div className='grid grid-cols-1 lg:grid-cols-2 gap-y-6 gap-x-10 text-sm text-neutral-700 dark:text-neutral-300 '>
-                          {/* TIEN ICH 1 */}
-                          {fromTravelRest["TravelRestrictions"].map((item) => (
-                            <div
-                              key={item}
-                              className='flex items-center space-x-4 '>
-                              <div className='w-10 flex-shrink-0'>
-                                <img src={carUtilities2} alt='' />
-                              </div>
-                              <span>{item}</span>
-                            </div>
-                          ))}
-                        </div>
-                      </div>
 
-                      <div className='listingSection__wrap bg-white'>
-                        <div>
-                          <h2 className='text-2xl font-semibold'>
-                            Additional Information{" "}
-                          </h2>
-                          <span className='block mt-2 text-neutral-500 dark:text-neutral-400'>
-                            Questions are at the heart of making things great.
-                          </span>
+                        <div className='listingSection__wrap elative bg-white dark:bg-neutral-900 border border-neutral-100 dark:border-neutral-800 rounded-2xl overflow-hidden hover:shadow-xl transition-shadow '>
+                          <div>
+                            <h2 className='text-2xl font-semibold'>
+                              Additional Information{" "}
+                            </h2>
+                            <span className='block mt-2 text-neutral-500 dark:text-neutral-400'>
+                              Questions are at the heart of making things great.
+                            </span>
+                          </div>
+                          <div className='w-14 border-b border-neutral-200 dark:border-neutral-700'></div>
+                          {/* 6 */}
+                          <div className='grid grid-cols-1 lg:grid-cols-2 gap-y-6 gap-x-10 text-sm text-neutral-700 dark:text-neutral-300 '>
+                            {/* TIEN ICH 1 */}
+                            {fromTravelRest["AdditionalInformation"].map(
+                              (item) => (
+                                <div
+                                  key={item}
+                                  className='flex items-center space-x-4 '>
+                                  <div className='w-10 flex-shrink-0'>
+                                    <img src={carUtilities2} alt='' />
+                                  </div>
+                                  <span>{item}</span>
+                                </div>
+                              )
+                            )}
+                          </div>
                         </div>
-                        <div className='w-14 border-b border-neutral-200 dark:border-neutral-700'></div>
-                        {/* 6 */}
-                        <div className='grid grid-cols-1 lg:grid-cols-2 gap-y-6 gap-x-10 text-sm text-neutral-700 dark:text-neutral-300 '>
-                          {/* TIEN ICH 1 */}
-                          {fromTravelRest["AdditionalInformation"].map(
-                            (item) => (
+                      </Tab.Panel>
+                      <Tab.Panel className='space-y-5'>
+                        <div className='listingSection__wrap elative bg-white dark:bg-neutral-900 border border-neutral-100 dark:border-neutral-800 rounded-2xl overflow-hidden hover:shadow-xl transition-shadow '>
+                          <div>
+                            <h2 className='text-2xl font-semibold'>
+                              Travel restrictions{" "}
+                            </h2>
+                            <span className='block mt-2 text-neutral-500 dark:text-neutral-400'>
+                              Questions are at the heart of making things great.
+                            </span>
+                          </div>
+                          <div className='w-14 border-b border-neutral-200 dark:border-neutral-700'></div>
+
+                          <div className='grid grid-cols-1 lg:grid-cols-2 gap-y-6 gap-x-10 text-sm text-neutral-700 dark:text-neutral-300 '>
+                            {/* TIEN ICH 1 */}
+                            {toTravelRest["TravelRestrictions"].map((item) => (
                               <div
                                 key={item}
                                 className='flex items-center space-x-4 '>
@@ -533,116 +568,91 @@ function PageHome() {
                                 </div>
                                 <span>{item}</span>
                               </div>
-                            )
-                          )}
+                            ))}
+                          </div>
                         </div>
-                      </div>
-                    </Tab.Panel>
-                    <Tab.Panel className='space-y-5'>
-                      <div className='listingSection__wrap bg-white'>
-                        <div>
-                          <h2 className='text-2xl font-semibold'>
-                            Travel restrictions{" "}
-                          </h2>
-                          <span className='block mt-2 text-neutral-500 dark:text-neutral-400'>
-                            Questions are at the heart of making things great.
-                          </span>
-                        </div>
-                        <div className='w-14 border-b border-neutral-200 dark:border-neutral-700'></div>
 
-                        <div className='grid grid-cols-1 lg:grid-cols-2 gap-y-6 gap-x-10 text-sm text-neutral-700 dark:text-neutral-300 '>
-                          {/* TIEN ICH 1 */}
-                          {toTravelRest["TravelRestrictions"].map((item) => (
-                            <div
-                              key={item}
-                              className='flex items-center space-x-4 '>
-                              <div className='w-10 flex-shrink-0'>
-                                <img src={carUtilities2} alt='' />
+                        <div className='listingSection__wrap elative bg-white dark:bg-neutral-900 border border-neutral-100 dark:border-neutral-800 rounded-2xl overflow-hidden hover:shadow-xl transition-shadow '>
+                          <div>
+                            <h2 className='text-2xl font-semibold'>
+                              Form and Documents{" "}
+                            </h2>
+                            <span className='block mt-2 text-neutral-500 dark:text-neutral-400'>
+                              Questions are at the heart of making things great.
+                            </span>
+                          </div>
+                          <div className='w-14 border-b border-neutral-200 dark:border-neutral-700'></div>
+                          {/* 6 */}
+                          <div className='grid grid-cols-1 lg:grid-cols-2 gap-y-6 gap-x-10 text-sm text-neutral-700 dark:text-neutral-300 '>
+                            {/* TIEN ICH 1 */}
+                            {toTravelRest["TravelRestrictions"].map((item) => (
+                              <div
+                                key={item}
+                                className='flex items-center space-x-4 '>
+                                <div className='w-10 flex-shrink-0'>
+                                  <img src={carUtilities2} alt='' />
+                                </div>
+                                <span>{item}</span>
                               </div>
-                              <span>{item}</span>
-                            </div>
-                          ))}
+                            ))}
+                          </div>
                         </div>
-                      </div>
 
-                      <div className='listingSection__wrap bg-white'>
-                        <div>
-                          <h2 className='text-2xl font-semibold'>
-                            Form and Documents{" "}
-                          </h2>
-                          <span className='block mt-2 text-neutral-500 dark:text-neutral-400'>
-                            Questions are at the heart of making things great.
-                          </span>
+                        <div className='listingSection__wrap elative bg-white dark:bg-neutral-900 border border-neutral-100 dark:border-neutral-800 rounded-2xl overflow-hidden hover:shadow-xl transition-shadow '>
+                          <div>
+                            <h2 className='text-2xl font-semibold'>
+                              Additional Information{" "}
+                            </h2>
+                            <span className='block mt-2 text-neutral-500 dark:text-neutral-400'>
+                              Questions are at the heart of making things great.
+                            </span>
+                          </div>
+                          <div className='w-14 border-b border-neutral-200 dark:border-neutral-700'></div>
+                          {/* 6 */}
+                          <div className='grid grid-cols-1 lg:grid-cols-2 gap-y-6 gap-x-10 text-sm text-neutral-700 dark:text-neutral-300 '>
+                            {/* TIEN ICH 1 */}
+                            {toTravelRest["AdditionalInformation"].map(
+                              (item) => (
+                                <div
+                                  key={item}
+                                  className='flex items-center space-x-4 '>
+                                  <div className='w-10 flex-shrink-0'>
+                                    <img src={carUtilities2} alt='' />
+                                  </div>
+                                  <span>{item}</span>
+                                </div>
+                              )
+                            )}
+                          </div>
                         </div>
-                        <div className='w-14 border-b border-neutral-200 dark:border-neutral-700'></div>
-                        {/* 6 */}
-                        <div className='grid grid-cols-1 lg:grid-cols-2 gap-y-6 gap-x-10 text-sm text-neutral-700 dark:text-neutral-300 '>
-                          {/* TIEN ICH 1 */}
-                          {toTravelRest["TravelRestrictions"].map((item) => (
-                            <div
-                              key={item}
-                              className='flex items-center space-x-4 '>
-                              <div className='w-10 flex-shrink-0'>
-                                <img src={carUtilities2} alt='' />
-                              </div>
-                              <span>{item}</span>
-                            </div>
-                          ))}
-                        </div>
-                      </div>
-
-                      <div className='listingSection__wrap bg-white'>
-                        <div>
-                          <h2 className='text-2xl font-semibold'>
-                            Additional Information{" "}
-                          </h2>
-                          <span className='block mt-2 text-neutral-500 dark:text-neutral-400'>
-                            Questions are at the heart of making things great.
-                          </span>
-                        </div>
-                        <div className='w-14 border-b border-neutral-200 dark:border-neutral-700'></div>
-                        {/* 6 */}
-                        <div className='grid grid-cols-1 lg:grid-cols-2 gap-y-6 gap-x-10 text-sm text-neutral-700 dark:text-neutral-300 '>
-                          {/* TIEN ICH 1 */}
-                          {toTravelRest["AdditionalInformation"].map((item) => (
-                            <div
-                              key={item}
-                              className='flex items-center space-x-4 '>
-                              <div className='w-10 flex-shrink-0'>
-                                <img src={carUtilities2} alt='' />
-                              </div>
-                              <span>{item}</span>
-                            </div>
-                          ))}
-                        </div>
-                      </div>
-                    </Tab.Panel>
-                  </Tab.Panels>
-                </Tab.Group>
+                      </Tab.Panel>
+                    </Tab.Panels>
+                  </Tab.Group>
+                </div>
               </div>
-            </div>
-          ) : (
-            <div style={{ marginLeft: "50%" }}>
-              <svg
-                className='animate-spin -ml-1 mr-3 h-5 w-5'
-                xmlns='http://www.w3.org/2000/svg'
-                fill='none'
-                viewBox='0 0 24 24'>
-                <circle
-                  className='opacity-25'
-                  cx='12'
-                  cy='12'
-                  r='10'
-                  stroke='currentColor'
-                  strokeWidth='3'></circle>
-                <path
-                  className='opacity-75'
-                  fill='currentColor'
-                  d='M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z'></path>
-              </svg>
-            </div>
-          )}
-        </div>
+            ) : (
+              <div style={{ marginLeft: "50%" }}>
+                <svg
+                  className='animate-spin -ml-1 mr-3 h-5 w-5'
+                  xmlns='http://www.w3.org/2000/svg'
+                  fill='none'
+                  viewBox='0 0 24 24'>
+                  <circle
+                    className='opacity-25'
+                    cx='12'
+                    cy='12'
+                    r='10'
+                    stroke='currentColor'
+                    strokeWidth='3'></circle>
+                  <path
+                    className='opacity-75'
+                    fill='currentColor'
+                    d='M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z'></path>
+                </svg>
+              </div>
+            )}
+          </div>
+        ) : null}
 
         {/* SECTION 1 */}
 
