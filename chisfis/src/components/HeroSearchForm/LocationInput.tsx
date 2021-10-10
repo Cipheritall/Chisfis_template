@@ -179,9 +179,7 @@ const LocationInput: FC<LocationInputProps> = ({
       <div
         onClick={() => setShowPopover(true)}
         className={`flex flex-1 relative [ nc-hero-field-padding ] flex-shrink-0 items-center space-x-3 cursor-pointer focus:outline-none text-left  ${
-          showPopover
-            ? "focus:outline-none rounded-full dark:bg-neutral-800"
-            : ""
+          showPopover ? "focus:outline-none rounded-full" : ""
         }`}>
         <div className='text-neutral-300 dark:text-neutral-400'>
           <svg
