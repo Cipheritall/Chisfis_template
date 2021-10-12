@@ -213,7 +213,7 @@ export const NAVIGATION_DEMO: NavItemType[] = [
   },
   {
     id: ncNanoId(),
-    href: "#",
+    href: "/travel-destination",
     name: "Travel Destinations",
     //type: "dropdown",
     //children: templatesChildrenMenus,

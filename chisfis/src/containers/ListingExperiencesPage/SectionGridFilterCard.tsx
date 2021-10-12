@@ -22,29 +22,26 @@ const SectionGridFilterCard: FC<SectionGridFilterCardProps> = ({
   return (
     <div
       className={`nc-SectionGridFilterCard ${className}`}
-      data-nc-id="SectionGridFilterCard"
-    >
+      data-nc-id='SectionGridFilterCard'>
       <Heading2
-        heading="Experiences in Tokyo"
+        heading='Browse Destinations'
         subHeading={
-          <span className="block text-neutral-500 dark:text-neutral-400 mt-3">
-            233 experiences
-            <span className="mx-2">·</span>
-            Aug 12 - 18
-            <span className="mx-2">·</span>2 Guests
+          <span className='block text-neutral-500 dark:text-neutral-400 mt-3'>
+            Discover COVID-19 testing requirements for over 190 international
+            destinations
           </span>
         }
       />
-
-      <div className="mb-8 lg:mb-11">
+      {/* 
+      <div className='mb-8 lg:mb-11'>
         <TabFilters />
-      </div>
-      <div className="grid grid-cols-1 gap-6 md:gap-8 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4">
+      </div> */}
+      <div className='grid grid-cols-1 gap-6 md:gap-8 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4'>
         {data.map((stay) => (
           <ExperiencesCard key={stay.id} data={stay} />
         ))}
       </div>
-      <div className="flex mt-16 justify-center items-center">
+      <div className='flex mt-16 justify-center items-center'>
         <Pagination />
       </div>
     </div>

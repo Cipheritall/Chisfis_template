@@ -40,6 +40,9 @@ import PageAddListing8 from "containers/PageAddListing1/PageAddListing8";
 import PageAddListing9 from "containers/PageAddListing1/PageAddListing9";
 import PageAddListing10 from "containers/PageAddListing1/PageAddListing10";
 
+import TravelDestinationCard from "../components/CarCard/TravelDestinationCard";
+import TravelDestinationDetail from "../components/CarCard/TravelDestinationDetail";
+
 export const pages: Page[] = [
   { path: "/", exact: true, component: PageHome },
   { path: "/#", exact: true, component: PageHome },
@@ -92,6 +95,16 @@ export const pages: Page[] = [
   { path: "/signup", component: PageSignUp },
   { path: "/login", component: PageLogin },
   { path: "/subscription", component: PageSubcription },
+
+  {
+    path: "/travel-destination",
+    component: TravelDestinationCard,
+  },
+
+  {
+    path: "/travel-destination-detail",
+    component: TravelDestinationDetail,
+  },
 ];
 
 const Routes = () => {
