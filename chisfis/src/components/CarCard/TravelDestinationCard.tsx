@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import React, { FC, useEffect, useState } from "react";
 import { DEMO_CAR_LISTINGS } from "data/listings";
 import { CarDataType } from "data/types";
 import StartRating from "components/StartRating/StartRating";
@@ -11,6 +11,8 @@ import Heading2 from "components/Heading/Heading2";
 import TabFilters from "containers/ListingStayPage/TabFilters";
 import Pagination from "shared/Pagination/Pagination";
 import CarCard from "./CarCard";
+import { query, collection, getDocs } from "@firebase/firestore";
+import { db } from "firebase";
 
 interface pageDataType {
   id: string | number;
@@ -139,6 +141,28 @@ const TravelDestinationCard: FC<CarCardProps> = ({
   //       </div>
   //     );
   //   };
+
+  const [travelDestinations, setTravelDestinations] = useState([]);
+
+  useEffect(() => {
+    getPageData();
+  }, []);
+
+  const getPageData = async () => {
+    try {
+      const q1 = query(collection(db, "TravelDestinations"));
+
+      const querySnapshot1 = await getDocs(q1);
+      let data = [];
+      querySnapshot1.forEach((doc) => {
+        console.log(doc.id, " => ", doc.data());
+        data.push(doc.data());
+      });
+      setTravelDestinations(data);
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   return (
     <div className='container relative mt-10'>

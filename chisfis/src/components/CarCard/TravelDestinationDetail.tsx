@@ -127,7 +127,7 @@ const TravelDestinationDetail: FC<ListingStayPageProps> = ({
       <div className='container relative overflow-hidden mt-10'>
         <div className='relative py-16'>
           <BackgroundSection />
-          <div className='listingSection__wrap bg-white relative'>
+          <div className='listingSection__wrap relative bg-white dark:bg-neutral-900 border border-neutral-100 dark:border-neutral-800 rounded-2xl overflow-hidden hover:shadow-xl transition-shadow '>
             <div className='text-center'>
               <h2 className='text-2xl font-semibold'>
                 Norway COVID-19 Entry Requirements{" "}
@@ -164,7 +164,7 @@ const TravelDestinationDetail: FC<ListingStayPageProps> = ({
       <div className='container relative overflow-hidden mt-10'>
         <div className='relative py-16'>
           <BackgroundSection />
-          <div className='listingSection__wrap bg-white relative'>
+          <div className='listingSection__wrap relative bg-white dark:bg-neutral-900 border border-neutral-100 dark:border-neutral-800 rounded-2xl overflow-hidden hover:shadow-xl transition-shadow '>
             <div className='text-center'>
               <h2 className='text-2xl font-semibold'>
                 Can You Travel To Norway?{" "}
@@ -257,6 +257,7 @@ const TravelDestinationDetail: FC<ListingStayPageProps> = ({
 
       <div className='container relative overflow-hidden mt-10'>
         <div className='relative py-16'>
+          <BackgroundSection />
           <div className='relative text-center mt-10'>
             <h2 className='text-2xl font-semibold'>Choose Your Test</h2>
             <span className='block mt-2 text-neutral-500 dark:text-neutral-400'>
@@ -264,8 +265,7 @@ const TravelDestinationDetail: FC<ListingStayPageProps> = ({
               Fly, Antigen, Day 2 & Day 8 Tests and <br /> Test to Release.
             </span>
           </div>
-          <BackgroundSection />
-          <div className='listingSection__wrap bg-white relative'>
+          <div className='listingSection__wrap mt-10 relative bg-white dark:bg-neutral-900 border border-neutral-100 dark:border-neutral-800 rounded-2xl overflow-hidden hover:shadow-xl transition-shadow'>
             <div className='flex items-center space-x-4 '>
               <div>
                 <h2 className='text-2xl font-semibold'>Leaving the UK</h2>
@@ -386,51 +386,13 @@ const TravelDestinationDetail: FC<ListingStayPageProps> = ({
             </div>
           </div>
 
-          <div className='listingSection__wrap bg-white relative mt-10'>
-            <div className='flex items-justify space-x-4'>
+          <div className='listingSection__wrap relative mt-10 bg-white dark:bg-neutral-900 border border-neutral-100 dark:border-neutral-800 rounded-2xl overflow-hidden hover:shadow-xl transition-shadow '>
+            <div className='flex items-center space-x-4 '>
               <div>
                 <h2 className='text-2xl font-semibold'>Entering the UK</h2>
               </div>
               <div className='w-10 flex-shrink-0'>
                 <img src={carUtilities2} alt='' />
-              </div>
-
-              <div className={`nc-SectionSliderNewCategories relative`}>
-                <div className='mt-6'>
-                  {/* <h3 className='text-2xl font-semibold'>Departure</h3> */}
-
-                  <Tab.Group>
-                    <Tab.List className='flex grid grid-cols-1 lg:grid-cols-2'>
-                      <Tab as={Fragment}>
-                        {({ selected }) => (
-                          <button
-                            className={`px-4 py-1.5 sm:px-6 sm:py-2.5 rounded-full focus:outline-none ${
-                              selected
-                                ? "bg-neutral-800 text-white"
-                                : "text-neutral-6000 dark:text-neutral-400"
-                            }`}>
-                            PCR Test
-                          </button>
-                        )}
-                      </Tab>
-
-                      <Tab as={Fragment}>
-                        {({ selected }) => (
-                          <button
-                            className={`px-4 py-1.5 sm:px-6 sm:py-2.5  rounded-full flex items-center justify-center focus:outline-none  ${
-                              selected
-                                ? "bg-neutral-800 text-white"
-                                : " text-neutral-6000 dark:text-neutral-400"
-                            }`}>
-                            <span className='mr-2.5'>Antigen Test</span>
-                          </button>
-                        )}
-                      </Tab>
-                    </Tab.List>
-
-                    <div className='w-14 border-b border-neutral-200 my-5'></div>
-                  </Tab.Group>
-                </div>
               </div>
             </div>
 
@@ -470,19 +432,91 @@ const TravelDestinationDetail: FC<ListingStayPageProps> = ({
                   </div>
                 </div>
               </div>
+              <div className={`nc-SectionSliderNewCategories relative`}>
+                <div className='mt-6'>
+                  {/* <h3 className='text-2xl font-semibold'>Departure</h3> */}
+
+                  <Tab.Group>
+                    <Tab.List className='flex grid grid-cols-1 lg:grid-cols-2'>
+                      <Tab as={Fragment}>
+                        {({ selected }) => (
+                          <button
+                            className={`px-4 py-1.5 sm:px-6 sm:py-2.5 rounded-full focus:outline-none ${
+                              selected
+                                ? "bg-neutral-800 text-white"
+                                : "text-neutral-6000 dark:text-neutral-400"
+                            }`}>
+                            PCR Test
+                          </button>
+                        )}
+                      </Tab>
+
+                      <Tab as={Fragment}>
+                        {({ selected }) => (
+                          <button
+                            className={`px-4 py-1.5 sm:px-6 sm:py-2.5  rounded-full flex items-center justify-center focus:outline-none  ${
+                              selected
+                                ? "bg-neutral-800 text-white"
+                                : " text-neutral-6000 dark:text-neutral-400"
+                            }`}>
+                            <span className='mr-2.5'>Antigen Test</span>
+                          </button>
+                        )}
+                      </Tab>
+                    </Tab.List>
+
+                    <div className='w-14 border-b border-neutral-200 my-5'></div>
+                    <Tab.Panels>
+                      <Tab.Panel className='space-y-5'>
+                        <div className='elative bg-white dark:bg-neutral-900 rounded-2xl overflow-hidden '>
+                          <div className='mt-10'>
+                            <div className='flex grid grid-cols-1 lg:grid-cols-2 space-x-5 mt-10'>
+                              <ButtonPrimary href=''>
+                                Book PCR Test
+                              </ButtonPrimary>
+                              <ButtonSecondary href=''>
+                                Learn More
+                              </ButtonSecondary>
+                            </div>
+                          </div>
+                        </div>
+                      </Tab.Panel>
+                      <Tab.Panel className='space-y-5'>
+                        <div className='bg-white dark:bg-neutral-900 dark:border-neutral-800 rounded-2xl overflow-hidden'>
+                          <div className='mt-10'>
+                            <div className='flex grid grid-cols-1 lg:grid-cols-2 space-x-5 mt-10'>
+                              <ButtonPrimary href=''>
+                                Book Antigen Test
+                              </ButtonPrimary>
+                              <ButtonSecondary href=''>
+                                Learn More
+                              </ButtonSecondary>
+                            </div>
+                          </div>
+                        </div>
+                      </Tab.Panel>
+                    </Tab.Panels>
+                  </Tab.Group>
+                  <div className='justify-center'>
+                    <h3 className='text-lg mt-5 flex justify-center'>
+                      PCR Fit to Fly Test
+                    </h3>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </div>
 
       {/* SECTION */}
-      <SectionSubscribe2 className='py-24 lg:py-32' />
+      {/* <SectionSubscribe2 className='py-24 lg:py-32' /> */}
 
       {/* SECTION */}
-      <div className='relative py-16 mb-24 lg:mb-32'>
+      {/* <div className='relative py-16 mb-24 lg:mb-32'>
         <BackgroundSection className='bg-orange-50 dark:bg-black dark:bg-opacity-20 ' />
         <SectionGridAuthorBox />
-      </div>
+      </div> */}
     </div>
   );
 };

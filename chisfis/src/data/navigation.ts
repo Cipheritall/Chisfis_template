@@ -173,44 +173,44 @@ export const NAVIGATION_DEMO: NavItemType[] = [
     // type: "dropdown",
     // children: demoChildMenus,
   },
-  {
-    id: ncNanoId(),
-    href: "#",
-    name: "Home Tests",
-    //type: "megaMenu",
-    //megaMenu: megaMenuDemo,
-  },
-  {
-    id: ncNanoId(),
-    href: "#",
-    name: "Test Centres",
-    //type: "dropdown",
-    // children: [
-    //   { id: ncNanoId(), href: "/listing-stay", name: "Stay page" },
-    //   { id: ncNanoId(), href: "/listing-stay-map", name: "Stay page (map)" },
-    //   { id: ncNanoId(), href: "/listing-stay-detail", name: "Stay Detail" },
-    //   //
-    //   {
-    //     id: ncNanoId(),
-    //     href: "/listing-experiences",
-    //     name: "Experiences page",
-    //   },
-    //   {
-    //     id: ncNanoId(),
-    //     href: "/listing-experiences-map",
-    //     name: "Experiences page (map)",
-    //   },
-    //   {
-    //     id: ncNanoId(),
-    //     href: "/listing-experiences-detail",
-    //     name: "Experiences Detail",
-    //   },
-    //   //
-    //   { id: ncNanoId(), href: "/listing-car", name: "Cars page" },
-    //   { id: ncNanoId(), href: "/listing-car-map", name: "Cars page (map)" },
-    //   { id: ncNanoId(), href: "/listing-car-detail", name: "Car Detail" },
-    // ],
-  },
+  // {
+  //   id: ncNanoId(),
+  //   href: "#",
+  //   name: "Home Tests",
+  //   //type: "megaMenu",
+  //   //megaMenu: megaMenuDemo,
+  // },
+  // {
+  //   id: ncNanoId(),
+  //   href: "#",
+  //   name: "Test Centres",
+  //type: "dropdown",
+  // children: [
+  //   { id: ncNanoId(), href: "/listing-stay", name: "Stay page" },
+  //   { id: ncNanoId(), href: "/listing-stay-map", name: "Stay page (map)" },
+  //   { id: ncNanoId(), href: "/listing-stay-detail", name: "Stay Detail" },
+  //   //
+  //   {
+  //     id: ncNanoId(),
+  //     href: "/listing-experiences",
+  //     name: "Experiences page",
+  //   },
+  //   {
+  //     id: ncNanoId(),
+  //     href: "/listing-experiences-map",
+  //     name: "Experiences page (map)",
+  //   },
+  //   {
+  //     id: ncNanoId(),
+  //     href: "/listing-experiences-detail",
+  //     name: "Experiences Detail",
+  //   },
+  //   //
+  //   { id: ncNanoId(), href: "/listing-car", name: "Cars page" },
+  //   { id: ncNanoId(), href: "/listing-car-map", name: "Cars page (map)" },
+  //   { id: ncNanoId(), href: "/listing-car-detail", name: "Car Detail" },
+  // ],
+  // },
   {
     id: ncNanoId(),
     href: "/travel-destination",
@@ -219,11 +219,11 @@ export const NAVIGATION_DEMO: NavItemType[] = [
     //children: templatesChildrenMenus,
   },
 
-  {
-    id: ncNanoId(),
-    href: "#",
-    name: "Corporate",
-    //type: "dropdown",
-    //children: otherPageChildMenus,
-  },
+  // {
+  //   id: ncNanoId(),
+  //   href: "#",
+  //   name: "Corporate",
+  //   //type: "dropdown",
+  //   //children: otherPageChildMenus,
+  // },
 ];

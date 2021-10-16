@@ -263,7 +263,7 @@ function PageHome() {
   return (
     <div className='nc-PageHome relative overflow-hidden'>
       <Helmet>
-        <title>Chisfis || Booking React Template</title>
+        <title>Test & Trip</title>
       </Helmet>
       {/* GLASSMOPHIN */}
       <BgGlassmorphism />
@@ -277,7 +277,7 @@ function PageHome() {
           data-nc-id='SectionHero'>
           <div className='z-10 mb-12 lg:mb-0 lg:-mt-40 w-full'>
             <div className='w-full relative mt-2 '>
-              <div className=' py-10 mt-10 [ nc-hero-field-padding ] flex flex-col space-y-4 sm:space-y-0 sm:flex-row sm:space-x-10 border-b border-neutral-100 dark:border-neutral-800'>
+              <div className=' py-10 mt-10 [ nc-hero-field-padding ] flex flex-col space-y-4 sm:space-y-0 sm:flex-row sm:space-x-10'>
                 <div className='flex  items-center'>
                   <input
                     id='same-drop-off'
@@ -366,7 +366,7 @@ function PageHome() {
                   </div>
                 </div>
               </div>
-              <form className='w-full relative flex flex-col md:flex-row md:items-center rounded-3xl lg:rounded-full shadow-xl dark:shadow-2xl bg-white dark:bg-neutral-900 divide-y divide-neutral-200 md:divide-y-0'>
+              <form className='w-full relative flex flex-col md:flex-row md:items-center rounded-3xl lg:rounded-full shadow-lg dark:shadow-2xl bg-white dark:bg-neutral-900 divide-y divide-neutral-200 md:divide-y-0'>
                 <FromLocationInput
                   defaultValue=''
                   // onInputDone={() => setDateFocused("startDate")}
@@ -662,7 +662,7 @@ function PageHome() {
           <SectionGridFeaturePlaces />
         </div>
 
-        <div className='relative py-16'>
+        {/* <div className='relative py-16'>
           <BackgroundSection className='bg-orange-50 dark:bg-black dark:bg-opacity-20 ' />
           <SectionSliderNewCategories
             categories={DEMO_CATS_2}
@@ -672,42 +672,42 @@ function PageHome() {
             subHeading='Popular places to stay that Chisfis recommends for you'
             sliderStyle='style2'
           />
-        </div>
+        </div> */}
 
         {/* SECTION */}
-        <SectionSubscribe2 />
+        {/* <SectionSubscribe2 /> */}
 
         {/* SECTION */}
-        <div className='relative py-16'>
+        {/* <div className='relative py-16'>
           <BackgroundSection className='bg-orange-50 dark:bg-black dark:bg-opacity-20 ' />
           <SectionGridAuthorBox />
-        </div>
+        </div> */}
 
         {/* SECTION */}
-        <SectionGridCategoryBox />
+        {/* <SectionGridCategoryBox /> */}
 
         {/* SECTION */}
-        <div className='relative py-16'>
+        {/* <div className='relative py-16'>
           <BackgroundSection />
           <SectionBecomeAnAuthor />
-        </div>
+        </div> */}
 
         {/* SECTION 1 */}
-        <SectionSliderNewCategories
+        {/* <SectionSliderNewCategories
           heading='Explore by types of stays'
           subHeading='Explore houses based on 10 types of stays'
           categoryCardType='card5'
           itemPerRow={5}
-        />
+        /> */}
 
         {/* SECTION */}
-        <SectionVideos />
+        {/* <SectionVideos /> */}
 
         {/* SECTION */}
-        <div className='relative py-16'>
+        {/* <div className='relative py-16'>
           <BackgroundSection />
           <SectionClientSay />
-        </div>
+        </div> */}
       </div>
     </div>
   );
