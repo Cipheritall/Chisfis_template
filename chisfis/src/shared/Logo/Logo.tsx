@@ -16,25 +16,26 @@ const Logo: React.FC<LogoProps> = ({
 }) => {
   return (
     <Link
-      to="/"
-      className={`ttnc-logo inline-block text-primary-6000 ${className}`}
-    >
+      to='/'
+      className={`ttnc-logo inline-block text-primary-6000 ${className}`}>
       {/* THIS USE FOR MY CLIENT */}
       {/* PLEASE UN COMMENT BELLOW CODE AND USE IT */}
       {img ? (
         <img
-          className={`block max-h-12 ${imgLight ? "dark:hidden" : ""}`}
+          className={`block  ${imgLight ? "dark:hidden" : ""}`}
+          style={{ maxHeight: "2rem" }}
           src={img}
-          alt="Logo"
+          alt='Logo'
         />
       ) : (
         "Logo Here"
       )}
       {imgLight && (
         <img
-          className="hidden max-h-12 dark:block"
+          className='hidden dark:block'
+          style={{ maxHeight: "2rem" }}
           src={imgLight}
-          alt="Logo-Light"
+          alt='Logo-Light'
         />
       )}
     </Link>
