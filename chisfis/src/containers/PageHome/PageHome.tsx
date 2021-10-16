@@ -366,7 +366,7 @@ function PageHome() {
                   </div>
                 </div>
               </div>
-              <form className='w-full relative flex flex-col md:flex-row md:items-center rounded-3xl lg:rounded-full shadow-lg dark:shadow-2xl bg-white dark:bg-neutral-900 divide-y divide-neutral-200 md:divide-y-0'>
+              <form className='w-full relative flex flex-col border border-neutral-100 md:flex-row md:items-center rounded-3xl lg:rounded-full dark:bg-neutral-900 border-neutral-700 divide-y divide-neutral-200 md:divide-y-0'>
                 <FromLocationInput
                   defaultValue=''
                   // onInputDone={() => setDateFocused("startDate")}
