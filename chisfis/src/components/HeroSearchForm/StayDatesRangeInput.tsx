@@ -75,7 +75,7 @@ const StayDatesRangeInput: FC<StayDatesRangeInputProps> = ({
     return (
       <div
         className={`relative flex ${fieldClassName} flex-shrink-0 items-center space-x-3 cursor-pointer ${
-          focused ? "shadow-2xl rounded-full dark:bg-neutral-800" : " "
+          focused ? " rounded-full dark:bg-neutral-800" : " "
         }`}
         onClick={() => handleDateFocusChange("startDate")}>
         <div className='text-neutral-300 dark:text-neutral-400'>
@@ -115,7 +115,7 @@ const StayDatesRangeInput: FC<StayDatesRangeInputProps> = ({
     return (
       <div
         className={`relative flex ${fieldClassName} flex-shrink-0 items-center space-x-3 cursor-pointer ${
-          focused ? "shadow-2xl rounded-full dark:bg-neutral-800" : " "
+          focused ? " rounded-full dark:bg-neutral-800" : " "
         }`}
         onClick={() => handleDateFocusChange("endDate")}>
         <div className='text-neutral-300 dark:text-neutral-400'>
