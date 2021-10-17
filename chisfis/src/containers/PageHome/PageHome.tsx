@@ -265,8 +265,7 @@ function PageHome() {
       <Helmet>
         <title>Test & Trip</title>
       </Helmet>
-      {/* GLASSMOPHIN */}
-      <BgGlassmorphism />
+     
 
       <div className='container relative space-y-24 mb-24 lg:space-y-32 lg:mb-32'>
         {/* SECTION HERO */}
@@ -275,6 +274,7 @@ function PageHome() {
         <div
           className='nc-SectionHero flex flex-col-reverse lg:flex-col relative pt-10 lg:pt-32 pb-16'
           data-nc-id='SectionHero'>
+            
           <div className='z-10 mb-12 lg:mb-0 lg:-mt-40 w-full'>
             <div className='w-full relative mt-2 '>
               <div className=' py-10 mt-10 [ nc-hero-field-padding ] flex flex-col space-y-4 sm:space-y-0 sm:flex-row sm:space-x-10'>

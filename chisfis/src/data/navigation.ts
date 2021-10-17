@@ -213,8 +213,15 @@ export const NAVIGATION_DEMO: NavItemType[] = [
   // },
   {
     id: ncNanoId(),
+    href: "/listing-car-map",
+    name: "Test Centers",
+    //type: "dropdown",
+    //children: templatesChildrenMenus,
+  },
+  {
+    id: ncNanoId(),
     href: "/travel-destination",
-    name: "Travel Destinations",
+    name: "Destinations",
     //type: "dropdown",
     //children: templatesChildrenMenus,
   },

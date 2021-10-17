@@ -23,10 +23,10 @@ const SectionGridHasMap: FC<SectionGridHasMapProps> = () => {
         {/* CARDSSSS */}
         <div className="min-h-screen w-full xl:w-[780px] 2xl:w-[880px] flex-shrink-0 xl:px-8 ">
           <Heading2
-            heading="Cars in Tokyo"
+            heading="Test Centers"
             subHeading={
               <span className="block text-neutral-500 dark:text-neutral-400 mt-3">
-                233 cars
+                233 centers
                 <span className="mx-2">·</span>
                 Aug 12 - 18
               </span>

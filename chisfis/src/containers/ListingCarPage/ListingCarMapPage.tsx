@@ -19,23 +19,11 @@ const ListingCarMapPage: FC<ListingCarMapPageProps> = ({ className = "" }) => {
       data-nc-id="ListingCarMapPage"
     >
       <Helmet>
-        <title>Chisfis || Booking React Template</title>
+        <title>Test Centers</title>
       </Helmet>
       <BgGlassmorphism />
 
-      {/* SECTION HERO */}
-      <div className="container pt-10 pb-24 lg:pt-28 lg:pb-32">
-        <SectionHeroArchivePage
-          currentPage="Rental car"
-          currentTab="Rental car"
-          listingType={
-            <>
-              <i className="text-2xl las la-car"></i>
-              <span className="ml-2.5">1512 cars</span>
-            </>
-          }
-        />
-      </div>
+   
 
       {/* SECTION */}
       <div className="container pb-24 lg:pb-32 2xl:pl-10 xl:pr-0 xl:max-w-none">
