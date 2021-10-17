@@ -55,14 +55,12 @@ const TravelDestinationDetail: FC<ListingStayPageProps> = ({
       className={`nc-ListingStayPage relative overflow-hidden ${className}`}
       data-nc-id='ListingStayPage'>
       <Helmet>
-        <title>Chisfis || Booking React Template</title>
+        <title>Details</title>
       </Helmet>
-      <BgGlassmorphism />
 
       <div className='container relative overflow-hidden'>
         {/* SECTION HERO */}
         <div className='relative py-16'>
-          <BackgroundSection />
 
           <div
             className={`nc-SectionHeroArchivePage flex flex-col relative pt-10 pb-24 lg:pb-32 lg:pt-28`}
@@ -126,7 +124,6 @@ const TravelDestinationDetail: FC<ListingStayPageProps> = ({
       {/* SECTION 1 */}
       <div className='container relative overflow-hidden mt-10'>
         <div className='relative py-16'>
-          <BackgroundSection />
           <div className='listingSection__wrap relative bg-white dark:bg-neutral-900 border border-neutral-100 dark:border-neutral-800 rounded-2xl overflow-hidden hover:shadow-xl transition-shadow '>
             <div className='text-center'>
               <h2 className='text-2xl font-semibold'>
@@ -163,7 +160,6 @@ const TravelDestinationDetail: FC<ListingStayPageProps> = ({
       {/* SECTION 1 */}
       <div className='container relative overflow-hidden mt-10'>
         <div className='relative py-16'>
-          <BackgroundSection />
           <div className='listingSection__wrap relative bg-white dark:bg-neutral-900 border border-neutral-100 dark:border-neutral-800 rounded-2xl overflow-hidden hover:shadow-xl transition-shadow '>
             <div className='text-center'>
               <h2 className='text-2xl font-semibold'>
@@ -257,7 +253,6 @@ const TravelDestinationDetail: FC<ListingStayPageProps> = ({
 
       <div className='container relative overflow-hidden mt-10'>
         <div className='relative py-16'>
-          <BackgroundSection />
           <div className='relative text-center mt-10'>
             <h2 className='text-2xl font-semibold'>Choose Your Test</h2>
             <span className='block mt-2 text-neutral-500 dark:text-neutral-400'>

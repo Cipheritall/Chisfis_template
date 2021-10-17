@@ -28,17 +28,6 @@ const ListingStayPage: FC<ListingStayPageProps> = ({ className = "" }) => {
         {/* SECTION */}
         <SectionGridFilterCard className="pb-24 lg:pb-32" />
 
-        {/* SECTION 1 */}
-        <div className="relative relative py-16 mb-24 lg:mb-32">
-          <SectionSliderNewCategories
-            heading="Top Test Providers"
-            subHeading="Explore houses based on 10 types of stays"
-            categoryCardType="card5"
-            itemPerRow={5}
-            sliderStyle="style2"
-          />
-        </div>
-
      
       </div>
     </div>
