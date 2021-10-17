@@ -9,7 +9,7 @@ export interface Heading2Props {
 
 const Heading2: React.FC<Heading2Props> = ({
   className = "",
-  heading = "Stays in Tokyo",
+  heading = "Find your nearest center",
   subHeading,
 }) => {
   return (
@@ -19,10 +19,8 @@ const Heading2: React.FC<Heading2Props> = ({
         subHeading
       ) : (
         <span className="block text-neutral-500 dark:text-neutral-400 mt-3">
-          233 stays
-          <span className="mx-2">·</span>
-          Aug 12 - 18
-          <span className="mx-2">·</span>2 Guests
+        Our partners have 1,000s of available appointments everyday.
+       
         </span>
       )}
     </div>

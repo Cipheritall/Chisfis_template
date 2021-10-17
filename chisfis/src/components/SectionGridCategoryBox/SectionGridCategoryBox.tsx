@@ -15,7 +15,7 @@ const DEMO_CATS: TaxonomyType[] = [
   {
     id: "1",
     href: "#",
-    name: "New Yourk",
+    name: "New York",
     taxonomy: "category",
     count: 1882,
     thumbnail:
@@ -89,7 +89,7 @@ const DEMO_CATS: TaxonomyType[] = [
 const SectionGridCategoryBox: React.FC<SectionGridCategoryBoxProps> = ({
   categories = DEMO_CATS,
   categoryCardType = "card1",
-  headingCenter = true,
+  headingCenter = false,
   className = "",
   gridClassName = "grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4",
 }) => {
@@ -106,9 +106,9 @@ const SectionGridCategoryBox: React.FC<SectionGridCategoryBoxProps> = ({
   return (
     <div className={`nc-SectionGridCategoryBox relative ${className}`}>
       <Heading
-        desc='Discover great places near where you live'
+        desc='Top places to travel from your location'
         isCenter={headingCenter}>
-        Explore nearby
+        Popular Destinations
       </Heading>
       <div className={`grid ${gridClassName} gap-5 sm:gap-6 md:gap-8`}>
         {categories.map((item, i) => (

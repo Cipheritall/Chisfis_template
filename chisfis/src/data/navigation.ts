@@ -213,7 +213,7 @@ export const NAVIGATION_DEMO: NavItemType[] = [
   // },
   {
     id: ncNanoId(),
-    href: "/listing-car-map",
+    href: "/test-centers",
     name: "Test Centers",
     //type: "dropdown",
     //children: templatesChildrenMenus,

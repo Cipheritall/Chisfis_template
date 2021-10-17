@@ -9,20 +9,24 @@ import Checkbox from "shared/Checkbox/Checkbox";
 // DEMO DATA
 const typeOfPaces = [
   {
-    name: "Entire place",
+    name: "RT-PCR Test",
     description: "Have a place to yourself",
   },
   {
-    name: "Private room",
+    name: "Day 2 & Day 8 ",
     description: "Have your own room and share some common spaces",
   },
   {
-    name: "Hotel room",
+    name: "Day 5 Test to Release",
     description:
       "Have a private or shared room in a boutique hotel, hostel, and more",
   },
   {
-    name: "Shared room",
+    name: "Lateral Flow Antigen Test",
+    description: "Stay in a shared space, like a common room",
+  },
+  {
+    name: "Rapid Antigen Packs",
     description: "Stay in a shared space, like a common room",
   },
 ];
@@ -120,7 +124,7 @@ const TabFilters = () => {
               className={`flex items-center justify-center px-4 py-2 text-sm rounded-full border border-neutral-300 dark:border-neutral-700 focus:outline-none ${
                 open ? "!border-primary-500 " : ""
               }`}>
-              <span>Type of place</span>
+              <span>Type of Test</span>
             </Popover.Button>
             <Transition
               as={Fragment}

@@ -25,7 +25,7 @@ const SectionGridFeaturePlaces: FC<SectionGridFeaturePlacesProps> = ({
   subHeading = ` We’ve brought together a number of options with exclusive discounts to help you book the test you 
   need to travel easily and safely. The table below shows the types of tests available from each supplier 
   and their discount codes. Tests are PCR unless otherwise indicated`,
-  headingIsCenter,
+  headingIsCenter = true,
   tabs = ["New York", "Tokyo", "Paris", "London"],
 }) => {
   const renderCard = (stay: StayDataType) => {

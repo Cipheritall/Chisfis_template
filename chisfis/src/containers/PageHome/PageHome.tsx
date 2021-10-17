@@ -1,4 +1,4 @@
-import SectionHero from "components/SectionHero/SectionHero";
+import SectionHeroArchivePage from "components/SectionHeroArchivePage/SectionHeroArchivePage";
 import SectionSliderNewCategories from "components/SectionSliderNewCategories/SectionSliderNewCategories";
 import React, { Fragment, useEffect, useState } from "react";
 import SectionSubscribe2 from "components/SectionSubscribe2/SectionSubscribe2";
@@ -272,7 +272,13 @@ function PageHome() {
 
       <div className='container relative space-y-24 mb-24 lg:space-y-32 lg:mb-32'>
         {/* SECTION HERO */}
-        {/* <SectionHero className='pt-10 lg:pt-32 pb-16' /> */}
+        {/*}
+        <SectionHeroArchivePage
+          currentPage="Stay"
+          currentTab="Stay"
+          className="pt-10 pb-24 lg:pb-32 lg:pt-28 "
+        />
+  */}
 
         <div
           className='nc-SectionHero flex flex-col-reverse lg:flex-col relative pt-10 lg:pt-32 pb-16'
@@ -684,17 +690,21 @@ function PageHome() {
 
         {/* SECTION */}
 
+         {/* SECTION */}
+         {/*}
+         <div>
+
+<SectionGridFeaturePlaces />
+</div>
+              */}
 
 
+   {/* SECTION 1 */}
+   <SectionGridCategoryBox />
 
-        {/* SECTION */}
-        <div>
 
-          <SectionGridFeaturePlaces />
-        </div>
-
-        {/* SECTION 1 */}
-        <SectionGridCategoryBox />
+       
+     
 
         {/* <div className='relative py-16'>
           <BackgroundSection className='bg-orange-50 dark:bg-black dark:bg-opacity-20 ' />

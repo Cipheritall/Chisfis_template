@@ -50,6 +50,7 @@ export interface LocationStates {
 
   "/travel-destination"?: {};
   "/travel-destination-detail"?: {};
+  "/test-centers"?: {};
 }
 
 export type PathName = keyof LocationStates;

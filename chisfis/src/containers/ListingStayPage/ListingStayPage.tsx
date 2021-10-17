@@ -19,26 +19,19 @@ const ListingStayPage: FC<ListingStayPageProps> = ({ className = "" }) => {
       data-nc-id="ListingStayPage"
     >
       <Helmet>
-        <title>Chisfis || Booking React Template</title>
+        <title>Testing Centers</title>
       </Helmet>
-      <BgGlassmorphism />
+      
 
-      <div className="container relative overflow-hidden">
-        {/* SECTION HERO */}
-        <SectionHeroArchivePage
-          currentPage="Stay"
-          currentTab="Stay"
-          className="pt-10 pb-24 lg:pb-32 lg:pt-28 "
-        />
-
+      <div className="container relative overflow-hidden mt-10">
+  
         {/* SECTION */}
         <SectionGridFilterCard className="pb-24 lg:pb-32" />
 
         {/* SECTION 1 */}
-        <div className="relative py-16">
-          <BackgroundSection />
+        <div className="relative relative py-16 mb-24 lg:mb-32">
           <SectionSliderNewCategories
-            heading="Explore by types of stays"
+            heading="Top Test Providers"
             subHeading="Explore houses based on 10 types of stays"
             categoryCardType="card5"
             itemPerRow={5}
@@ -46,14 +39,7 @@ const ListingStayPage: FC<ListingStayPageProps> = ({ className = "" }) => {
           />
         </div>
 
-        {/* SECTION */}
-        <SectionSubscribe2 className="py-24 lg:py-32" />
-
-        {/* SECTION */}
-        <div className="relative py-16 mb-24 lg:mb-32">
-          <BackgroundSection className="bg-orange-50 dark:bg-black dark:bg-opacity-20 " />
-          <SectionGridAuthorBox />
-        </div>
+     
       </div>
     </div>
   );

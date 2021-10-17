@@ -47,6 +47,7 @@ export const pages: Page[] = [
   { path: "/", exact: true, component: PageHome },
   { path: "/#", exact: true, component: PageHome },
   { path: "/listing-stay", component: ListingStayPage },
+  
   { path: "/listing-stay-map", component: ListingStayMapPage },
   { path: "/listing-stay-detail", component: ListingStayDetailPage },
   //
@@ -100,11 +101,14 @@ export const pages: Page[] = [
     path: "/travel-destination",
     component: TravelDestinationCard,
   },
+  
 
   {
     path: "/travel-destination-detail",
     component: TravelDestinationDetail,
   },
+  { path: "/test-centers", component: ListingStayPage },
+
 ];
 
 const Routes = () => {

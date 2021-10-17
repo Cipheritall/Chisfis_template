@@ -11,6 +11,8 @@ import ButtonSecondary from "shared/Button/ButtonSecondary";
 import Button from "shared/Button/Button";
 import ButtonThird from "shared/Button/ButtonThird";
 import { ClockIcon } from "@heroicons/react/solid";
+import provider_logo from "images/collinson.png";
+
 
 export interface StayCardProps {
   className?: string;
@@ -53,17 +55,17 @@ const StayCard: FC<StayCardProps> = ({
   };
 
   const includes_demo = [
-    { name: "Set Menu Lunch on boat" },
-    { name: "Express Bus From Hanoi To Halong and Return" },
-    { name: "Mineral Water On Express Bus" },
-    { name: "Kayak or Bamboo Boat. Life Jacket." },
-    { name: "Halong Bay Entrance Ticket" },
+    { name: "Pre-departure testing" },
+    { name: "Test to release" },
+    { name: "Mandatory arrivals testing" },
+    { name: "Free parking on site" }
   ];
 
   const renderContent = () => {
     return (
       <div className={size === "default" ? "p-4 space-y-4" : "p-3 space-y-2"}>
         <div className='space-y-2'>
+
           <span className='text-sm text-neutral-500 dark:text-neutral-400'>
             {/* {listingCategory.name} · {bedrooms} beds */}
           </span>
@@ -117,6 +119,7 @@ const StayCard: FC<StayCardProps> = ({
               ))}
           </div>
         </div>
+
 
         <div className='flex justify-between items-center pt-3'>
           <span className='text-base font-semibold'>
@@ -172,9 +175,7 @@ const StayCard: FC<StayCardProps> = ({
         </div>
 
         <div className='flex justify-between items-center pt-3'>
-          <ButtonThird sizeClass='px-4 py-2 sm:px-1'>
-            Check Availability
-          </ButtonThird>
+         
           <ButtonThird
             className='ttnc-ButtonPrimary disabled:bg-opacity-70 bg-primary-6000 hover:bg-primary-700 text-neutral-50'
             sizeClass='px-4 py-2 sm:px-5'>
