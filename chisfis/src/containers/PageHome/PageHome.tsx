@@ -423,7 +423,7 @@ function PageHome() {
         {/* SECTION */}
         {toTravelRest["TravelRestrictions"].length !== 0 || isLoaded ? (
           <div className='relative py-16'>
-            <BackgroundSection />
+            
             {!isLoaded ? (
               <div className={`nc-SectionSliderNewCategories relative`}>
                 {/* <h3 className='text-2xl font-semibold'>Departure</h3> */}
@@ -658,7 +658,7 @@ function PageHome() {
 
         {/* SECTION */}
         <div className='relative py-16'>
-          <BackgroundSection />
+        
           <SectionGridFeaturePlaces />
         </div>
 
