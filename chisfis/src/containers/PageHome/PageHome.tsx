@@ -21,6 +21,9 @@ import carUtilities5 from "../../images/carUtilities/5.png";
 import carUtilities6 from "../../images/carUtilities/6.png";
 import carUtilities7 from "../../images/carUtilities/7.png";
 import carUtilities8 from "../../images/carUtilities/8.png";
+import { Disclosure } from '@headlessui/react'
+import { ChevronUpIcon } from '@heroicons/react/solid'
+
 
 import Label from "components/Label/Label";
 import Avatar from "shared/Avatar/Avatar";
@@ -265,7 +268,7 @@ function PageHome() {
       <Helmet>
         <title>Test & Trip</title>
       </Helmet>
-     
+
 
       <div className='container relative space-y-24 mb-24 lg:space-y-32 lg:mb-32'>
         {/* SECTION HERO */}
@@ -274,7 +277,7 @@ function PageHome() {
         <div
           className='nc-SectionHero flex flex-col-reverse lg:flex-col relative pt-10 lg:pt-32 pb-16'
           data-nc-id='SectionHero'>
-            
+
           <div className='z-10 mb-12 lg:mb-0 lg:-mt-40 w-full'>
             <div className='w-full relative mt-2 '>
               <div className=' py-10 mt-10 [ nc-hero-field-padding ] flex flex-col space-y-4 sm:space-y-0 sm:flex-row sm:space-x-10'>
@@ -310,7 +313,7 @@ function PageHome() {
                     Fully Vaccinated
                   </label>
                 </div>
-                
+
               </div>
               <form className='w-full relative flex flex-col border border-neutral-100 md:flex-row md:items-center rounded-3xl lg:rounded-full dark:bg-neutral-900 border-neutral-700 divide-y divide-neutral-200 md:divide-y-0'>
                 <FromLocationInput
@@ -360,237 +363,317 @@ function PageHome() {
             </div>
           </div>
           {toTravelRest["TravelRestrictions"].length !== 0 || isLoaded ? (
-          <>
-            
-            {!isLoaded ? (
-              <div className={`nc-SectionSliderNewCategories relative`}>
-                {/* <h3 className='text-2xl font-semibold'>Departure</h3> */}
-                <div className='mt-6'>
-                  <Tab.Group>
-                    <Tab.List className='flex'>
-                      <Tab as={Fragment}>
-                        {({ selected }) => (
-                          <button
-                            className={`px-4 py-1.5 sm:px-6 sm:py-2.5 rounded-full focus:outline-none ${
-                              selected
-                                ? "bg-neutral-800 text-white"
-                                : "text-neutral-6000 dark:text-neutral-400"
-                            }`}>
-                            Departure
-                          </button>
-                        )}
-                      </Tab>
-                      {roundTrip && (
+            <>
+
+              {!isLoaded ? (
+                <div className={`nc-SectionSliderNewCategories relative`}>
+                  {/* <h3 className='text-2xl font-semibold'>Departure</h3> */}
+                  <div className='mt-6'>
+                    <Tab.Group>
+                      <Tab.List className='flex'>
                         <Tab as={Fragment}>
                           {({ selected }) => (
                             <button
-                              className={`px-4 py-1.5 sm:px-6 sm:py-2.5  rounded-full flex items-center justify-center focus:outline-none  ${
-                                selected
-                                  ? "bg-neutral-800 text-white"
-                                  : " text-neutral-6000 dark:text-neutral-400"
-                              }`}>
-                              <span className='mr-2.5'>Return</span>
+                              className={`px-4 py-1.5 sm:px-6 sm:py-2.5 rounded-full focus:outline-none ${selected
+                                ? "bg-neutral-800 text-white"
+                                : "text-neutral-6000 dark:text-neutral-400"
+                                }`}>
+                              Departure
                             </button>
                           )}
                         </Tab>
-                      )}
-                    </Tab.List>
-
-                    <div className='w-14 border-b border-neutral-200 my-5'></div>
-                    <Tab.Panels>
-                      <Tab.Panel className='space-y-5'>
-                        <div className='listingSection__wrap elative bg-white dark:bg-neutral-900 border border-neutral-100 dark:border-neutral-800 rounded-2xl overflow-hidden hover:shadow-xl transition-shadow '>
-                          <div>
-                            <h2 className='text-2xl font-semibold'>
-                              Travel restrictions{" "}
-                            </h2>
-                            <span className='block mt-2 text-neutral-500 dark:text-neutral-400'>
-                              Questions are at the heart of making things great.
-                            </span>
-                          </div>
-                          <div className='w-14 border-b border-neutral-200 dark:border-neutral-700'></div>
-
-                          <div className='grid grid-cols-1 lg:grid-cols-2 gap-y-6 gap-x-10 text-sm text-neutral-700 dark:text-neutral-300 '>
-                            {/* TIEN ICH 1 */}
-                            {fromTravelRest["TravelRestrictions"].map(
-                              (item) => (
-                                <div
-                                  key={item}
-                                  className='flex items-center space-x-4 '>
-                                  <div className='w-10 flex-shrink-0'>
-                                    <img src={carUtilities2} alt='' />
-                                  </div>
-                                  <span>{item}</span>
-                                </div>
-                              )
+                        {roundTrip && (
+                          <Tab as={Fragment}>
+                            {({ selected }) => (
+                              <button
+                                className={`px-4 py-1.5 sm:px-6 sm:py-2.5  rounded-full flex items-center justify-center focus:outline-none  ${selected
+                                  ? "bg-neutral-800 text-white"
+                                  : " text-neutral-6000 dark:text-neutral-400"
+                                  }`}>
+                                <span className='mr-2.5'>Return</span>
+                              </button>
                             )}
-                          </div>
-                        </div>
+                          </Tab>
+                        )}
+                      </Tab.List>
 
-                        <div className='listingSection__wrap elative bg-white dark:bg-neutral-900 border border-neutral-100 dark:border-neutral-800 rounded-2xl overflow-hidden hover:shadow-xl transition-shadow '>
+                      <div className='w-14 border-b border-neutral-200 my-5'></div>
+                      <Tab.Panels>
+                        <Tab.Panel className='space-y-5'>
                           <div>
-                            <h2 className='text-2xl font-semibold'>
-                              Form and Documents{" "}
-                            </h2>
-                            <span className='block mt-2 text-neutral-500 dark:text-neutral-400'>
-                              Questions are at the heart of making things great.
-                            </span>
+                            <Disclosure>
+                              {({ open }) => (
+                                <>
+                                  <Disclosure.Button className="flex justify-between w-full px-4 py-5 text-sm font-medium text-left text-gray-900 bg-gray-100 rounded-lg hover:bg-gray-200 focus:outline-none focus-visible:ring focus-visible:ring-gray-500 focus-visible:ring-opacity-75">
+                                    <span>Visa Requirements</span>
+                                    <ChevronUpIcon
+                                      className={`${open ? 'transform rotate-180' : ''
+                                        } w-5 h-5 text-gray-500`}
+                                    />
+                                  </Disclosure.Button>
+                                  <Disclosure.Panel className="px-4 pt-4 pb-2 text-sm text-gray-500">
+                                    <div className='grid grid-cols-1 lg:grid-cols-2 gap-y-6 gap-x-10 text-sm text-neutral-700 dark:text-neutral-300 '>
+                                      {/* TIEN ICH 1 */}
+                                      {fromTravelRest["TravelRestrictions"].map(
+                                        (item) => (
+                                          <div
+                                            key={item}
+                                            className='flex items-center space-x-4 '>
+                                            <div className='w-10 flex-shrink-0'>
+                                              <img src={carUtilities2} alt='' />
+                                            </div>
+                                            <span>{item}</span>
+                                          </div>
+                                        )
+                                      )}
+                                    </div>
+                                  </Disclosure.Panel>
+                                </>
+                              )}
+                            </Disclosure>
+                            <Disclosure as="div" className="mt-2">
+                              {({ open }) => (
+                                <>
+                                  <Disclosure.Button className="flex justify-between w-full px-4 py-5 text-sm font-medium text-left text-gray-900 bg-gray-100 rounded-lg hover:bg-gray-200 focus:outline-none focus-visible:ring focus-visible:ring-gray-500 focus-visible:ring-opacity-75">
+                                    <span>Travel Restrictions</span>
+                                    <ChevronUpIcon
+                                      className={`${open ? 'transform rotate-180' : ''
+                                        } w-5 h-5 text-gray-500`}
+                                    />
+                                  </Disclosure.Button>
+                                  <Disclosure.Panel className="px-4 pt-4 pb-2 text-sm text-gray-500">
+                                    <div className='grid grid-cols-1 lg:grid-cols-2 gap-y-6 gap-x-10 text-sm text-neutral-700 dark:text-neutral-300 '>
+                                      {/* TIEN ICH 1 */}
+                                      {fromTravelRest["TravelRestrictions"].map(
+                                        (item) => (
+                                          <div
+                                            key={item}
+                                            className='flex items-center space-x-4 '>
+                                            <div className='w-10 flex-shrink-0'>
+                                              <img src={carUtilities2} alt='' />
+                                            </div>
+                                            <span>{item}</span>
+                                          </div>
+                                        )
+                                      )}
+                                    </div>
+                                  </Disclosure.Panel>
+                                </>
+                              )}
+                            </Disclosure>
+                            <Disclosure as="div" className="mt-2">
+                              {({ open }) => (
+                                <>
+                                  <Disclosure.Button className="flex justify-between w-full px-4 py-5 text-sm font-medium text-left text-gray-900 bg-gray-100 rounded-lg hover:bg-gray-200 focus:outline-none focus-visible:ring focus-visible:ring-gray-500 focus-visible:ring-opacity-75">
+                                    <span>Forms and documents</span>
+                                    <ChevronUpIcon
+                                      className={`${open ? 'transform rotate-180' : ''
+                                        } w-5 h-5 text-gray-500`}
+                                    />
+                                  </Disclosure.Button>
+                                  <Disclosure.Panel className="px-4 pt-4 pb-2 text-sm text-gray-500">
+                                    <div className='grid grid-cols-1 lg:grid-cols-2 gap-y-6 gap-x-10 text-sm text-neutral-700 dark:text-neutral-300 '>
+                                      {/* TIEN ICH 1 */}
+                                      {fromTravelRest["TravelRestrictions"].map(
+                                        (item) => (
+                                          <div
+                                            key={item}
+                                            className='flex items-center space-x-4 '>
+                                            <div className='w-10 flex-shrink-0'>
+                                              <img src={carUtilities2} alt='' />
+                                            </div>
+                                            <span>{item}</span>
+                                          </div>
+                                        )
+                                      )}
+                                    </div>
+                                  </Disclosure.Panel>
+                                </>
+                              )}
+                            </Disclosure>
+                            <Disclosure as="div" className="mt-2">
+                              {({ open }) => (
+                                <>
+                                  <Disclosure.Button className="flex justify-between w-full px-4 py-5 text-sm font-medium text-left text-gray-900 bg-gray-100 rounded-lg hover:bg-gray-200 focus:outline-none focus-visible:ring focus-visible:ring-gray-500 focus-visible:ring-opacity-75">
+                                    <span>Additional Information</span>
+                                    <ChevronUpIcon
+                                      className={`${open ? 'transform rotate-180' : ''
+                                        } w-5 h-5 text-gray-500`}
+                                    />
+                                  </Disclosure.Button>
+                                  <Disclosure.Panel className="px-4 pt-4 pb-2 text-sm text-gray-500">
+                                    <div className='grid grid-cols-1 lg:grid-cols-2 gap-y-6 gap-x-10 text-sm text-neutral-700 dark:text-neutral-300 '>
+                                      {/* TIEN ICH 1 */}
+                                      {fromTravelRest["TravelRestrictions"].map(
+                                        (item) => (
+                                          <div
+                                            key={item}
+                                            className='flex items-center space-x-4 '>
+                                            <div className='w-10 flex-shrink-0'>
+                                              <img src={carUtilities2} alt='' />
+                                            </div>
+                                            <span>{item}</span>
+                                          </div>
+                                        )
+                                      )}
+                                    </div>
+                                  </Disclosure.Panel>
+                                </>
+                              )}
+                            </Disclosure>
                           </div>
-                          <div className='w-14 border-b border-neutral-200 dark:border-neutral-700'></div>
-                          {/* 6 */}
-                          <div className='grid grid-cols-1 lg:grid-cols-2 gap-y-6 gap-x-10 text-sm text-neutral-700 dark:text-neutral-300 '>
-                            {/* TIEN ICH 1 */}
-                            {fromTravelRest["TravelRestrictions"].map(
-                              (item) => (
-                                <div
-                                  key={item}
-                                  className='flex items-center space-x-4 '>
-                                  <div className='w-10 flex-shrink-0'>
-                                    <img src={carUtilities2} alt='' />
-                                  </div>
-                                  <span>{item}</span>
-                                </div>
-                              )
-                            )}
-                          </div>
-                        </div>
-
-                        <div className='listingSection__wrap elative bg-white dark:bg-neutral-900 border border-neutral-100 dark:border-neutral-800 rounded-2xl overflow-hidden hover:shadow-xl transition-shadow '>
+                        </Tab.Panel>
+                        <Tab.Panel className='space-y-5'>
                           <div>
-                            <h2 className='text-2xl font-semibold'>
-                              Additional Information{" "}
-                            </h2>
-                            <span className='block mt-2 text-neutral-500 dark:text-neutral-400'>
-                              Questions are at the heart of making things great.
-                            </span>
+                            <Disclosure>
+                              {({ open }) => (
+                                <>
+                                  <Disclosure.Button className="flex justify-between w-full px-4 py-5 text-sm font-medium text-left text-gray-900 bg-gray-100 rounded-lg hover:bg-gray-200 focus:outline-none focus-visible:ring focus-visible:ring-gray-500 focus-visible:ring-opacity-75">
+                                    <span>Visa Requirements</span>
+                                    <ChevronUpIcon
+                                      className={`${open ? 'transform rotate-180' : ''
+                                        } w-5 h-5 text-gray-500`}
+                                    />
+                                  </Disclosure.Button>
+                                  <Disclosure.Panel className="px-4 pt-4 pb-2 text-sm text-gray-500">
+                                    <div className='grid grid-cols-1 lg:grid-cols-2 gap-y-6 gap-x-10 text-sm text-neutral-700 dark:text-neutral-300 '>
+                                      {/* TIEN ICH 1 */}
+                                      {fromTravelRest["TravelRestrictions"].map(
+                                        (item) => (
+                                          <div
+                                            key={item}
+                                            className='flex items-center space-x-4 '>
+                                            <div className='w-10 flex-shrink-0'>
+                                              <img src={carUtilities2} alt='' />
+                                            </div>
+                                            <span>{item}</span>
+                                          </div>
+                                        )
+                                      )}
+                                    </div>
+                                  </Disclosure.Panel>
+                                </>
+                              )}
+                            </Disclosure>
+                            <Disclosure as="div" className="mt-2">
+                              {({ open }) => (
+                                <>
+                                  <Disclosure.Button className="flex justify-between w-full px-4 py-5 text-sm font-medium text-left text-gray-900 bg-gray-100 rounded-lg hover:bg-gray-200 focus:outline-none focus-visible:ring focus-visible:ring-gray-500 focus-visible:ring-opacity-75">
+                                    <span>Travel Restrictions</span>
+                                    <ChevronUpIcon
+                                      className={`${open ? 'transform rotate-180' : ''
+                                        } w-5 h-5 text-gray-500`}
+                                    />
+                                  </Disclosure.Button>
+                                  <Disclosure.Panel className="px-4 pt-4 pb-2 text-sm text-gray-500">
+                                    <div className='grid grid-cols-1 lg:grid-cols-2 gap-y-6 gap-x-10 text-sm text-neutral-700 dark:text-neutral-300 '>
+                                      {/* TIEN ICH 1 */}
+                                      {fromTravelRest["TravelRestrictions"].map(
+                                        (item) => (
+                                          <div
+                                            key={item}
+                                            className='flex items-center space-x-4 '>
+                                            <div className='w-10 flex-shrink-0'>
+                                              <img src={carUtilities2} alt='' />
+                                            </div>
+                                            <span>{item}</span>
+                                          </div>
+                                        )
+                                      )}
+                                    </div>
+                                  </Disclosure.Panel>
+                                </>
+                              )}
+                            </Disclosure>
+                            <Disclosure as="div" className="mt-2">
+                              {({ open }) => (
+                                <>
+                                  <Disclosure.Button className="flex justify-between w-full px-4 py-5 text-sm font-medium text-left text-gray-900 bg-gray-100 rounded-lg hover:bg-gray-200 focus:outline-none focus-visible:ring focus-visible:ring-gray-500 focus-visible:ring-opacity-75">
+                                    <span>Forms and documents</span>
+                                    <ChevronUpIcon
+                                      className={`${open ? 'transform rotate-180' : ''
+                                        } w-5 h-5 text-gray-500`}
+                                    />
+                                  </Disclosure.Button>
+                                  <Disclosure.Panel className="px-4 pt-4 pb-2 text-sm text-gray-500">
+                                    <div className='grid grid-cols-1 lg:grid-cols-2 gap-y-6 gap-x-10 text-sm text-neutral-700 dark:text-neutral-300 '>
+                                      {/* TIEN ICH 1 */}
+                                      {fromTravelRest["TravelRestrictions"].map(
+                                        (item) => (
+                                          <div
+                                            key={item}
+                                            className='flex items-center space-x-4 '>
+                                            <div className='w-10 flex-shrink-0'>
+                                              <img src={carUtilities2} alt='' />
+                                            </div>
+                                            <span>{item}</span>
+                                          </div>
+                                        )
+                                      )}
+                                    </div>
+                                  </Disclosure.Panel>
+                                </>
+                              )}
+                            </Disclosure>
+                            <Disclosure as="div" className="mt-2">
+                              {({ open }) => (
+                                <>
+                                  <Disclosure.Button className="flex justify-between w-full px-4 py-5 text-sm font-medium text-left text-gray-900 bg-gray-100 rounded-lg hover:bg-gray-200 focus:outline-none focus-visible:ring focus-visible:ring-gray-500 focus-visible:ring-opacity-75">
+                                    <span>Additional Information</span>
+                                    <ChevronUpIcon
+                                      className={`${open ? 'transform rotate-180' : ''
+                                        } w-5 h-5 text-gray-500`}
+                                    />
+                                  </Disclosure.Button>
+                                  <Disclosure.Panel className="px-4 pt-4 pb-2 text-sm text-gray-500">
+                                    <div className='grid grid-cols-1 lg:grid-cols-2 gap-y-6 gap-x-10 text-sm text-neutral-700 dark:text-neutral-300 '>
+                                      {/* TIEN ICH 1 */}
+                                      {fromTravelRest["TravelRestrictions"].map(
+                                        (item) => (
+                                          <div
+                                            key={item}
+                                            className='flex items-center space-x-4 '>
+                                            <div className='w-10 flex-shrink-0'>
+                                              <img src={carUtilities2} alt='' />
+                                            </div>
+                                            <span>{item}</span>
+                                          </div>
+                                        )
+                                      )}
+                                    </div>
+                                  </Disclosure.Panel>
+                                </>
+                              )}
+                            </Disclosure>
                           </div>
-                          <div className='w-14 border-b border-neutral-200 dark:border-neutral-700'></div>
-                          {/* 6 */}
-                          <div className='grid grid-cols-1 lg:grid-cols-2 gap-y-6 gap-x-10 text-sm text-neutral-700 dark:text-neutral-300 '>
-                            {/* TIEN ICH 1 */}
-                            {fromTravelRest["AdditionalInformation"].map(
-                              (item) => (
-                                <div
-                                  key={item}
-                                  className='flex items-center space-x-4 '>
-                                  <div className='w-10 flex-shrink-0'>
-                                    <img src={carUtilities2} alt='' />
-                                  </div>
-                                  <span>{item}</span>
-                                </div>
-                              )
-                            )}
-                          </div>
-                        </div>
-                      </Tab.Panel>
-                      <Tab.Panel className='space-y-5'>
-                        <div className='listingSection__wrap elative bg-white dark:bg-neutral-900 border border-neutral-100 dark:border-neutral-800 rounded-2xl overflow-hidden hover:shadow-xl transition-shadow '>
-                          <div>
-                            <h2 className='text-2xl font-semibold'>
-                              Travel restrictions{" "}
-                            </h2>
-                            <span className='block mt-2 text-neutral-500 dark:text-neutral-400'>
-                              Questions are at the heart of making things great.
-                            </span>
-                          </div>
-                          <div className='w-14 border-b border-neutral-200 dark:border-neutral-700'></div>
-
-                          <div className='grid grid-cols-1 lg:grid-cols-2 gap-y-6 gap-x-10 text-sm text-neutral-700 dark:text-neutral-300 '>
-                            {/* TIEN ICH 1 */}
-                            {toTravelRest["TravelRestrictions"].map((item) => (
-                              <div
-                                key={item}
-                                className='flex items-center space-x-4 '>
-                                <div className='w-10 flex-shrink-0'>
-                                  <img src={carUtilities2} alt='' />
-                                </div>
-                                <span>{item}</span>
-                              </div>
-                            ))}
-                          </div>
-                        </div>
-
-                        <div className='listingSection__wrap elative bg-white dark:bg-neutral-900 border border-neutral-100 dark:border-neutral-800 rounded-2xl overflow-hidden hover:shadow-xl transition-shadow '>
-                          <div>
-                            <h2 className='text-2xl font-semibold'>
-                              Form and Documents{" "}
-                            </h2>
-                            <span className='block mt-2 text-neutral-500 dark:text-neutral-400'>
-                              Questions are at the heart of making things great.
-                            </span>
-                          </div>
-                          <div className='w-14 border-b border-neutral-200 dark:border-neutral-700'></div>
-                          {/* 6 */}
-                          <div className='grid grid-cols-1 lg:grid-cols-2 gap-y-6 gap-x-10 text-sm text-neutral-700 dark:text-neutral-300 '>
-                            {/* TIEN ICH 1 */}
-                            {toTravelRest["TravelRestrictions"].map((item) => (
-                              <div
-                                key={item}
-                                className='flex items-center space-x-4 '>
-                                <div className='w-10 flex-shrink-0'>
-                                  <img src={carUtilities2} alt='' />
-                                </div>
-                                <span>{item}</span>
-                              </div>
-                            ))}
-                          </div>
-                        </div>
-
-                        <div className='listingSection__wrap elative bg-white dark:bg-neutral-900 border border-neutral-100 dark:border-neutral-800 rounded-2xl overflow-hidden hover:shadow-xl transition-shadow '>
-                          <div>
-                            <h2 className='text-2xl font-semibold'>
-                              Additional Information{" "}
-                            </h2>
-                            <span className='block mt-2 text-neutral-500 dark:text-neutral-400'>
-                              Questions are at the heart of making things great.
-                            </span>
-                          </div>
-                          <div className='w-14 border-b border-neutral-200 dark:border-neutral-700'></div>
-                          {/* 6 */}
-                          <div className='grid grid-cols-1 lg:grid-cols-2 gap-y-6 gap-x-10 text-sm text-neutral-700 dark:text-neutral-300 '>
-                            {/* TIEN ICH 1 */}
-                            {toTravelRest["AdditionalInformation"].map(
-                              (item) => (
-                                <div
-                                  key={item}
-                                  className='flex items-center space-x-4 '>
-                                  <div className='w-10 flex-shrink-0'>
-                                    <img src={carUtilities2} alt='' />
-                                  </div>
-                                  <span>{item}</span>
-                                </div>
-                              )
-                            )}
-                          </div>
-                        </div>
-                      </Tab.Panel>
-                    </Tab.Panels>
-                  </Tab.Group>
+                        </Tab.Panel>
+                      </Tab.Panels>
+                    </Tab.Group>
+                  </div>
                 </div>
-              </div>
-            ) : (
-              <div style={{ marginLeft: "50%" }} className="py-6">
-                <svg
-                  className='animate-spin -ml-1 mr-3 h-5 w-5'
-                  xmlns='http://www.w3.org/2000/svg'
-                  fill='none'
-                  viewBox='0 0 24 24'>
-                  <circle
-                    className='opacity-25'
-                    cx='12'
-                    cy='12'
-                    r='10'
-                    stroke='currentColor'
-                    strokeWidth='3'></circle>
-                  <path
-                    className='opacity-75'
-                    fill='currentColor'
-                    d='M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z'></path>
-                </svg>
-              </div>
-            )}
-          </>
-        ) : null}
+              ) : (
+                <div style={{ marginLeft: "50%" }} className="py-6">
+                  <svg
+                    className='animate-spin -ml-1 mr-3 h-5 w-5'
+                    xmlns='http://www.w3.org/2000/svg'
+                    fill='none'
+                    viewBox='0 0 24 24'>
+                    <circle
+                      className='opacity-25'
+                      cx='12'
+                      cy='12'
+                      r='10'
+                      stroke='currentColor'
+                      strokeWidth='3'></circle>
+                    <path
+                      className='opacity-75'
+                      fill='currentColor'
+                      d='M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z'></path>
+                  </svg>
+                </div>
+              )}
+            </>
+          ) : null}
 
         </div>
         {/* SECTION 1 */}
@@ -600,18 +683,18 @@ function PageHome() {
         {/* <SectionOurFeatures /> */}
 
         {/* SECTION */}
-     
-     
+
+
 
 
         {/* SECTION */}
         <div>
-        
+
           <SectionGridFeaturePlaces />
         </div>
 
-           {/* SECTION 1 */}
-           <SectionGridCategoryBox /> 
+        {/* SECTION 1 */}
+        <SectionGridCategoryBox />
 
         {/* <div className='relative py-16'>
           <BackgroundSection className='bg-orange-50 dark:bg-black dark:bg-opacity-20 ' />
@@ -634,7 +717,7 @@ function PageHome() {
           <SectionGridAuthorBox />
         </div> */}
 
-      
+
         {/* SECTION */}
         {/* <div className='relative py-16'>
           <BackgroundSection />
