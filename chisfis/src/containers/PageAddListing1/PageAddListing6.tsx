@@ -8,8 +8,9 @@ const PageAddListing6: FC<PageAddListing6Props> = () => {
   return (
     <CommonLayout
       index="06"
-      backtHref="/add-listing-5"
-      nextHref="/add-listing-7"
+      header="Choose your service"
+      backtHref="/add-booking-5"
+      nextHref="/add-booking-7"
     >
       <>
         <div>

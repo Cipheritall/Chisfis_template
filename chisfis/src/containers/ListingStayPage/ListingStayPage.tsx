@@ -6,6 +6,7 @@ import SectionSliderNewCategories from "components/SectionSliderNewCategories/Se
 import SectionSubscribe2 from "components/SectionSubscribe2/SectionSubscribe2";
 import React, { FC } from "react";
 import SectionGridFilterCard from "./SectionGridFilterCard";
+
 import { Helmet } from "react-helmet";
 
 export interface ListingStayPageProps {
@@ -24,6 +25,7 @@ const ListingStayPage: FC<ListingStayPageProps> = ({ className = "" }) => {
       
 
       <div className="container relative overflow-hidden mt-10">
+     
   
         {/* SECTION */}
         <SectionGridFilterCard className="pb-24 lg:pb-32" />

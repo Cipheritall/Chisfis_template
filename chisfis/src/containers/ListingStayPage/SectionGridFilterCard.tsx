@@ -5,7 +5,7 @@ import { StayDataType } from "data/types";
 import Pagination from "shared/Pagination/Pagination";
 import TabFilters from "./TabFilters";
 import Heading2 from "components/Heading/Heading2";
-
+import WidgetTags from "./WidgetTags";
 export interface SectionGridFilterCardProps {
   className?: string;
   data?: StayDataType[];
@@ -23,6 +23,11 @@ const SectionGridFilterCard: FC<SectionGridFilterCardProps> = ({
       data-nc-id="SectionGridFilterCard"
     >
       <Heading2 />
+     
+
+      <div className="mb-8 lg:mb-11">
+      <WidgetTags />
+      </div>
 
       <div className="mb-8 lg:mb-11">
         <TabFilters />

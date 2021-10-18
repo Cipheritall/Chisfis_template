@@ -104,7 +104,7 @@ const TravelDestinationDetail: FC<ListingStayPageProps> = ({
 
                 <div className='w-14 border-b border-neutral-200 dark:border-neutral-700' />
 
-                <ButtonPrimary href='/login'>Book a Test</ButtonPrimary>
+                <ButtonPrimary href='/select-test'>Book a Test</ButtonPrimary>
               </div>
               <div className='flex-grow'>
                 <img

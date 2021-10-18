@@ -12,7 +12,8 @@ const PageAddListing10: FC<PageAddListing10Props> = () => {
     <CommonLayout
       nextBtnText="Publish listing"
       index="10"
-      backtHref="/add-listing-9"
+      header="Choose your service"
+      backtHref="/add-booking-9"
       nextHref="/"
     >
       <>
@@ -34,7 +35,7 @@ const PageAddListing10: FC<PageAddListing10Props> = () => {
             />
           </div>
           <div className="flex items-center space-x-5 mt-8">
-            <ButtonSecondary href="/add-listing-1">
+            <ButtonSecondary href="/add-booking-1">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 className="h-5 w-5"

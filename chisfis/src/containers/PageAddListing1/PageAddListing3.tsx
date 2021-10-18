@@ -10,8 +10,9 @@ const PageAddListing3: FC<PageAddListing3Props> = () => {
   return (
     <CommonLayout
       index="03"
-      backtHref="/add-listing-2"
-      nextHref="/add-listing-4"
+      header="Choose your service"
+      backtHref="/add-booking-2"
+      nextHref="/add-booking-4"
     >
       <>
         <h2 className="text-2xl font-semibold">Size of your location</h2>

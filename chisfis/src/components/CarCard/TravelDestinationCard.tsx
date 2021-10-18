@@ -44,7 +44,7 @@ const pageData: Array<pageDataType> = [
   },
   {
     id: "9824dd51-14bc-4a05-ba7d-1ca3c3c08bd7",
-    href: "/listing-car-detail",
+    href: "/travel-destination-detail",
     title: "France",
     desc: "UK travellers to Norway must quarantine in a hotel and present a negative pre-departure test. Domestic restrictions are gradually being lifted.",
     testingWindow: "24 hours",
@@ -53,7 +53,7 @@ const pageData: Array<pageDataType> = [
   },
   {
     id: "9824dd51-14bc-4a05-ba7d-1ca3c3c08bd7",
-    href: "/listing-car-detail",
+    href: "/travel-destination-detail",
     title: "Paris",
     desc: "UK travellers to Norway must quarantine in a hotel and present a negative pre-departure test. Domestic restrictions are gradually being lifted.",
     testingWindow: "24 hours",
@@ -62,7 +62,7 @@ const pageData: Array<pageDataType> = [
   },
   {
     id: "9824dd51-14bc-4a05-ba7d-1ca3c3c08bd7",
-    href: "/listing-car-detail",
+    href: "/travel-destination-detail",
     title: "Singapore",
     desc: "UK travellers to Norway must quarantine in a hotel and present a negative pre-departure test. Domestic restrictions are gradually being lifted.",
     testingWindow: "24 hours",

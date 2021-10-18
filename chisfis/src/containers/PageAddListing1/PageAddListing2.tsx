@@ -15,8 +15,9 @@ const PageAddListing2: FC<PageAddListing2Props> = () => {
   return (
     <CommonLayout
       index="02"
-      nextHref="/add-listing-3"
-      backtHref="/add-listing-1"
+      header="Choose your service"
+      nextHref="/add-booking-3"
+      backtHref="/add-booking-1"
     >
       <>
         <h2 className="text-2xl font-semibold">Your place location</h2>

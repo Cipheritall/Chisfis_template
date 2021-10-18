@@ -101,58 +101,58 @@ const otherPageChildMenus: NavItemType[] = [
 const templatesChildrenMenus: NavItemType[] = [
   {
     id: ncNanoId(),
-    href: "/add-listing-1",
+    href: "/add-booking-1",
     name: "Add Listings",
     type: "dropdown",
     children: [
       {
         id: ncNanoId(),
-        href: "/add-listing-1",
+        href: "/add-booking-1",
         name: "Add Listings 1",
       },
       {
         id: ncNanoId(),
-        href: "/add-listing-2",
+        href: "/add-booking-2",
         name: "Add Listings 2",
       },
       {
         id: ncNanoId(),
-        href: "/add-listing-3",
+        href: "/add-booking-3",
         name: "Add Listings 3",
       },
       {
         id: ncNanoId(),
-        href: "/add-listing-4",
+        href: "/add-booking-4",
         name: "Add Listings 4",
       },
       {
         id: ncNanoId(),
-        href: "/add-listing-5",
+        href: "/add-booking-5",
         name: "Add Listings 5",
       },
       {
         id: ncNanoId(),
-        href: "/add-listing-6",
+        href: "/add-booking-6",
         name: "Add Listings 6",
       },
       {
         id: ncNanoId(),
-        href: "/add-listing-7",
+        href: "/add-booking-7",
         name: "Add Listings 7",
       },
       {
         id: ncNanoId(),
-        href: "/add-listing-8",
+        href: "/add-booking-8",
         name: "Add Listings 8",
       },
       {
         id: ncNanoId(),
-        href: "/add-listing-9",
+        href: "/add-booking-9",
         name: "Add Listings 9",
       },
       {
         id: ncNanoId(),
-        href: "/add-listing-10",
+        href: "/add-booking-10",
         name: "Add Listings 10",
       },
     ],

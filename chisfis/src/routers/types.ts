@@ -27,16 +27,16 @@ export interface LocationStates {
   "/blog"?: {};
   "/blog-single"?: {};
   //
-  "/add-listing-1"?: {};
-  "/add-listing-2"?: {};
-  "/add-listing-3"?: {};
-  "/add-listing-4"?: {};
-  "/add-listing-5"?: {};
-  "/add-listing-6"?: {};
-  "/add-listing-7"?: {};
-  "/add-listing-8"?: {};
-  "/add-listing-9"?: {};
-  "/add-listing-10"?: {};
+  "/add-booking-1"?: {};
+  "/add-booking-2"?: {};
+  "/add-booking-3"?: {};
+  "/add-booking-4"?: {};
+  "/add-booking-5"?: {};
+  "/add-booking-6"?: {};
+  "/add-booking-7"?: {};
+  "/add-booking-8"?: {};
+  "/add-booking-9"?: {};
+  "/add-booking-10"?: {};
   //
   "/author"?: {};
   "/search"?: {};
@@ -51,6 +51,8 @@ export interface LocationStates {
   "/travel-destination"?: {};
   "/travel-destination-detail"?: {};
   "/test-centers"?: {};
+  "/booking-page"?: {};
+  "/select-test"?: {};
 }
 
 export type PathName = keyof LocationStates;

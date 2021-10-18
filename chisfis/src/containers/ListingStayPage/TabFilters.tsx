@@ -33,22 +33,19 @@ const typeOfPaces = [
 
 const rangePrices = [
   {
-    name: "$ 0 - 20",
+    name: "0 - 20",
   },
   {
-    name: "$ 20 - 50",
+    name: "20 - 50",
     defaultChecked: true,
   },
   {
-    name: "$ 50 - 100",
+    name: "50 - 100",
     defaultChecked: true,
   },
   {
-    name: "$ 100 - 200",
-  },
-  {
-    name: "> $1,000",
-  },
+    name: "100 - 200",
+  }
 ];
 
 const moreFilter1 = [
@@ -218,7 +215,7 @@ const TabFilters = () => {
           <>
             <Popover.Button
               className={`flex items-center justify-center px-4 py-2 text-sm rounded-full border border-primary-500 bg-primary-50 text-primary-700 focus:outline-none `}>
-              <span>$20 - $100</span>
+              <span>20 - 100</span>
               {renderXClear()}
             </Popover.Button>
             <Transition
@@ -233,7 +230,7 @@ const TabFilters = () => {
                 <div className='overflow-hidden rounded-2xl shadow-xl bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-700'>
                   <div className='relative flex flex-col px-5 py-6 space-y-8'>
                     <div className='space-y-5'>
-                      <span className='font-medium'>Price per day</span>
+                      <span className='font-medium'>Price</span>
                       {rangePrices.map((item) => (
                         <Checkbox
                           key={item.name}
@@ -257,9 +254,7 @@ const TabFilters = () => {
                         </label>
                         <div className='mt-1 relative rounded-md'>
                           <div className='absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none'>
-                            <span className='text-neutral-500 sm:text-sm'>
-                              $
-                            </span>
+                           
                           </div>
                           <input
                             type='number'
@@ -280,9 +275,7 @@ const TabFilters = () => {
                         </label>
                         <div className='mt-1 relative rounded-md'>
                           <div className='absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none'>
-                            <span className='text-neutral-500 sm:text-sm'>
-                              $
-                            </span>
+                           
                           </div>
                           <input
                             type='number'
@@ -593,9 +586,12 @@ const TabFilters = () => {
     <div className='flex lg:space-x-4'>
       <div className='hidden lg:flex space-x-4'>
         {renderTabsTypeOfPlace()}
+
         {renderTabsPriceRage()}
+        {/*}
         {renderTabsRoomAndBeds()}
         {renderTabMoreFilter()}
+  */}
       </div>
       {renderTabMoreFilterMobile()}
     </div>

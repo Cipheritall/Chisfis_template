@@ -1,0 +1,83 @@
+[
+  {
+    "id": 1,
+    "name": "North East",
+    "href": "/",
+    "thumbnail": "https://images.pexels.com/photos/2363814/pexels-photo-2363814.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
+    "count": 13,
+    "color": "indigo"
+  },
+  {
+    "id": 2,
+    "name": "North West",
+    "href": "/",
+    "thumbnail": "https://images.pexels.com/photos/7932264/pexels-photo-7932264.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
+    "count": 16,
+    "color": "red"
+  },
+  {
+    "id": 3,
+    "name": "Yorkshire",
+    "href": "/",
+    "thumbnail": "https://images.pexels.com/photos/1858406/pexels-photo-1858406.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
+    "count": 15,
+    "color": "yellow"
+  },
+  {
+    "id": 4,
+    "name": "Midlands",
+    "href": "/",
+    "thumbnail": "https://images.pexels.com/photos/4352244/pexels-photo-4352244.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
+    "count": 21,
+    "color": "pink"
+  },
+  {
+    "id": 5,
+    "name": "East of England",
+    "href": "/",
+    "thumbnail": "https://images.pexels.com/photos/2395249/pexels-photo-2395249.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
+    "count": 16,
+    "color": "pink"
+  },
+  {
+    "id": 6,
+    "name": "South East",
+    "href": "/",
+    "thumbnail": "https://images.pexels.com/photos/1103970/pexels-photo-1103970.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
+    "count": 25,
+    "color": "blue"
+  },
+  {
+    "id": 7,
+    "name": "London",
+    "href": "/",
+    "thumbnail": "https://images.pexels.com/photos/7195344/pexels-photo-7195344.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
+    "count": 14,
+    "color": "gray"
+  },
+  {
+    "id": 8,
+    "name": "South West",
+    "href": "/",
+    "thumbnail": "https://images.pexels.com/photos/7195270/pexels-photo-7195270.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
+    "count": 4,
+    "color": "purple"
+  },
+  {
+    "id": 9,
+    "name": "Wales",
+    "href": "/",
+    "thumbnail": "https://images.pexels.com/photos/7195208/pexels-photo-7195208.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
+    "count": 7,
+    "color": "red"
+  },
+  {
+    "id": 10,
+    "name": "Scotland",
+    "href": "/",
+    "thumbnail": "x",
+    "count": 26,
+    "color": "blue"
+  }
+  
+]
