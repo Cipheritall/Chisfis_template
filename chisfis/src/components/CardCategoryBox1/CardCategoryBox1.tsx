@@ -37,7 +37,7 @@ const CardCategoryBox1: FC<CardCategoryBox1Props> = ({
         <span
           className={`block mt-2 text-sm text-neutral-500 dark:text-neutral-400`}
         >
-          19 minutes drive
+          Restrictions apply
         </span>
       </div>
     </Link>
