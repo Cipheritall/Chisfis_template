@@ -172,15 +172,37 @@ const ListingStayPage: FC<ListingStayPageProps> = ({
     );
   };
 
-  const handleFilter = (e) => {
-    let filteredTests = [];
-    for (let i = 0; i < filteredTestCentres.length; i++) {
-      if (filteredTestCentres[i].provider === e.target.value) {
-        filteredTests.push(filteredTestCentres[i]);
-      }
-    }
+  const [activeFilters, setActiveFilters] = useState([]);
 
-    setFilteredTestCentres(filteredTests);
+  const handleFilter = (e) => {
+    let fil = activeFilters;
+    let filteredTests = [];
+    if (fil.includes(e.target.value)) {
+      let ind = fil.indexOf(e.target.value);
+      console.log(ind);
+      fil.splice(ind, 1);
+      filteredTests = filteredTests.filter(
+        (f) => f.provider !== e.target.value
+      );
+    } else {
+      fil.push(e.target.value);
+    }
+    if (fil.length < 1) {
+      setFilteredTestCentres(testCentres);
+    } else {
+      for (let i = 0; i < testCentres.length; i++) {
+        for (let j = 0; j < fil.length; j++) {
+          if (testCentres[i].provider === fil[j]) {
+            console.log(testCentres[i].provider, fil[j]);
+            filteredTests.push(testCentres[i]);
+          }
+        }
+      }
+      console.log(fil);
+
+      setFilteredTestCentres(filteredTests);
+      setActiveFilters(fil);
+    }
   };
 
   return (
