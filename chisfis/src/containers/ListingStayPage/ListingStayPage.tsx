@@ -232,12 +232,19 @@ const ListingStayPage: FC<ListingStayPageProps> = ({
                       control: (styles) => ({
                         ...styles,
                         border: "0",
-                        outline: "none",
+                        boxShadow: "0",
                       }),
                       option: (base) => ({
                         ...base,
-                        border: "1px dotted",
-                        height: "100%",
+                        border: "0",
+                        boxShadow: "0",
+                        fontDisplay: "Poppins",
+                        fontBody: "Poppins",
+                        fontSize: "16px",
+                        fontWeight: "500",
+                        marginLeft: "5px",
+                        paddingTop: "1.25em",
+                        paddingBottom: "1.25em",
                       }),
                     },
                   }}
