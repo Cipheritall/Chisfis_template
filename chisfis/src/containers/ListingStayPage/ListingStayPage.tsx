@@ -212,7 +212,7 @@ const ListingStayPage: FC<ListingStayPageProps> = ({
       <Helmet>
         <title>Testing Centers</title>
       </Helmet>
-      <div className='container relative overflow-hidden mt-10'>
+      <div className='container relative mt-10'>
         <Heading2 />
 
         <form className='w-full relative flex flex-col border border-neutral-100 md:flex-row md:items-center rounded-3xl lg:rounded-full dark:bg-neutral-900 border-neutral-700 divide-y divide-neutral-200 md:divide-y-0'>
@@ -222,7 +222,7 @@ const ListingStayPage: FC<ListingStayPageProps> = ({
                 <GooglePlacesAutocomplete
                   apiKey='AIzaSyDNfNT3Ds4oOEXvnzX0LJSDDeJEuzll8ys'
                   selectProps={{
-                    region,
+                    value: region,
                     onChange: onLocationSelect,
                     classNamePrefix: "bg-primary-6000",
                     className:
@@ -238,6 +238,7 @@ const ListingStayPage: FC<ListingStayPageProps> = ({
                         ...base,
                         border: "0",
                         boxShadow: "0",
+                        overflowY: "auto",
                         fontDisplay: "Poppins",
                         fontBody: "Poppins",
                         fontSize: "16px",
