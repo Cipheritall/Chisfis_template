@@ -224,9 +224,8 @@ const ListingStayPage: FC<ListingStayPageProps> = ({
                   selectProps={{
                     value: region,
                     onChange: onLocationSelect,
-                    classNamePrefix: "bg-primary-6000",
                     className:
-                      "block w-full bg-transparent border-none focus:ring-0 p-0 focus:outline-none focus:placeholder-neutral-300 xl:text-lg font-semibold placeholder-neutral-800 dark:placeholder-neutral-200",
+                      "block w-full border-none xl:text-lg font-semibold placeholder-neutral-800 dark:placeholder-neutral-200",
                     placeholder: "Search...",
                     styles: {
                       control: (styles) => ({
