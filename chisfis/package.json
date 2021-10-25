@@ -25,6 +25,7 @@
     "Account": "^0.0.0",
     "add": "^2.0.6",
     "autoprefixer": "^9.8.8",
+    "axios": "^0.24.0",
     "component": "^1.1.0",
     "component-remotes": "^1.2.0",
     "firebase": "^9.1.1",
@@ -42,6 +43,7 @@
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.3",
     "redux-persist": "^6.0.0",
+    "sweetalert2": "^11.1.9",
     "tailwindcss": "npm:@tailwindcss/postcss7-compat@^2.2.17",
     "typescript": "^4.1.2",
     "web-vitals": "^1.0.1"

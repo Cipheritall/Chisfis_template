@@ -1,6 +1,6 @@
 import { Tab } from "@headlessui/react";
 import { PencilAltIcon } from "@heroicons/react/outline";
-import React, { FC, Fragment } from "react";
+import React, { FC, Fragment, useEffect, useState } from "react";
 import visaPng from "images/vis.png";
 import mastercardPng from "images/mastercard.svg";
 import Input from "shared/Input/Input";
@@ -11,6 +11,8 @@ import NcImage from "shared/NcImage/NcImage";
 import StartRating from "components/StartRating/StartRating";
 import NcModal from "shared/NcModal/NcModal";
 
+import swal from "sweetalert2/dist/sweetalert2.all.min.js";
+
 import {
   Elements,
   CardElement,
@@ -18,12 +20,20 @@ import {
   useStripe,
 } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
+import axios from "axios";
+import { CLIENT_RENEG_LIMIT } from "tls";
+import { useHistory } from "react-router";
+import { resourceLimits } from "worker_threads";
 
 export interface CheckOutPageProps {
   className?: string;
 }
 
 const CheckOutPage: FC<CheckOutPageProps> = ({ className = "" }) => {
+  const stripePromise = loadStripe(
+    "pk_test_51Jn1M5D6QVbbUe2SEWO6S72rZ4cRrOABtPgcrmpirR8Wd5osZLq4oPKwgMW2QlqcgVeNk1a8ibU7VRlT9paIIQJD00Hgscl9lW"
+  );
+
   const renderSidebar = () => {
     return (
       <div className='w-full flex flex-col sm:rounded-2xl sm:border border-neutral-200 dark:border-neutral-700 space-y-6 sm:space-y-8 px-0 sm:p-6 xl:p-8'>
@@ -70,10 +80,6 @@ const CheckOutPage: FC<CheckOutPageProps> = ({ className = "" }) => {
     );
   };
 
-  const stripePromise = loadStripe(
-    "pk_test_51Jn1M5D6QVbbUe2SEWO6S72rZ4cRrOABtPgcrmpirR8Wd5osZLq4oPKwgMW2QlqcgVeNk1a8ibU7VRlT9paIIQJD00Hgscl9lW"
-  );
-
   const handleSubmit = (stripe, elements) => async () => {
     const cardElement = elements.getElement(CardElement);
 
@@ -113,13 +119,194 @@ const CheckOutPage: FC<CheckOutPageProps> = ({ className = "" }) => {
   };
 
   const PaymentForm = () => {
-    const stripe = useStripe();
+    // const stripe = useStripe();
+    // const elements = useElements();
+    // return (
+    //   <>
+    //     <h1>stripe form</h1>
+    //     <CardElement options={CARD_ELEMENT_OPTIONS} />
+    //     <button onClick={handleSubmit(stripe, elements)}>Buy</button>
+    //   </>
+    // );
+
+    const history = useHistory();
+
     const elements = useElements();
+    const stripe = useStripe();
+
+    const [error, setError] = useState(null);
+    const [disabled, setDisabled] = useState(true);
+
+    const [succeeded, setSucceeded] = useState(false);
+    const [processing, setProcessing] = useState(false);
+    const [clientSecret, setClientSecret] = useState();
+
+    const handleChange = (event) => {
+      setDisabled(event.empty);
+      setError(event.error ? event.error.message : "");
+    };
+
+    // useEffect(() => {
+    //   const getClientSecret = async () => {
+    //     const amount = 10000; //harcode
+    //     const response = await axios({
+    //       method: "post",
+    //       url:
+    //         "http://localhost:5001/testandtrip/us-central1/api/payments/create?total=" +
+    //         amount,
+    //     });
+
+    //     setClientSecret(response.data.clientSecret);
+    //   };
+
+    //   getClientSecret();
+    // }, []);
+
+    const formSubmit = async (event) => {
+      event.preventDefault();
+
+      swal
+        .fire({
+          title: "Are you sure?",
+          text: "You want to pay now!",
+          icon: "warning",
+          showCancelButton: true,
+          confirmButtonColor: "#3085d6",
+          cancelButtonColor: "#d33",
+          confirmButtonText: "Yes, pay now!",
+        })
+        .then(async (result) => {
+          if (result.isConfirmed) {
+            try {
+              setProcessing(true);
+
+              const amount = 10000; //harcode
+              const response = await axios({
+                method: "post",
+                url:
+                  "http://localhost:5001/testandtrip/us-central1/api/payments/create?total=" +
+                  amount,
+              });
+
+              console.log(response);
+
+              if (response.status === 201) {
+                const payload = await stripe
+                  .confirmCardPayment(response.data.clientSecret, {
+                    payment_method: {
+                      card: elements.getElement(CardElement),
+                    },
+                  })
+                  .then(
+                    (result) => {
+                      if (result.error) {
+                        console.log(result, "res");
+                        swal.fire({
+                          icon: "error",
+                          title: "Oops...",
+                          text: result.error.message,
+                        });
+                        setSucceeded(true);
+                        setError(null);
+                        setProcessing(false);
+                      }
+                      if (result.paymentIntent) {
+                        console.log(result, "dfkjkfdjkjfd");
+                        setSucceeded(true);
+                        setError(null);
+                        setProcessing(false);
+                        swal.fire("Updated!", "Payment Successful", "success");
+                      }
+
+                      // history.replace("/payment/success");
+                    },
+                    function (error) {
+                      console.log("error");
+                      swal.fire({
+                        icon: "error",
+                        title: "Oops...",
+                        text: "Something went wrong",
+                      });
+                    }
+                  );
+              } else if (response.status === 402) {
+                swal.fire({
+                  icon: "error",
+                  title: "Oops...",
+                  text: "Something went wrong",
+                });
+                setError(response["errorMessage"]);
+              }
+
+              setClientSecret(response.data.clientSecret);
+            } catch {
+              swal.fire({
+                icon: "error",
+                title: "Oops...",
+                text: "Something went wrong",
+              });
+            }
+          }
+
+          // if (!stripe || !elements) {
+          //   return;
+          // }
+
+          // const formData = new FormData();
+          // formData.append("paymentMethodType", "card");
+          // formData.append("currency", "eur");
+          // formData.append("name", values.name);
+
+          // const card = elements.getElement(CardElement);
+
+          // await stripe.createToken(card).then(function (result) {
+          //   if (result.error) {
+          //     let errorElement = document.getElementById("card-errors");
+          //     errorElement.textContent = result.error.message;
+          //   } else {
+          //     console.log(result);
+          //     // formData.append("stripe_token", result.token.id);
+          //   }
+          // });
+
+          // const { data } = await makePayment(formData);
+          // if (data.status) {
+          //   Swal.fire({
+          //     position: "center",
+          //     icon: "success",
+          //     title: data.message,
+          //     showConfirmButton: false,
+          //     timer: 2000,
+          //   });
+          //   props.history.push("/react/dashboard");
+          // } else {
+          //   console.log(data);
+          //   const res = errorMessage(data);
+          //   Swal.fire({
+          //     icon: "error",
+          //     title: "Oops...",
+          //     text: data.errors,
+          //   });
+          // }
+
+          // const cardElement = elements.getElement(CardElement);
+          // console.log(cardElement);
+
+          const cardElement = elements.getElement(CardElement);
+        });
+    };
+
     return (
       <>
-        <h1>stripe form</h1>
-        <CardElement options={CARD_ELEMENT_OPTIONS} />
-        <button onClick={handleSubmit(stripe, elements)}>Buy</button>
+        <form onSubmit={formSubmit}>
+          <label htmlFor='card-element'>Card</label>
+          <CardElement id='card-element' onChange={handleChange} />
+          <div>Price : 1000</div>
+          <button disabled={error || processing || disabled || succeeded}>
+            <span>{processing ? <p>Processing</p> : "Pay Now"}</span>
+          </button>
+        </form>
+        {error && <div>{error}</div>}
       </>
     );
   };
