@@ -11,6 +11,8 @@ import NcImage from "shared/NcImage/NcImage";
 import StartRating from "components/StartRating/StartRating";
 import NcModal from "shared/NcModal/NcModal";
 
+import styled from "styled-components";
+
 import swal from "sweetalert2/dist/sweetalert2.all.min.js";
 
 import {
@@ -96,28 +98,6 @@ const CheckOutPage: FC<CheckOutPageProps> = ({ className = "" }) => {
     }
   };
 
-  const CARD_ELEMENT_OPTIONS = {
-    hidePostalCode: true,
-    style: {
-      base: {
-        iconColor: "rgb(240, 57, 122)",
-        color: "rgb(240, 57, 122)",
-        fontSize: "16px",
-        fontFamily: '"Open Sans", sans-serif',
-        fontSmoothing: "antialiased",
-        "::placeholder": {
-          color: "#CFD7DF",
-        },
-      },
-      invalid: {
-        color: "#e5424d",
-        ":focus": {
-          color: "#303238",
-        },
-      },
-    },
-  };
-
   const PaymentForm = () => {
     // const stripe = useStripe();
     // const elements = useElements();
@@ -165,6 +145,9 @@ const CheckOutPage: FC<CheckOutPageProps> = ({ className = "" }) => {
     const formSubmit = async (event) => {
       event.preventDefault();
 
+      const cardElement = elements.getElement(CardElement);
+      console.log(cardElement, "hjfdhjdfhj");
+
       swal
         .fire({
           title: "Are you sure?",
@@ -190,11 +173,24 @@ const CheckOutPage: FC<CheckOutPageProps> = ({ className = "" }) => {
 
               console.log(response);
 
+              const billingDetails = {
+                name: "John Doe",
+                email: "john@doe.com",
+                address: {
+                  city: "Mumbai",
+                  line1: "1/101, CST",
+                  state: "Maharashtra",
+                  postal_code: "400001",
+                },
+              };
+
               if (response.status === 201) {
                 const payload = await stripe
                   .confirmCardPayment(response.data.clientSecret, {
                     payment_method: {
+                      type: "card",
                       card: elements.getElement(CardElement),
+                      billing_details: billingDetails,
                     },
                   })
                   .then(
@@ -215,7 +211,11 @@ const CheckOutPage: FC<CheckOutPageProps> = ({ className = "" }) => {
                         setSucceeded(true);
                         setError(null);
                         setProcessing(false);
-                        swal.fire("Updated!", "Payment Successful", "success");
+                        swal.fire(
+                          "Completed!",
+                          "Payment Successful",
+                          "success"
+                        );
                       }
 
                       // history.replace("/payment/success");
@@ -227,15 +227,18 @@ const CheckOutPage: FC<CheckOutPageProps> = ({ className = "" }) => {
                         title: "Oops...",
                         text: "Something went wrong",
                       });
+                      setSucceeded(true);
+                      setError(null);
+                      setProcessing(false);
                     }
                   );
-              } else if (response.status === 402) {
+              } else if (response.status > 399 && response.status < 599) {
                 swal.fire({
                   icon: "error",
                   title: "Oops...",
-                  text: "Something went wrong",
+                  text: response["errorMessage"],
                 });
-                setError(response["errorMessage"]);
+                // setError(response["errorMessage"]);
               }
 
               setClientSecret(response.data.clientSecret);
@@ -247,66 +250,61 @@ const CheckOutPage: FC<CheckOutPageProps> = ({ className = "" }) => {
               });
             }
           }
-
-          // if (!stripe || !elements) {
-          //   return;
-          // }
-
-          // const formData = new FormData();
-          // formData.append("paymentMethodType", "card");
-          // formData.append("currency", "eur");
-          // formData.append("name", values.name);
-
-          // const card = elements.getElement(CardElement);
-
-          // await stripe.createToken(card).then(function (result) {
-          //   if (result.error) {
-          //     let errorElement = document.getElementById("card-errors");
-          //     errorElement.textContent = result.error.message;
-          //   } else {
-          //     console.log(result);
-          //     // formData.append("stripe_token", result.token.id);
-          //   }
-          // });
-
-          // const { data } = await makePayment(formData);
-          // if (data.status) {
-          //   Swal.fire({
-          //     position: "center",
-          //     icon: "success",
-          //     title: data.message,
-          //     showConfirmButton: false,
-          //     timer: 2000,
-          //   });
-          //   props.history.push("/react/dashboard");
-          // } else {
-          //   console.log(data);
-          //   const res = errorMessage(data);
-          //   Swal.fire({
-          //     icon: "error",
-          //     title: "Oops...",
-          //     text: data.errors,
-          //   });
-          // }
-
-          // const cardElement = elements.getElement(CardElement);
-          // console.log(cardElement);
-
-          const cardElement = elements.getElement(CardElement);
         });
+    };
+
+    const CARD_ELEMENT_OPTIONS = {
+      hidePostalCode: true,
+      style: {
+        base: {
+          border: "2px",
+          iconColor: "blue",
+          color: "#000",
+          fontWeight: "500",
+          fontFamily: "Roboto, Open Sans, Segoe UI, sans-serif",
+          fontSize: "16px",
+          fontSmoothing: "antialiased",
+          ":-webkit-autofill": {
+            color: "#fce883",
+          },
+        },
+        invalid: {
+          iconColor: "#FFC7EE",
+          color: "#FFC7EE",
+        },
+      },
     };
 
     return (
       <>
         <form onSubmit={formSubmit}>
-          <label htmlFor='card-element'>Card</label>
-          <CardElement id='card-element' onChange={handleChange} />
-          <div>Price : 1000</div>
-          <button disabled={error || processing || disabled || succeeded}>
-            <span>{processing ? <p>Processing</p> : "Pay Now"}</span>
-          </button>
+          <div className='space-y-1'>
+            <Label>Card holder </Label>
+            <Input defaultValue='JOHN DOE' />
+          </div>
+
+          <div className='space-y-1'>
+            <Label>Card number </Label>
+
+            <CardElement
+              id='card-element'
+              onChange={handleChange}
+              options={CARD_ELEMENT_OPTIONS}
+            />
+          </div>
+
+          {/* <div>Price : 1000</div> */}
+          <div className='pt-4'>
+            <ButtonPrimary
+              type='submit'
+              disabled={error || processing}
+              // disabled={error || processing || disabled || succeeded}
+            >
+              <span>{processing ? <p>Processing</p> : "Pay Now"}</span>
+            </ButtonPrimary>
+          </div>
         </form>
-        {error && <div>{error}</div>}
+        {error && <div className='error-red'>{error}</div>}
       </>
     );
   };
@@ -378,8 +376,8 @@ const CheckOutPage: FC<CheckOutPageProps> = ({ className = "" }) => {
                           : " text-neutral-6000 dark:text-neutral-400"
                       }`}>
                       <span className='mr-2.5'>Credit card</span>
-                      <img className='w-8' src={visaPng} alt='' />
-                      <img className='w-8' src={mastercardPng} alt='' />
+                      {/* <img className='w-8' src={visaPng} alt='' /> */}
+                      {/* <img className='w-8' src={mastercardPng} alt='' /> */}
                     </button>
                   )}
                 </Tab>
@@ -406,18 +404,12 @@ const CheckOutPage: FC<CheckOutPageProps> = ({ className = "" }) => {
                       <Input />
                     </div>
                   </div>
-                  <div className='space-y-1'>
-                    <Label>Messager for author </Label>
-                    <Textarea placeholder='...' />
-                    <span className='text-sm text-neutral-500 block'>
-                      Write a few sentences about yourself.
-                    </span>
-                  </div>
+
                   <div className='pt-4'>
                     <ButtonPrimary>Confirm and pay</ButtonPrimary>
                   </div>
                 </Tab.Panel>
-                <Tab.Panel className='space-y-5'>
+                {/* <Tab.Panel className='space-y-5'>
                   <div className='space-y-1'>
                     <Label>Email </Label>
                     <Input type='email' defaultValue='example@gmail.com' />
@@ -436,15 +428,11 @@ const CheckOutPage: FC<CheckOutPageProps> = ({ className = "" }) => {
                   <div className='pt-4'>
                     <ButtonPrimary>Confirm and pay</ButtonPrimary>
                   </div>
-                </Tab.Panel>
+                </Tab.Panel> */}
               </Tab.Panels>
             </Tab.Group>
           </div>
         </div>
-
-        <Elements stripe={stripePromise}>
-          <PaymentForm />
-        </Elements>
       </div>
     );
   };
@@ -452,7 +440,52 @@ const CheckOutPage: FC<CheckOutPageProps> = ({ className = "" }) => {
   return (
     <div className={`nc-CheckOutPage ${className}`} data-nc-id='CheckOutPage'>
       <main className='container mt-11 mb-24 lg:mb-32 flex flex-col-reverse lg:flex-row'>
-        <div className='w-full lg:w-3/5 xl:w-2/3 lg:pr-10 '>{renderMain()}</div>
+        <div className='w-full lg:w-3/5 xl:w-2/3 lg:pr-10 '>
+          <div className='w-full flex flex-col sm:rounded-2xl sm:border border-neutral-200 dark:border-neutral-700 space-y-8 px-0 sm:p-6 xl:p-8'>
+            <h2 className='text-3xl lg:text-4xl font-semibold'>
+              Confirm and payment
+            </h2>
+            <div className='border-b border-neutral-200 dark:border-neutral-700'></div>
+            <div>
+              <div>
+                <h3 className='text-2xl font-semibold'>Your trip</h3>
+                <NcModal
+                  renderTrigger={(openModal) => (
+                    <span
+                      onClick={() => openModal()}
+                      className='block lg:hidden underline  mt-1 cursor-pointer'>
+                      View booking details
+                    </span>
+                  )}
+                  renderContent={renderSidebar}
+                />
+              </div>
+              <div className='mt-6 border border-neutral-200 dark:border-neutral-700 rounded-3xl flex flex-col sm:flex-row divide-y sm:divide-x sm:divide-y-0 divide-neutral-200 dark:divide-neutral-700'>
+                <div className='flex-1 p-5 flex justify-between space-x-5'>
+                  <div className='flex flex-col'>
+                    <span className='text-sm text-neutral-400'>Date</span>
+                    <span className='mt-1.5 text-lg font-semibold'>
+                      Aug 12 - 16, 2021
+                    </span>
+                  </div>
+                  <PencilAltIcon className='w-6 h-6 text-neutral-300 dark:text-neutral-6000' />
+                </div>
+                <div className='flex-1 p-5 flex justify-between space-x-5'>
+                  <div className='flex flex-col'>
+                    <span className='text-sm text-neutral-400'>Guests</span>
+                    <span className='mt-1.5 text-lg font-semibold'>
+                      3 Guests
+                    </span>
+                  </div>
+                  <PencilAltIcon className='w-6 h-6 text-neutral-300 dark:text-neutral-6000' />
+                </div>
+              </div>
+            </div>
+            <Elements stripe={stripePromise}>
+              <PaymentForm />
+            </Elements>
+          </div>
+        </div>
         <div className='hidden lg:block flex-grow'>{renderSidebar()}</div>
       </main>
     </div>
