@@ -198,7 +198,6 @@ const CheckOutPage: FC<CheckOutPageProps> = ({ className = "" }) => {
                 const payload = await stripe
                   .confirmCardPayment(response.data.clientSecret, {
                     payment_method: {
-                      type: "card",
                       card: elements.getElement(CardElement),
                       billing_details: billingDetails,
                     },
