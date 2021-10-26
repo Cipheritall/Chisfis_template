@@ -205,7 +205,7 @@ const LocationInput: FC<LocationInputProps> = ({
             autoFocus={showPopover}
             onChange={(e) => setValue(e.currentTarget.value)}
             ref={inputRef}
-          />
+          />  
 
           {value && !showPopover && (
             <span className='block mt-0.5 text-sm text-neutral-400 font-light '>

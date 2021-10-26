@@ -181,7 +181,7 @@ const CheckOutPage: FC<CheckOutPageProps> = ({ className = "" }) => {
               if (history.location.state) {
                 // console.clear();
                 // console.log(history.location.state.formData, "dfkjdkf");
-                formData = history.location.state.formData;
+                formData = history.location.state[formData];
               }
               const billingDetails = {
                 name: formData.first_name + " " + formData.last_name,
@@ -316,7 +316,7 @@ const CheckOutPage: FC<CheckOutPageProps> = ({ className = "" }) => {
           <div className='pt-4'>
             <ButtonPrimary
               type='submit'
-              disabled={error || processing}
+              disabled={error || processing || disabled}
               // disabled={error || processing || disabled || succeeded}
             >
               <span>{processing ? <p>Processing</p> : "Pay Now"}</span>
