@@ -21,3 +21,8 @@
   outline: 0px !important;
   box-shadow: none !important;
 }
+
+#react-select-3-input:focus {
+  outline: 0px !important;
+  box-shadow: none !important;
+}
