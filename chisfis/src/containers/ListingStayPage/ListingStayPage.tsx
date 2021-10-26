@@ -208,7 +208,7 @@ const ListingStayPage: FC<ListingStayPageProps> = ({
 
   return (
     <div
-      className={`nc-ListingStayPage relative overflow-hidden ${className} mb-10`}
+      className={`nc-ListingStayPage relative ${className} mb-10`}
       data-nc-id='ListingStayPage'>
       <Helmet>
         <title>Testing Centers</title>
@@ -216,9 +216,9 @@ const ListingStayPage: FC<ListingStayPageProps> = ({
       <div className='container relative mt-10'>
         <Heading2 />
 
-        <form className='w-full relative flex flex-col border border-neutral-100 md:flex-row md:items-center rounded-3xl lg:rounded-full dark:bg-neutral-900 border-neutral-700 divide-y divide-neutral-200 md:divide-y-0'>
+        <form className='z-50 w-full relative flex flex-col border border-neutral-100 md:flex-row md:items-center rounded-3xl lg:rounded-full dark:bg-neutral-900 border-neutral-700 divide-y divide-neutral-200 md:divide-y-0'>
           <div className='relative flex nc-flex-1.5'>
-            <div className='flex flex-1 relative [ nc-hero-field-padding ] flex-shrink-0 items-center space-x-3 cursor-pointer focus:outline-none text-left'>
+            <div className='flex flex-1 [ nc-hero-field-padding ] flex-shrink-0 items-center space-x-3 cursor-pointer focus:outline-none text-left'>
               <div className='flex-grow'>
                 <GooglePlacesAutocomplete
                   apiKey='AIzaSyDNfNT3Ds4oOEXvnzX0LJSDDeJEuzll8ys'
@@ -238,9 +238,9 @@ const ListingStayPage: FC<ListingStayPageProps> = ({
                       }),
                       option: (base) => ({
                         ...base,
+                        position: "relative",
                         boxShadow: "none",
                         border: "0",
-
                         overflowY: "auto",
                         fontDisplay: "Poppins",
                         fontBody: "Poppins",
