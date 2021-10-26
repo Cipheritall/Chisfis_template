@@ -16,3 +16,8 @@
 .error-red {
   color: red;
 }
+
+#react-select-2-input:focus {
+  outline: 0px !important;
+  box-shadow: none !important;
+}

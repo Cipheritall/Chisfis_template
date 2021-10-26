@@ -29,6 +29,7 @@ import { ClockIcon } from "@heroicons/react/solid";
 import { title } from "process";
 import WidgetHeading1 from "containers/BlogPage/WidgetHeading1";
 import Tag from "shared/Tag/Tag";
+import { NONAME } from "dns";
 
 export interface ListingStayPageProps {
   className?: string;
@@ -228,15 +229,18 @@ const ListingStayPage: FC<ListingStayPageProps> = ({
                       "block w-full border-none xl:text-lg font-semibold placeholder-neutral-800 dark:placeholder-neutral-200",
                     placeholder: "Search...",
                     styles: {
+                      boxShadow: "none",
                       control: (styles) => ({
                         ...styles,
                         border: "0",
-                        boxShadow: "0",
+                        // boxShadow: "0",
+                        boxShadow: "none",
                       }),
                       option: (base) => ({
                         ...base,
+                        boxShadow: "none",
                         border: "0",
-                        boxShadow: "0",
+
                         overflowY: "auto",
                         fontDisplay: "Poppins",
                         fontBody: "Poppins",
@@ -330,7 +334,7 @@ const ListingStayPage: FC<ListingStayPageProps> = ({
                   <div className='hidden lg:flex space-x-4'>
                     {/* {renderTabsPriceRage()} */}
                     <TabFilters />
-                    </div>
+                  </div>
                 </div>
               </div>
               <div className='grid grid-cols-1 gap-6 md:gap-8 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4'>
