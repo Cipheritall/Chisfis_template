@@ -26,12 +26,16 @@ import axios from "axios";
 import { CLIENT_RENEG_LIMIT } from "tls";
 import { useHistory } from "react-router";
 import { resourceLimits } from "worker_threads";
+import { db } from "firebase";
+import { addDoc, collection } from "firebase/firestore";
 
 export interface CheckOutPageProps {
   className?: string;
 }
 
 const CheckOutPage: FC<CheckOutPageProps> = ({ className = "" }) => {
+  const history = useHistory();
+
   const stripePromise = loadStripe(
     "pk_test_51Jn1M5D6QVbbUe2SEWO6S72rZ4cRrOABtPgcrmpirR8Wd5osZLq4oPKwgMW2QlqcgVeNk1a8ibU7VRlT9paIIQJD00Hgscl9lW"
   );
@@ -173,14 +177,20 @@ const CheckOutPage: FC<CheckOutPageProps> = ({ className = "" }) => {
 
               console.log(response);
 
+              let formData;
+              if (history.location.state) {
+                // console.clear();
+                // console.log(history.location.state.formData, "dfkjdkf");
+                formData = history.location.state.formData;
+              }
               const billingDetails = {
-                name: "John Doe",
-                email: "john@doe.com",
+                name: formData.first_name + " " + formData.last_name,
+                email: formData.email,
                 address: {
-                  city: "Mumbai",
-                  line1: "1/101, CST",
-                  state: "Maharashtra",
-                  postal_code: "400001",
+                  city: formData.city,
+                  line1: formData.address,
+                  state: formData.state,
+                  postal_code: formData.postal_code,
                 },
               };
 
@@ -208,6 +218,9 @@ const CheckOutPage: FC<CheckOutPageProps> = ({ className = "" }) => {
                       }
                       if (result.paymentIntent) {
                         console.log(result, "dfkjkfdjkjfd");
+                        formData["payment_id"] = result.paymentIntent.id;
+                        formData["amount"] = result.paymentIntent.amount;
+                        sendToFirebase(formData);
                         setSucceeded(true);
                         setError(null);
                         setProcessing(false);
@@ -253,6 +266,12 @@ const CheckOutPage: FC<CheckOutPageProps> = ({ className = "" }) => {
         });
     };
 
+    const sendToFirebase = async (formData) => {
+      const docRef = await addDoc(collection(db, "customerPayments"), {
+        formData: formData,
+      });
+      console.log("Document written with ID: ", docRef.id);
+    };
     const CARD_ELEMENT_OPTIONS = {
       hidePostalCode: true,
       style: {
