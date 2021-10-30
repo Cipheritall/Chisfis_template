@@ -21,9 +21,8 @@ import carUtilities5 from "../../images/carUtilities/5.png";
 import carUtilities6 from "../../images/carUtilities/6.png";
 import carUtilities7 from "../../images/carUtilities/7.png";
 import carUtilities8 from "../../images/carUtilities/8.png";
-import { Disclosure } from '@headlessui/react'
-import { ChevronUpIcon } from '@heroicons/react/solid'
-
+import { Disclosure } from "@headlessui/react";
+import { ChevronUpIcon } from "@heroicons/react/solid";
 
 import Label from "components/Label/Label";
 import Avatar from "shared/Avatar/Avatar";
@@ -208,7 +207,14 @@ function PageHome() {
     console.log(
       "Date Range:" + dateRangeValue.startDate + " " + dateRangeValue.endDate
     );
-    getSearchedData();
+    if (
+      fromLocation &&
+      toLocation &&
+      dateRangeValue.startDate &&
+      dateRangeValue.endDate
+    ) {
+      getSearchedData();
+    }
   };
 
   const getSearchedData = async () => {
@@ -269,7 +275,6 @@ function PageHome() {
         <title>Test & Trip</title>
       </Helmet>
 
-
       <div className='container relative space-y-24 mb-24 lg:space-y-32 lg:mb-32'>
         {/* SECTION HERO */}
         {/*}
@@ -283,7 +288,6 @@ function PageHome() {
         <div
           className='nc-SectionHero flex flex-col-reverse lg:flex-col relative pt-10 lg:pt-32 pb-16'
           data-nc-id='SectionHero'>
-
           <div className='z-10 mb-12 lg:mb-0 lg:-mt-40 w-full'>
             <div className='w-full relative mt-2 '>
               <div className=' py-10 mt-10 [ nc-hero-field-padding ] flex flex-col space-y-4 sm:space-y-0 sm:flex-row sm:space-x-10'>
@@ -305,7 +309,7 @@ function PageHome() {
                 </div>
                 <div className='flex  items-center'>
                   <input
-                    id='same-drop-off'
+                    id='same-drop-off-2'
                     name='drop-off-type'
                     type='checkbox'
                     value='fully_vaccinated'
@@ -319,7 +323,6 @@ function PageHome() {
                     Fully Vaccinated
                   </label>
                 </div>
-
               </div>
               <form className='w-full relative flex flex-col border border-neutral-100 md:flex-row md:items-center rounded-3xl lg:rounded-full dark:bg-neutral-900 border-neutral-700 divide-y divide-neutral-200 md:divide-y-0'>
                 <FromLocationInput
@@ -370,7 +373,6 @@ function PageHome() {
           </div>
           {toTravelRest["TravelRestrictions"].length !== 0 || isLoaded ? (
             <>
-
               {!isLoaded ? (
                 <div className={`nc-SectionSliderNewCategories relative`}>
                   {/* <h3 className='text-2xl font-semibold'>Departure</h3> */}
@@ -380,10 +382,11 @@ function PageHome() {
                         <Tab as={Fragment}>
                           {({ selected }) => (
                             <button
-                              className={`px-4 py-1.5 sm:px-6 sm:py-2.5 rounded-full focus:outline-none ${selected
-                                ? "bg-neutral-800 text-white"
-                                : "text-neutral-6000 dark:text-neutral-400"
-                                }`}>
+                              className={`px-4 py-1.5 sm:px-6 sm:py-2.5 rounded-full focus:outline-none ${
+                                selected
+                                  ? "bg-neutral-800 text-white"
+                                  : "text-neutral-6000 dark:text-neutral-400"
+                              }`}>
                               Departure
                             </button>
                           )}
@@ -392,10 +395,11 @@ function PageHome() {
                           <Tab as={Fragment}>
                             {({ selected }) => (
                               <button
-                                className={`px-4 py-1.5 sm:px-6 sm:py-2.5  rounded-full flex items-center justify-center focus:outline-none  ${selected
-                                  ? "bg-neutral-800 text-white"
-                                  : " text-neutral-6000 dark:text-neutral-400"
-                                  }`}>
+                                className={`px-4 py-1.5 sm:px-6 sm:py-2.5  rounded-full flex items-center justify-center focus:outline-none  ${
+                                  selected
+                                    ? "bg-neutral-800 text-white"
+                                    : " text-neutral-6000 dark:text-neutral-400"
+                                }`}>
                                 <span className='mr-2.5'>Return</span>
                               </button>
                             )}
@@ -410,14 +414,15 @@ function PageHome() {
                             <Disclosure>
                               {({ open }) => (
                                 <>
-                                  <Disclosure.Button className="flex justify-between w-full px-4 py-5 text-sm font-medium text-left text-gray-900 bg-gray-100 rounded-lg hover:bg-gray-200 focus:outline-none focus-visible:ring focus-visible:ring-gray-500 focus-visible:ring-opacity-75">
+                                  <Disclosure.Button className='flex justify-between w-full px-4 py-5 text-sm font-medium text-left text-gray-900 bg-gray-100 rounded-lg hover:bg-gray-200 focus:outline-none focus-visible:ring focus-visible:ring-gray-500 focus-visible:ring-opacity-75'>
                                     <span>Visa Requirements</span>
                                     <ChevronUpIcon
-                                      className={`${open ? 'transform rotate-180' : ''
-                                        } w-5 h-5 text-gray-500`}
+                                      className={`${
+                                        open ? "transform rotate-180" : ""
+                                      } w-5 h-5 text-gray-500`}
                                     />
                                   </Disclosure.Button>
-                                  <Disclosure.Panel className="px-4 pt-4 pb-2 text-sm text-gray-500">
+                                  <Disclosure.Panel className='px-4 pt-4 pb-2 text-sm text-gray-500'>
                                     <div className='grid grid-cols-1 lg:grid-cols-2 gap-y-6 gap-x-10 text-sm text-neutral-700 dark:text-neutral-300 '>
                                       {/* TIEN ICH 1 */}
                                       {fromTravelRest["TravelRestrictions"].map(
@@ -437,17 +442,18 @@ function PageHome() {
                                 </>
                               )}
                             </Disclosure>
-                            <Disclosure as="div" className="mt-2">
+                            <Disclosure as='div' className='mt-2'>
                               {({ open }) => (
                                 <>
-                                  <Disclosure.Button className="flex justify-between w-full px-4 py-5 text-sm font-medium text-left text-gray-900 bg-gray-100 rounded-lg hover:bg-gray-200 focus:outline-none focus-visible:ring focus-visible:ring-gray-500 focus-visible:ring-opacity-75">
+                                  <Disclosure.Button className='flex justify-between w-full px-4 py-5 text-sm font-medium text-left text-gray-900 bg-gray-100 rounded-lg hover:bg-gray-200 focus:outline-none focus-visible:ring focus-visible:ring-gray-500 focus-visible:ring-opacity-75'>
                                     <span>Travel Restrictions</span>
                                     <ChevronUpIcon
-                                      className={`${open ? 'transform rotate-180' : ''
-                                        } w-5 h-5 text-gray-500`}
+                                      className={`${
+                                        open ? "transform rotate-180" : ""
+                                      } w-5 h-5 text-gray-500`}
                                     />
                                   </Disclosure.Button>
-                                  <Disclosure.Panel className="px-4 pt-4 pb-2 text-sm text-gray-500">
+                                  <Disclosure.Panel className='px-4 pt-4 pb-2 text-sm text-gray-500'>
                                     <div className='grid grid-cols-1 lg:grid-cols-2 gap-y-6 gap-x-10 text-sm text-neutral-700 dark:text-neutral-300 '>
                                       {/* TIEN ICH 1 */}
                                       {fromTravelRest["TravelRestrictions"].map(
@@ -467,17 +473,18 @@ function PageHome() {
                                 </>
                               )}
                             </Disclosure>
-                            <Disclosure as="div" className="mt-2">
+                            <Disclosure as='div' className='mt-2'>
                               {({ open }) => (
                                 <>
-                                  <Disclosure.Button className="flex justify-between w-full px-4 py-5 text-sm font-medium text-left text-gray-900 bg-gray-100 rounded-lg hover:bg-gray-200 focus:outline-none focus-visible:ring focus-visible:ring-gray-500 focus-visible:ring-opacity-75">
+                                  <Disclosure.Button className='flex justify-between w-full px-4 py-5 text-sm font-medium text-left text-gray-900 bg-gray-100 rounded-lg hover:bg-gray-200 focus:outline-none focus-visible:ring focus-visible:ring-gray-500 focus-visible:ring-opacity-75'>
                                     <span>Forms and documents</span>
                                     <ChevronUpIcon
-                                      className={`${open ? 'transform rotate-180' : ''
-                                        } w-5 h-5 text-gray-500`}
+                                      className={`${
+                                        open ? "transform rotate-180" : ""
+                                      } w-5 h-5 text-gray-500`}
                                     />
                                   </Disclosure.Button>
-                                  <Disclosure.Panel className="px-4 pt-4 pb-2 text-sm text-gray-500">
+                                  <Disclosure.Panel className='px-4 pt-4 pb-2 text-sm text-gray-500'>
                                     <div className='grid grid-cols-1 lg:grid-cols-2 gap-y-6 gap-x-10 text-sm text-neutral-700 dark:text-neutral-300 '>
                                       {/* TIEN ICH 1 */}
                                       {fromTravelRest["TravelRestrictions"].map(
@@ -497,17 +504,18 @@ function PageHome() {
                                 </>
                               )}
                             </Disclosure>
-                            <Disclosure as="div" className="mt-2">
+                            <Disclosure as='div' className='mt-2'>
                               {({ open }) => (
                                 <>
-                                  <Disclosure.Button className="flex justify-between w-full px-4 py-5 text-sm font-medium text-left text-gray-900 bg-gray-100 rounded-lg hover:bg-gray-200 focus:outline-none focus-visible:ring focus-visible:ring-gray-500 focus-visible:ring-opacity-75">
+                                  <Disclosure.Button className='flex justify-between w-full px-4 py-5 text-sm font-medium text-left text-gray-900 bg-gray-100 rounded-lg hover:bg-gray-200 focus:outline-none focus-visible:ring focus-visible:ring-gray-500 focus-visible:ring-opacity-75'>
                                     <span>Additional Information</span>
                                     <ChevronUpIcon
-                                      className={`${open ? 'transform rotate-180' : ''
-                                        } w-5 h-5 text-gray-500`}
+                                      className={`${
+                                        open ? "transform rotate-180" : ""
+                                      } w-5 h-5 text-gray-500`}
                                     />
                                   </Disclosure.Button>
-                                  <Disclosure.Panel className="px-4 pt-4 pb-2 text-sm text-gray-500">
+                                  <Disclosure.Panel className='px-4 pt-4 pb-2 text-sm text-gray-500'>
                                     <div className='grid grid-cols-1 lg:grid-cols-2 gap-y-6 gap-x-10 text-sm text-neutral-700 dark:text-neutral-300 '>
                                       {/* TIEN ICH 1 */}
                                       {fromTravelRest["TravelRestrictions"].map(
@@ -534,14 +542,15 @@ function PageHome() {
                             <Disclosure>
                               {({ open }) => (
                                 <>
-                                  <Disclosure.Button className="flex justify-between w-full px-4 py-5 text-sm font-medium text-left text-gray-900 bg-gray-100 rounded-lg hover:bg-gray-200 focus:outline-none focus-visible:ring focus-visible:ring-gray-500 focus-visible:ring-opacity-75">
+                                  <Disclosure.Button className='flex justify-between w-full px-4 py-5 text-sm font-medium text-left text-gray-900 bg-gray-100 rounded-lg hover:bg-gray-200 focus:outline-none focus-visible:ring focus-visible:ring-gray-500 focus-visible:ring-opacity-75'>
                                     <span>Visa Requirements</span>
                                     <ChevronUpIcon
-                                      className={`${open ? 'transform rotate-180' : ''
-                                        } w-5 h-5 text-gray-500`}
+                                      className={`${
+                                        open ? "transform rotate-180" : ""
+                                      } w-5 h-5 text-gray-500`}
                                     />
                                   </Disclosure.Button>
-                                  <Disclosure.Panel className="px-4 pt-4 pb-2 text-sm text-gray-500">
+                                  <Disclosure.Panel className='px-4 pt-4 pb-2 text-sm text-gray-500'>
                                     <div className='grid grid-cols-1 lg:grid-cols-2 gap-y-6 gap-x-10 text-sm text-neutral-700 dark:text-neutral-300 '>
                                       {/* TIEN ICH 1 */}
                                       {fromTravelRest["TravelRestrictions"].map(
@@ -561,17 +570,18 @@ function PageHome() {
                                 </>
                               )}
                             </Disclosure>
-                            <Disclosure as="div" className="mt-2">
+                            <Disclosure as='div' className='mt-2'>
                               {({ open }) => (
                                 <>
-                                  <Disclosure.Button className="flex justify-between w-full px-4 py-5 text-sm font-medium text-left text-gray-900 bg-gray-100 rounded-lg hover:bg-gray-200 focus:outline-none focus-visible:ring focus-visible:ring-gray-500 focus-visible:ring-opacity-75">
+                                  <Disclosure.Button className='flex justify-between w-full px-4 py-5 text-sm font-medium text-left text-gray-900 bg-gray-100 rounded-lg hover:bg-gray-200 focus:outline-none focus-visible:ring focus-visible:ring-gray-500 focus-visible:ring-opacity-75'>
                                     <span>Travel Restrictions</span>
                                     <ChevronUpIcon
-                                      className={`${open ? 'transform rotate-180' : ''
-                                        } w-5 h-5 text-gray-500`}
+                                      className={`${
+                                        open ? "transform rotate-180" : ""
+                                      } w-5 h-5 text-gray-500`}
                                     />
                                   </Disclosure.Button>
-                                  <Disclosure.Panel className="px-4 pt-4 pb-2 text-sm text-gray-500">
+                                  <Disclosure.Panel className='px-4 pt-4 pb-2 text-sm text-gray-500'>
                                     <div className='grid grid-cols-1 lg:grid-cols-2 gap-y-6 gap-x-10 text-sm text-neutral-700 dark:text-neutral-300 '>
                                       {/* TIEN ICH 1 */}
                                       {fromTravelRest["TravelRestrictions"].map(
@@ -591,17 +601,18 @@ function PageHome() {
                                 </>
                               )}
                             </Disclosure>
-                            <Disclosure as="div" className="mt-2">
+                            <Disclosure as='div' className='mt-2'>
                               {({ open }) => (
                                 <>
-                                  <Disclosure.Button className="flex justify-between w-full px-4 py-5 text-sm font-medium text-left text-gray-900 bg-gray-100 rounded-lg hover:bg-gray-200 focus:outline-none focus-visible:ring focus-visible:ring-gray-500 focus-visible:ring-opacity-75">
+                                  <Disclosure.Button className='flex justify-between w-full px-4 py-5 text-sm font-medium text-left text-gray-900 bg-gray-100 rounded-lg hover:bg-gray-200 focus:outline-none focus-visible:ring focus-visible:ring-gray-500 focus-visible:ring-opacity-75'>
                                     <span>Forms and documents</span>
                                     <ChevronUpIcon
-                                      className={`${open ? 'transform rotate-180' : ''
-                                        } w-5 h-5 text-gray-500`}
+                                      className={`${
+                                        open ? "transform rotate-180" : ""
+                                      } w-5 h-5 text-gray-500`}
                                     />
                                   </Disclosure.Button>
-                                  <Disclosure.Panel className="px-4 pt-4 pb-2 text-sm text-gray-500">
+                                  <Disclosure.Panel className='px-4 pt-4 pb-2 text-sm text-gray-500'>
                                     <div className='grid grid-cols-1 lg:grid-cols-2 gap-y-6 gap-x-10 text-sm text-neutral-700 dark:text-neutral-300 '>
                                       {/* TIEN ICH 1 */}
                                       {fromTravelRest["TravelRestrictions"].map(
@@ -621,17 +632,18 @@ function PageHome() {
                                 </>
                               )}
                             </Disclosure>
-                            <Disclosure as="div" className="mt-2">
+                            <Disclosure as='div' className='mt-2'>
                               {({ open }) => (
                                 <>
-                                  <Disclosure.Button className="flex justify-between w-full px-4 py-5 text-sm font-medium text-left text-gray-900 bg-gray-100 rounded-lg hover:bg-gray-200 focus:outline-none focus-visible:ring focus-visible:ring-gray-500 focus-visible:ring-opacity-75">
+                                  <Disclosure.Button className='flex justify-between w-full px-4 py-5 text-sm font-medium text-left text-gray-900 bg-gray-100 rounded-lg hover:bg-gray-200 focus:outline-none focus-visible:ring focus-visible:ring-gray-500 focus-visible:ring-opacity-75'>
                                     <span>Additional Information</span>
                                     <ChevronUpIcon
-                                      className={`${open ? 'transform rotate-180' : ''
-                                        } w-5 h-5 text-gray-500`}
+                                      className={`${
+                                        open ? "transform rotate-180" : ""
+                                      } w-5 h-5 text-gray-500`}
                                     />
                                   </Disclosure.Button>
-                                  <Disclosure.Panel className="px-4 pt-4 pb-2 text-sm text-gray-500">
+                                  <Disclosure.Panel className='px-4 pt-4 pb-2 text-sm text-gray-500'>
                                     <div className='grid grid-cols-1 lg:grid-cols-2 gap-y-6 gap-x-10 text-sm text-neutral-700 dark:text-neutral-300 '>
                                       {/* TIEN ICH 1 */}
                                       {fromTravelRest["TravelRestrictions"].map(
@@ -658,7 +670,7 @@ function PageHome() {
                   </div>
                 </div>
               ) : (
-                <div style={{ marginLeft: "50%" }} className="py-6">
+                <div style={{ marginLeft: "50%" }} className='py-6'>
                   <svg
                     className='animate-spin -ml-1 mr-3 h-5 w-5'
                     xmlns='http://www.w3.org/2000/svg'
@@ -680,7 +692,6 @@ function PageHome() {
               )}
             </>
           ) : null}
-
         </div>
         {/* SECTION 1 */}
         {/* <SectionSliderNewCategories categories={DEMO_CATS} /> */}
@@ -690,21 +701,16 @@ function PageHome() {
 
         {/* SECTION */}
 
-         {/* SECTION */}
-         {/*}
+        {/* SECTION */}
+        {/*}
          <div>
 
 <SectionGridFeaturePlaces />
 </div>
               */}
 
-
-   {/* SECTION 1 */}
-   <SectionGridCategoryBox />
-
-
-       
-     
+        {/* SECTION 1 */}
+        <SectionGridCategoryBox />
 
         {/* <div className='relative py-16'>
           <BackgroundSection className='bg-orange-50 dark:bg-black dark:bg-opacity-20 ' />
@@ -726,7 +732,6 @@ function PageHome() {
           <BackgroundSection className='bg-orange-50 dark:bg-black dark:bg-opacity-20 ' />
           <SectionGridAuthorBox />
         </div> */}
-
 
         {/* SECTION */}
         {/* <div className='relative py-16'>

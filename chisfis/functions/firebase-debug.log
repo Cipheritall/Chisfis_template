@@ -59,3 +59,4 @@
 Issues? Report them at https://github.com/firebase/firebase-tools/issues and attach the *-debug.log files.
  
 [debug] [2021-10-26T17:05:44.261Z] [worker-~diagnostic~-17c71b71-9ad0-4c1b-9eb3-334acc7141d2]: IDLE {"metadata":{"emulator":{"name":"functions"},"message":"[worker-~diagnostic~-17c71b71-9ad0-4c1b-9eb3-334acc7141d2]: IDLE"}}
+[debug] [2021-10-26T19:18:09.449Z] Received signal SIGHUP 1
