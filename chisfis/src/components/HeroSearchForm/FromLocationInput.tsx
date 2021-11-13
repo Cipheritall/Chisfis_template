@@ -3,12 +3,13 @@ import { FC } from "react";
 import { useEffect } from "react";
 import ClearDataButton from "./ClearDataButton";
 import { useRef } from "react";
+import { isForInStatement } from "typescript";
 
 export interface LocationInputProps {
   defaultValue: string;
   onChange?: (value: string) => void;
   onInputDone?: (value: string) => void;
-  onSelect?: (value: string) => void;
+  onSelect?: (value: any) => void;
   placeHolder?: string;
   desc?: string;
   className?: string;
@@ -28,7 +29,7 @@ const LocationInput: FC<LocationInputProps> = ({
   onInputDone,
   searchResults,
   onSelect,
-  placeHolder = "Location",
+  placeHolder,
   desc = "Where are you going?",
   className = "nc-flex-1.5",
 }) => {
@@ -77,10 +78,17 @@ const LocationInput: FC<LocationInputProps> = ({
   };
 
   const handleSelectLocation = (item: any) => {
-    setValue(item.city + ", " + item.country);
-    onInputDone && onInputDone(item.city + item.country);
-    setShowPopover(false);
-    onSelect(item.code);
+    if (item.coordinates) {
+      setValue(item.city + ", " + item.country);
+      onInputDone && onInputDone(item.city + item.country);
+      setShowPopover(false);
+      onSelect(item.coordinates);
+    } else {
+      setValue(item.city + ", " + item.country);
+      onInputDone && onInputDone(item.city + item.country);
+      setShowPopover(false);
+      onSelect(item.code);
+    }
   };
 
   const renderRecentSearches = () => {
@@ -200,12 +208,12 @@ const LocationInput: FC<LocationInputProps> = ({
         <div className='flex-grow'>
           <input
             className={`block w-full bg-transparent border-none focus:ring-0 p-0 focus:outline-none focus:placeholder-neutral-300 xl:text-lg font-semibold placeholder-neutral-800 dark:placeholder-neutral-200 truncate`}
-            placeholder='From'
+            placeholder={placeHolder}
             value={value}
             autoFocus={showPopover}
             onChange={(e) => setValue(e.currentTarget.value)}
             ref={inputRef}
-          />  
+          />
 
           {value && !showPopover && (
             <span className='block mt-0.5 text-sm text-neutral-400 font-light '>

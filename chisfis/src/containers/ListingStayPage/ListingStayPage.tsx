@@ -4,7 +4,7 @@ import SectionGridAuthorBox from "components/SectionGridAuthorBox/SectionGridAut
 import SectionHeroArchivePage from "components/SectionHeroArchivePage/SectionHeroArchivePage";
 import SectionSliderNewCategories from "components/SectionSliderNewCategories/SectionSliderNewCategories";
 import SectionSubscribe2 from "components/SectionSubscribe2/SectionSubscribe2";
-import React, { FC, Fragment, useEffect, useState } from "react";
+import React, { FC, Fragment, useEffect, useState, useRef } from "react";
 import SectionGridFilterCard from "./SectionGridFilterCard";
 
 import { Helmet } from "react-helmet";
@@ -30,6 +30,7 @@ import { title } from "process";
 import WidgetHeading1 from "containers/BlogPage/WidgetHeading1";
 import Tag from "shared/Tag/Tag";
 import { NONAME } from "dns";
+import axios from "containers/CheckOutPage/axios";
 
 export interface ListingStayPageProps {
   className?: string;
@@ -54,6 +55,42 @@ const ListingStayPage: FC<ListingStayPageProps> = ({
   const [testProviders, setAllTestProviders] = useState([]);
   const [isLoaded, setIsLoaded] = useState(false);
 
+  const [queryText, setQueryText] = useState("");
+  const [queryLocation, setQueryLocation] = useState([]);
+  const [locationResults, setLocationResults] = useState([]);
+
+  const autocompleteAddress = (query) => {
+    setQueryText(query);
+
+    axios(
+      `https://api.mapbox.com/geocoding/v5/mapbox.places/${query}.json?autocomplete=true&limit=5&access_token=pk.eyJ1IjoiZ3VsYiIsImEiOiJja3VuemltZG4weWtjMm9wZjJsMHcwOXg1In0.Iwe4HWpF3rfRb-flOJTW-Q`
+    )
+      .then(function (response) {
+        // console.log(JSON.stringify(response.data));
+        // console.log(response.data.features);
+
+        let alf = [];
+        response.data.features.map((q) => {
+          let locationFormatted = {};
+
+          locationFormatted["name"] = q.text;
+          locationFormatted["city"] = q.place_name;
+          locationFormatted["country"] = q.place_type[0];
+          locationFormatted["code"] = q.id;
+          locationFormatted["coordinates"] = q.geometry.coordinates;
+          alf.push(locationFormatted);
+        });
+        // setIsShowingResults(true);
+        //setSelectedLocation("");
+        // console.log(alf, "alf");
+        setLocationResults(response.data.features);
+        setQueryLocation(alf);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  };
+
   useEffect(() => {
     getAllTestCentres();
     if (history.location.state) {
@@ -70,17 +107,17 @@ const ListingStayPage: FC<ListingStayPageProps> = ({
     let testCen = [];
     let testPro = [];
     querySnapshot1.forEach((doc) => {
-      console.log(doc.id, " => ", doc.data());
+      // console.log(doc.id, " => ", doc.data());
       testCen.push(doc.data());
     });
     querySnapshot2.forEach((doc) => {
-      console.log(doc.id, " => ", doc.data());
+      // console.log(doc.id, " => ", doc.data());
       testPro.push(doc.data());
     });
     setAllTestCentres(testCen);
     setFilteredTestCentres(testCen);
     setAllTestProviders(testPro);
-    console.log(testCen);
+    // console.log(testCen);
     setIsLoaded(false);
   };
 
@@ -91,20 +128,31 @@ const ListingStayPage: FC<ListingStayPageProps> = ({
   const searchRegion = () => {
     setIsLoaded(true);
     setShowCentres(true);
-    Geocode.setApiKey("AIzaSyDNfNT3Ds4oOEXvnzX0LJSDDeJEuzll8ys");
-    Geocode.setLanguage("en");
-    Geocode.enableDebug();
-    Geocode.fromAddress(region.label).then(
-      (response) => {
-        const { lat, lng } = response.results[0].geometry.location;
-        setLatLon({ lat, lng });
-        console.log(lat, lng);
-        findNearTest(lat, lng);
-      },
-      (error) => {
-        console.error(error);
-      }
-    );
+
+    // let FL = [];
+    // FL = queryLocation.filter((q) => {
+    //   return q.code === region;
+    // });
+    // let lt = FL[0].geometry.coordinates[0];
+    // let lg = FL[0].geometry.coordinates[1];
+    // console.log(FL[0].geometry, region, locationResults, "FLLLFL");
+    setLatLon({ region });
+    findNearTest(region[1], region[0]);
+    // AIzaSyAVeDtcgZuZEu43BJw_E6roH_SvafnDuLk
+    // Geocode.setApiKey("AIzaSyAVeDtcgZuZEu43BJw_E6roH_SvafnDuLk");
+    // Geocode.setLanguage("en");
+    // Geocode.enableDebug();
+    // Geocode.fromAddress(region.label).then(
+    //   (response) => {
+    //     const { lat, lng } = response.results[0].geometry.location;
+    //     setLatLon({ lat, lng });
+    //     console.log(lat, lng);
+    //     findNearTest(lat, lng);
+    //   },
+    //   (error) => {
+    //     console.error(error);
+    //   }
+    // );
     setIsLoaded(false);
     setShowCentres(true);
   };
@@ -196,7 +244,7 @@ const ListingStayPage: FC<ListingStayPageProps> = ({
     } else {
       for (let i = 0; i < filteredTestCentres.length; i++) {
         if (fil.includes(filteredTestCentres[i].provider)) {
-          console.log(testCentres[i].provider);
+          // console.log(testCentres[i].provider);
           filteredTests.push(filteredTestCentres[i]);
         }
       }
@@ -220,8 +268,8 @@ const ListingStayPage: FC<ListingStayPageProps> = ({
           <div className='relative flex nc-flex-1.5'>
             <div className='flex flex-1 [ nc-hero-field-padding ] flex-shrink-0 items-center space-x-3 cursor-pointer focus:outline-none text-left'>
               <div className='flex-grow'>
-                <GooglePlacesAutocomplete
-                  apiKey='AIzaSyDNfNT3Ds4oOEXvnzX0LJSDDeJEuzll8ys'
+                {/* <GooglePlacesAutocomplete
+                  apiKey='AIzaSyAVeDtcgZuZEu43BJw_E6roH_SvafnDuLk'
                   selectProps={{
                     value: region,
                     onChange: onLocationSelect,
@@ -252,6 +300,24 @@ const ListingStayPage: FC<ListingStayPageProps> = ({
                       }),
                     },
                   }}
+                /> */}
+
+                {/* <input
+                  className={`block w-full bg-transparent border-none focus:ring-0 p-0 focus:outline-none focus:placeholder-neutral-300 xl:text-lg font-semibold placeholder-neutral-800 dark:placeholder-neutral-200 truncate`}
+                  placeholder='From'
+                  value={queryText}
+                  // autoFocus={showPopover}
+                  onChange={(e) => autocompleteAddress(e.currentTarget.value)}
+                  // ref={inputRef}
+                /> */}
+
+                <FromLocationInput
+                  defaultValue=''
+                  // onInputDone={() => setDateFocused("startDate")}
+                  onChange={(value) => autocompleteAddress(value)}
+                  searchResults={queryLocation}
+                  onSelect={setRegion}
+                  placeHolder='Search'
                 />
               </div>
             </div>

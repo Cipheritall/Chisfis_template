@@ -88,7 +88,7 @@ const CheckOutPage: FC<CheckOutPageProps> = ({ className = "" }) => {
 
     history.push({
       pathname: "/checkout",
-      state: { formData: formData },
+      state: { billingDet: formData },
     });
   };
 

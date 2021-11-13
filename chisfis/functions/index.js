@@ -37,7 +37,8 @@ app.post("/payments/create", async (request, response) => {
   });
 
   response.status(402).send({
-    errorMessage: paymentIntent.error.message,
+    // errorMessage: paymentIntent.error.message,
+    errorMessage: "Something went Wrong!",
     statusType: "failure",
   });
 });

@@ -35,6 +35,7 @@ export interface CheckOutPageProps {
 
 const CheckOutPage: FC<CheckOutPageProps> = ({ className = "" }) => {
   const history = useHistory();
+  const [formData, setFormData] = useState(null);
 
   const stripePromise = loadStripe(
     "pk_test_51Jn1M5D6QVbbUe2SEWO6S72rZ4cRrOABtPgcrmpirR8Wd5osZLq4oPKwgMW2QlqcgVeNk1a8ibU7VRlT9paIIQJD00Hgscl9lW"
@@ -130,21 +131,19 @@ const CheckOutPage: FC<CheckOutPageProps> = ({ className = "" }) => {
       setError(event.error ? event.error.message : "");
     };
 
-    // useEffect(() => {
-    //   const getClientSecret = async () => {
-    //     const amount = 10000; //harcode
-    //     const response = await axios({
-    //       method: "post",
-    //       url:
-    //         "http://localhost:5001/testandtrip/us-central1/api/payments/create?total=" +
-    //         amount,
-    //     });
+    useEffect(() => {
+      const loadFormData = () => {
+        let fd;
+        if (history.location.state) {
+          // console.clear();
+          // console.log(history.location.state.formData, "dfkjdkf");
+          fd = history.location.state;
+          setFormData(fd.billingDet);
+        }
+      };
 
-    //     setClientSecret(response.data.clientSecret);
-    //   };
-
-    //   getClientSecret();
-    // }, []);
+      loadFormData();
+    }, []);
 
     const formSubmit = async (event) => {
       event.preventDefault();
@@ -175,14 +174,8 @@ const CheckOutPage: FC<CheckOutPageProps> = ({ className = "" }) => {
                   amount,
               });
 
-              console.log(response);
+              console.log(response, "res");
 
-              let formData;
-              if (history.location.state) {
-                // console.clear();
-                // console.log(history.location.state.formData, "dfkjdkf");
-                formData = history.location.state[formData];
-              }
               const billingDetails = {
                 name: formData.first_name + " " + formData.last_name,
                 email: formData.email,
@@ -204,6 +197,8 @@ const CheckOutPage: FC<CheckOutPageProps> = ({ className = "" }) => {
                   })
                   .then(
                     (result) => {
+                      console.log(result, "result");
+
                       if (result.error) {
                         console.log(result, "res");
                         swal.fire({
@@ -217,9 +212,11 @@ const CheckOutPage: FC<CheckOutPageProps> = ({ className = "" }) => {
                       }
                       if (result.paymentIntent) {
                         console.log(result, "dfkjkfdjkjfd");
-                        formData["payment_id"] = result.paymentIntent.id;
-                        formData["amount"] = result.paymentIntent.amount;
-                        sendToFirebase(formData);
+                        let fd = formData;
+                        fd["payment_id"] = result.paymentIntent.id;
+                        fd["amount"] = result.paymentIntent.amount;
+                        setFormData(fd);
+                        sendToFirebase();
                         setSucceeded(true);
                         setError(null);
                         setProcessing(false);
@@ -254,18 +251,18 @@ const CheckOutPage: FC<CheckOutPageProps> = ({ className = "" }) => {
               }
 
               setClientSecret(response.data.clientSecret);
-            } catch {
+            } catch (e) {
               swal.fire({
                 icon: "error",
                 title: "Oops...",
-                text: "Something went wrong",
+                text: "Something went wrong" + e,
               });
             }
           }
         });
     };
 
-    const sendToFirebase = async (formData) => {
+    const sendToFirebase = async () => {
       const docRef = await addDoc(collection(db, "customerPayments"), {
         formData: formData,
       });

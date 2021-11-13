@@ -331,6 +331,7 @@ function PageHome() {
                   onChange={(value) => handleFromChange(value)}
                   searchResults={searchFromResults}
                   onSelect={setFromLocation}
+                  placeHolder='From'
                 />
                 <LocationInput
                   defaultValue=''
