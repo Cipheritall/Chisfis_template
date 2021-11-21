@@ -311,7 +311,7 @@ const CheckOutPage: FC<CheckOutPageProps> = ({ className = "" }) => {
         <form onSubmit={formSubmit}>
           <div className='space-y-1'>
             <Label>Card holder </Label>
-            <Input defaultValue='JOHN DOE' />
+            <Input defaultValue='' placeholder="Enter Card Holder's Name" />
           </div>
 
           <div className='space-y-1'>
@@ -423,7 +423,7 @@ const CheckOutPage: FC<CheckOutPageProps> = ({ className = "" }) => {
                   </div>
                   <div className='space-y-1'>
                     <Label>Card holder </Label>
-                    <Input defaultValue='JOHN DOE' />
+                    <Input defaultValue='' />
                   </div>
                   <div className='flex space-x-5  '>
                     <div className='flex-1 space-y-1'>
