@@ -44,7 +44,13 @@ import HeroSearchForm from "components/HeroSearchForm/HeroSearchForm";
 import StaySearchForm, {
   DateRage,
 } from "../../components/HeroSearchForm/StaySearchForm";
-import { query, collection, where, getDocs } from "@firebase/firestore";
+import {
+  query,
+  collection,
+  where,
+  getDocs,
+  orderBy,
+} from "@firebase/firestore";
 import FromLocationInput from "components/HeroSearchForm/FromLocationInput";
 import LocationInput from "components/HeroSearchForm/LocationInput";
 import StayDatesRangeInput from "components/HeroSearchForm/StayDatesRangeInput";
@@ -52,6 +58,12 @@ import { db } from "firebase";
 import { FocusedInputShape } from "react-dates";
 import Checkbox from "shared/Checkbox/Checkbox";
 import AirportJson from "../../airports.json";
+import Heading from "components/Heading/Heading";
+import { count } from "console";
+import { Link } from "react-router-dom";
+import Badge from "shared/Badge/Badge";
+import NcImage from "shared/NcImage/NcImage";
+import convertNumbThousand from "utils/convertNumbThousand";
 
 const DEMO_CATS_2: TaxonomyType[] = [
   {
@@ -148,6 +160,7 @@ function PageHome() {
   const [fullyVaccinated, setFullyVaccinated] = useState(false);
   const [fromLocation, setFromLocation] = useState("");
   const [toLocation, setToLocation] = useState("");
+  const [isSearchDone, setSearchDone] = useState(false);
 
   const [fromTravelRest, setFromTravelRest] = useState({
     TravelRestrictions: [],
@@ -162,7 +175,7 @@ function PageHome() {
     searchLocationName: "",
   });
 
-  const [isLoaded, setIsLoaded] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const [resLoaded, setResLoaded] = useState(false);
 
   const handleToChange = async (value) => {
@@ -194,19 +207,27 @@ function PageHome() {
           v.country.toLowerCase().startsWith(value.toLowerCase()) ||
           v.name.toLowerCase().startsWith(value.toLowerCase())
       );
+      console.log(
+        "🚀 ~ file: PageHome.tsx ~ line 197 ~ handleFromChange ~ searchFromResults",
+        searchFromResults
+      );
       setSearchFromResults(searchFromResults);
     }
   };
 
   const searchSubmit = () => {
-    console.log("sumbit");
-    console.log("RoundTrip:" + roundTrip);
-    console.log("Vaccinated:" + fullyVaccinated);
-    console.log("From Loction:" + fromLocation);
-    console.log("To Loction:" + toLocation);
-    console.log(
-      "Date Range:" + dateRangeValue.startDate + " " + dateRangeValue.endDate
-    );
+    // console.log("sumbit");
+    // console.log("RoundTrip:" + roundTrip);
+    // console.log("Vaccinated:" + fullyVaccinated);
+    // console.log(
+    //   "🚀 ~ file: PageHome.tsx ~ line 206 ~ searchSubmit ~ fromLocation",
+    //   fromLocation
+    // );
+    // console.log(
+    //   "🚀 ~ file: PageHome.tsx ~ line 208 ~ searchSubmit ~ toLocation",
+    //   toLocation
+    // );
+
     if (
       fromLocation &&
       toLocation &&
@@ -218,56 +239,117 @@ function PageHome() {
   };
 
   const getSearchedData = async () => {
-    try {
-      setIsLoaded(true);
+    // try {
+    setIsLoading(true);
+    setSearchDone(false);
+    let fromData = {
+      TravelRestrictions: [],
+      AdditionalInformation: [],
+      Documents: [],
+      searchLocationName: "",
+    };
 
-      const q1 = query(
-        collection(db, "searchedData"),
-        where("searchLocationName", "==", "India")
+    setFromTravelRest(fromData);
+
+    let toData = {
+      TravelRestrictions: [],
+      AdditionalInformation: [],
+      Documents: [],
+      searchLocationName: "",
+    };
+
+    setToTravelRest(toData);
+
+    const q1 = query(
+      collection(db, "searchedData"),
+      where("searchLocationName", "==", fromLocation)
+    );
+    console.log(
+      "🚀 ~ file: PageHome.tsx ~ line 236 ~ getSearchedData ~ q1",
+      q1
+    );
+
+    const q2 = query(
+      collection(db, "searchedData"),
+      where("searchLocationName", "==", toLocation)
+    );
+
+    const querySnapshot1 = await getDocs(q1);
+
+    querySnapshot1.forEach((doc) => {
+      console.log(
+        "🚀 ~ file: PageHome.tsx ~ line 245 ~ querySnapshot1.forEach ~ doc",
+        doc
       );
-      const q2 = query(
-        collection(db, "searchedData"),
-        where("searchLocationName", "==", "United States")
-      );
-      const querySnapshot1 = await getDocs(q1);
-      const querySnapshot2 = await getDocs(q2);
-      querySnapshot1.forEach((doc) => {
-        console.log(doc.id, " => ", doc.data().searchLocationName);
-        const data = doc.data();
-        let fromData = {
-          TravelRestrictions: [],
-          AdditionalInformation: [],
-          Documents: [],
-          searchLocationName: "",
-        };
+      const data = doc.data();
+      console.log("TLL: getSearchedData -> data = " + data);
+
+      if (data.TravelRestrictions) {
         fromData["TravelRestrictions"] = data.TravelRestrictions;
         fromData["AdditionalInformation"] = data.AdditionalInformation;
         fromData["Documents"] = data.Documents;
         fromData["searchLocationName"] = data.searchLocationName;
         setFromTravelRest(fromData);
-      });
+      } else {
+        console.log("No data");
+      }
+    });
 
-      querySnapshot2.forEach((doc) => {
-        console.log(doc.id, " => ", doc.data());
-        const data = doc.data();
-        let toData = {
-          TravelRestrictions: [],
-          AdditionalInformation: [],
-          Documents: [],
-          searchLocationName: "",
-        };
-        toData["TravelRestrictions"] = data.TravelRestrictions;
-        toData["AdditionalInformation"] = data.AdditionalInformation;
-        toData["Documents"] = data.Documents;
-        toData["searchLocationName"] = data.searchLocationName;
-        setToTravelRest(toData);
-      });
-    } catch (err) {
-      console.log(err);
-    }
-    setIsLoaded(false);
+    const querySnapshot2 = await getDocs(q2);
+
+    querySnapshot2.forEach((doc) => {
+      console.log(doc.id, " => ", doc.data());
+      const data = doc.data();
+      console.log(
+        "TLL: getSearchedData -> data = " + data.searchLocationName,
+        data.Documents
+      );
+
+      toData["TravelRestrictions"] = data.TravelRestrictions;
+      console.log(
+        "🚀 ~ file: PageHome.tsx ~ line 300 ~ querySnapshot2.forEach ~ data.TravelRestrictions",
+        data.TravelRestrictions
+      );
+      toData["AdditionalInformation"] = data.AdditionalInformation;
+      toData["Documents"] = data.Documents;
+      toData["searchLocationName"] = data.searchLocationName;
+      setToTravelRest(toData);
+      console.log("TLL: getSearchedData -> toData = " + toData);
+    });
+    // } catch (err) {
+    //   console.log(err);
+    // }
+    setIsLoading(false);
     setResLoaded(true);
+    setSearchDone(true);
   };
+
+  const [travelDestinations, setTravelDestinations] = useState([]);
+
+  useEffect(() => {
+    const loadFormData = async () => {
+      try {
+        const q1 = query(
+          collection(db, "TravelDestinations"),
+          orderBy("visits", "desc")
+        );
+
+        const querySnapshot1 = await getDocs(q1);
+        let data = [];
+        querySnapshot1.forEach((doc) => {
+          console.log(doc.id, " => ", doc.data());
+          data.push(doc.data());
+        });
+        setTravelDestinations(data);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+
+    setIsLoading(true);
+    loadFormData();
+    setIsLoading(false);
+  }, []);
 
   return (
     <div className='nc-PageHome relative overflow-hidden'>
@@ -372,9 +454,12 @@ function PageHome() {
               </form>
             </div>
           </div>
-          {toTravelRest["TravelRestrictions"].length !== 0 || isLoaded ? (
+          {(toTravelRest["TravelRestrictions"].length !== 0 &&
+            fromTravelRest["TravelRestrictions"].length !== 0) ||
+          !isLoading ? (
             <>
-              {!isLoaded ? (
+              {toTravelRest["TravelRestrictions"].length !== 0 &&
+              fromTravelRest["TravelRestrictions"].length !== 0 ? (
                 <div className={`nc-SectionSliderNewCategories relative`}>
                   {/* <h3 className='text-2xl font-semibold'>Departure</h3> */}
                   <div className='mt-6'>
@@ -671,28 +756,36 @@ function PageHome() {
                   </div>
                 </div>
               ) : (
-                <div style={{ marginLeft: "50%" }} className='py-6'>
-                  <svg
-                    className='animate-spin -ml-1 mr-3 h-5 w-5'
-                    xmlns='http://www.w3.org/2000/svg'
-                    fill='none'
-                    viewBox='0 0 24 24'>
-                    <circle
-                      className='opacity-25'
-                      cx='12'
-                      cy='12'
-                      r='10'
-                      stroke='currentColor'
-                      strokeWidth='3'></circle>
-                    <path
-                      className='opacity-75'
-                      fill='currentColor'
-                      d='M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z'></path>
-                  </svg>
-                </div>
+                isSearchDone && (
+                  <h2
+                    style={{ marginLeft: "50%" }}
+                    className='text-lg text-neutral-900 dark:text-neutral-100 font-semibold flex-grow py-6'>
+                    No data found
+                  </h2>
+                )
               )}
             </>
-          ) : null}
+          ) : (
+            <div style={{ marginLeft: "50%" }} className='py-6'>
+              <svg
+                className='animate-spin -ml-1 mr-3 h-5 w-5'
+                xmlns='http://www.w3.org/2000/svg'
+                fill='none'
+                viewBox='0 0 24 24'>
+                <circle
+                  className='opacity-25'
+                  cx='12'
+                  cy='12'
+                  r='10'
+                  stroke='currentColor'
+                  strokeWidth='3'></circle>
+                <path
+                  className='opacity-75'
+                  fill='currentColor'
+                  d='M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z'></path>
+              </svg>
+            </div>
+          )}
         </div>
         {/* SECTION 1 */}
         {/* <SectionSliderNewCategories categories={DEMO_CATS} /> */}
@@ -711,7 +804,51 @@ function PageHome() {
               */}
 
         {/* SECTION 1 */}
-        <SectionGridCategoryBox />
+        {/* <SectionGridCategoryBox /> */}
+
+        <div className={`nc-SectionGridCategoryBox relative`}>
+          <Heading
+            desc='Top places to travel from your location'
+            isCenter={false}>
+            Popular Destinations
+          </Heading>
+          <div
+            className={`grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 sm:gap-6 md:gap-8`}>
+            {travelDestinations.map((td, i) => (
+              // <CardComponentName key={i} taxonomy={item} />
+              <Link
+                key={td.destinationName}
+                to={{
+                  pathname: "/travel-destination-detail",
+                  state: { destinationDetails: td },
+                }}
+                className={`nc-CardCategoryBox1 relative flex items-center p-3 sm:p-6 [ nc-box-has-hover ] [ nc-dark-box-bg-has-hover ]`}
+                data-nc-id='CardCategoryBox1'>
+                <Badge
+                  className='absolute right-2 top-2'
+                  color='gray'
+                  name={convertNumbThousand(td.visits)}
+                />
+
+                <div className='relative flex-shrink-0 w-24 h-24 rounded-full overflow-hidden'>
+                  <NcImage
+                    src={td.destinationImage}
+                    containerClassName='absolute inset-0'
+                  />
+                </div>
+                <div className='ml-4 flex-grow overflow-hidden'>
+                  <h2 className='text-base font-medium'>
+                    <span className='line-clamp-1'>{td.destinationName}</span>
+                  </h2>
+                  <span
+                    className={`block mt-2 text-sm text-neutral-500 dark:text-neutral-400`}>
+                    Restrictions apply
+                  </span>
+                </div>
+              </Link>
+            ))}
+          </div>
+        </div>
 
         {/* <div className='relative py-16'>
           <BackgroundSection className='bg-orange-50 dark:bg-black dark:bg-opacity-20 ' />

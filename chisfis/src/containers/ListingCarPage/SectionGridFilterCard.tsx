@@ -41,9 +41,9 @@ const SectionGridFilterCard: FC<SectionGridFilterCardProps> = ({
           <CarCard key={car.id} data={car} />
         ))}
       </div>
-      <div className='flex mt-16 justify-center items-center'>
+      {/* <div className='flex mt-16 justify-center items-center'>
         <Pagination />
-      </div>
+      </div> */}
     </div>
   );
 };

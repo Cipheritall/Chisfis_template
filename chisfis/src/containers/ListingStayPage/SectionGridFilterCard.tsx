@@ -35,9 +35,9 @@ const SectionGridFilterCard: FC<SectionGridFilterCardProps> = ({
           <StayCard key={stay.id} data={stay} />
         ))}
       </div>
-      <div className='flex mt-16 justify-center items-center'>
+      {/* <div className='flex mt-16 justify-center items-center'>
         <Pagination />
-      </div>
+      </div> */}
     </div>
   );
 };

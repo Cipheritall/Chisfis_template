@@ -181,68 +181,76 @@ const TravelDestinationCard: FC<CarCardProps> = ({
           }
         />
 
-     
-
         <div className='grid grid-cols-1 gap-6 md:gap-8 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4'>
-          {data.map((d) => (
-            <div
-              className={`nc-CarCard group relative border border-neutral-200 dark:border-neutral-700 rounded-3xl overflow-hidden hover:shadow-xl transition-shadow bg-white dark:bg-neutral-900 ${className}`}
-              data-nc-id='CarCard'>
-              <Link to={d.href} className='flex flex-col'>
-                <div className='relative w-full rounded-2xl overflow-hidden'>
-                  <div className='aspect-w-16 aspect-h-9 '>
-                    <NcImage
-                      containerClassName='flex items-center justify-center'
-                      className='w-full'
-                      src={d.featuredImage}
-                    />
-                  </div>
-                  {/* <BtnLikeIcon isLiked={like} className='absolute right-3 top-3' /> */}
-                  {/* {saleOff && <SaleOffBadge className="absolute left-3 top-3" />} */}
-                  {/* {<SaleOffBadge className='absolute left-3 top-3' />} */}
-                </div>
-
-                <div
-                  className={
-                    size === "default" ? "p-5  space-y-4" : "p-3  space-y-2"
-                  }>
-                  <div className='space-y-2'>
-                    <div className='flex items-center space-x-2'>
-                      {<Badge name='Open' color='green' />}
-                      <h2
-                        className={`  capitalize ${
-                          size === "default"
-                            ? "text-xl font-semibold"
-                            : "text-base font-medium"
-                        }`}>
-                        <span className='line-clamp-1'>{d.title}</span>
-                      </h2>
+          {travelDestinations &&
+            travelDestinations.map((d) => (
+              <div
+                className={`nc-CarCard group relative border border-neutral-200 dark:border-neutral-700 rounded-3xl overflow-hidden hover:shadow-xl transition-shadow bg-white dark:bg-neutral-900 ${className}`}
+                data-nc-id='CarCard'>
+                <Link
+                  to={{
+                    pathname: "/travel-destination-detail",
+                    state: { destinationDetails: d },
+                  }}
+                  className='flex flex-col'>
+                  <div className='relative w-full rounded-2xl overflow-hidden'>
+                    <div className='aspect-w-16 aspect-h-9 '>
+                      <NcImage
+                        containerClassName='flex items-center justify-center'
+                        className='w-full'
+                        src={d.destinationImage}
+                      />
                     </div>
-                    <div className='flex items-center text-neutral-500 dark:text-neutral-400 text-sm space-x-2'>
-                      <span className=''>{d.desc}</span>
+                    {/* <BtnLikeIcon isLiked={like} className='absolute right-3 top-3' /> */}
+                    {/* {saleOff && <SaleOffBadge className="absolute left-3 top-3" />} */}
+                    {/* {<SaleOffBadge className='absolute left-3 top-3' />} */}
+                  </div>
+
+                  <div
+                    className={
+                      size === "default" ? "p-5  space-y-4" : "p-3  space-y-2"
+                    }>
+                    <div className='space-y-2'>
+                      <div className='flex items-center space-x-2'>
+                        {<Badge name='Open' color='green' />}
+                        <h2
+                          className={`  capitalize ${
+                            size === "default"
+                              ? "text-xl font-semibold"
+                              : "text-base font-medium"
+                          }`}>
+                          <span className='line-clamp-1'>
+                            {d.destinationName}
+                          </span>
+                        </h2>
+                      </div>
+                      <div className='flex items-center text-neutral-500 dark:text-neutral-400 text-sm space-x-2'>
+                        <span className=''>{d.destinationDescription}</span>
+                      </div>
+                    </div>
+                    <div className='w-14 border-b border-neutral-100 dark:border-neutral-800'></div>
+
+                    {/* <div> */}
+                    {/* <p className='text-sm'>Testing Window</p>
+                    </div> */}
+
+                    <div className='flex justify-between items-center'>
+                      {/* <span className='text-base font-semibold'>
+                        {d.testingWindow}
+                      </span> */}
+                      <span className='text-base font-semibold'>
+                        Learn More
+                      </span>
                     </div>
                   </div>
-                  <div className='w-14 border-b border-neutral-100 dark:border-neutral-800'></div>
-
-                  <div>
-                    <p className='text-sm'>Testing Window</p>
-                  </div>
-
-                  <div className='flex justify-between items-center'>
-                    <span className='text-base font-semibold'>
-                      {d.testingWindow}
-                    </span>
-                    <span className='text-base font-semibold'>Learn More</span>
-                  </div>
-                </div>
-              </Link>
-            </div>
-          ))}
+                </Link>
+              </div>
+            ))}
         </div>
 
-        <div className='flex mt-16 justify-center items-center'>
+        {/* <div className='flex mt-16 justify-center items-center'>
           <Pagination />
-        </div>
+        </div> */}
       </div>
     </div>
   );

@@ -4,7 +4,7 @@ import SectionGridAuthorBox from "../../components/SectionGridAuthorBox/SectionG
 import SectionHeroArchivePage from "../../components/SectionHeroArchivePage/SectionHeroArchivePage";
 import SectionSliderNewCategories from "../../components/SectionSliderNewCategories/SectionSliderNewCategories";
 import SectionSubscribe2 from "../../components/SectionSubscribe2/SectionSubscribe2";
-import React, { FC, Fragment } from "react";
+import React, { FC, Fragment, useEffect, useState } from "react";
 import SectionGridFilterCard from "../../containers/ListingStayPage/SectionGridFilterCard";
 import { Helmet } from "react-helmet";
 import HeroSearchForm from "components/HeroSearchForm/HeroSearchForm";
@@ -13,6 +13,10 @@ import ButtonPrimary from "shared/Button/ButtonPrimary";
 import carUtilities2 from "../../images/carUtilities/2.png";
 import { Tab } from "@headlessui/react";
 import ButtonSecondary from "shared/Button/ButtonSecondary";
+import { useHistory } from "react-router";
+import { query, collection, where, getDocs, addDoc } from "@firebase/firestore";
+import { db } from "firebase";
+import { doc, updateDoc } from "firebase/firestore";
 
 export interface ListingStayPageProps {
   className?: string;
@@ -50,6 +54,34 @@ const includes_demo = [
 const TravelDestinationDetail: FC<ListingStayPageProps> = ({
   className = "",
 }) => {
+  const history = useHistory();
+
+  const [destDet, setDestDetails] = useState({
+    destinationName: "",
+    destinationDescription: "",
+    entryRequirementsAnswers: [],
+    destinationImage: "",
+    visits: "",
+    id: "",
+  });
+  useEffect(() => {
+    const loadFormData = async () => {
+      let fd;
+      if (history.location.state) {
+        fd = history.location.state;
+
+        setDestDetails(fd.destinationDetails);
+
+        const travelDestRef = collection(db, "TravelDestinations");
+        await updateDoc(doc(travelDestRef, fd.destinationDetails.id.trim()), {
+          visits: parseInt(fd.destinationDetails.visits) + 1,
+        });
+      }
+    };
+
+    loadFormData();
+  }, []);
+
   return (
     <div
       className={`nc-ListingStayPage relative overflow-hidden ${className}`}
@@ -61,14 +93,13 @@ const TravelDestinationDetail: FC<ListingStayPageProps> = ({
       <div className='container relative overflow-hidden'>
         {/* SECTION HERO */}
         <div className='relative py-16'>
-
           <div
             className={`nc-SectionHeroArchivePage flex flex-col relative pt-10 pb-24 lg:pb-32 lg:pt-28`}
             data-nc-id='SectionHeroArchivePage'>
             <div className='flex flex-col lg:flex-row lg:items-center'>
               <div className='flex-shrink-0 lg:w-1/2 flex flex-col items-start space-y-6 lg:space-y-10 pb-14 lg:pb-64 xl:pb-80 xl:pr-14 lg:mr-10 xl:mr-0'>
                 <h2 className='font-medium text-3xl md:text-4xl xl:text-6xl leading-[110%]'>
-                  Norway Travel Restrictions
+                  {destDet && destDet.destinationName} Travel Restrictions
                 </h2>
                 <div className='flex items-center text-base md:text-lg text-neutral-500 dark:text-neutral-400'>
                   <i className='text-2xl las la-map-marked'></i>
@@ -82,7 +113,7 @@ const TravelDestinationDetail: FC<ListingStayPageProps> = ({
 
                 <div>
                   <h4 className='text-lg font-semibold'>
-                    Who can travel to Norway ?
+                    Who can travel to {destDet && destDet.destinationName} ?
                   </h4>
                   <span className='block mt-3 text-neutral-500 dark:text-neutral-400'>
                     Yes 10 days{" "}
@@ -94,11 +125,7 @@ const TravelDestinationDetail: FC<ListingStayPageProps> = ({
                     Accepted tests for entry{" "}
                   </h4>
                   <span className='block mt-3 text-neutral-500 dark:text-neutral-400'>
-                    Anyone arriving to Norway will be required to present a
-                    negative PCR test, no older than 24 hours, and get tested
-                    upon entry. Arrivals from countries considered low-risk, are
-                    exempt from presenting test results.Vaccinated and recovered
-                    arrivals holding an EU green certificate are exempt as well.
+                    {destDet && destDet.destinationDescription}
                   </span>
                 </div>
 
@@ -109,7 +136,7 @@ const TravelDestinationDetail: FC<ListingStayPageProps> = ({
               <div className='flex-grow'>
                 <img
                   className='w-full'
-                  src='https://images.pexels.com/photos/4151484/pexels-photo-4151484.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260'
+                  src={destDet && destDet.destinationImage}
                   alt='hero'
                 />
               </div>
@@ -127,7 +154,7 @@ const TravelDestinationDetail: FC<ListingStayPageProps> = ({
           <div className='listingSection__wrap relative bg-white dark:bg-neutral-900 border border-neutral-100 dark:border-neutral-800 rounded-2xl overflow-hidden hover:shadow-xl transition-shadow '>
             <div className='text-center'>
               <h2 className='text-2xl font-semibold'>
-                Norway COVID-19 Entry Requirements{" "}
+                {destDet && destDet.destinationName} COVID-19 Entry Requirements{" "}
               </h2>
               {/* <span className='block mt-2 text-neutral-500 dark:text-neutral-400'>
                 Questions are at the heart of making things great.
@@ -163,7 +190,7 @@ const TravelDestinationDetail: FC<ListingStayPageProps> = ({
           <div className='listingSection__wrap relative bg-white dark:bg-neutral-900 border border-neutral-100 dark:border-neutral-800 rounded-2xl overflow-hidden hover:shadow-xl transition-shadow '>
             <div className='text-center'>
               <h2 className='text-2xl font-semibold'>
-                Can You Travel To Norway?{" "}
+                Can You Travel To {destDet && destDet.destinationName}?{" "}
               </h2>
               {/* <span className='block mt-2 text-neutral-500 dark:text-neutral-400'>
                 Questions are at the heart of making things great.
@@ -263,7 +290,9 @@ const TravelDestinationDetail: FC<ListingStayPageProps> = ({
           <div className='listingSection__wrap mt-10 relative bg-white dark:bg-neutral-900 border border-neutral-100 dark:border-neutral-800 rounded-2xl overflow-hidden hover:shadow-xl transition-shadow'>
             <div className='flex items-center space-x-4 '>
               <div>
-                <h2 className='text-2xl font-semibold'>Leaving the UK</h2>
+                <h2 className='text-2xl font-semibold'>
+                  Leaving the {destDet && destDet.destinationName}
+                </h2>
               </div>
               <div className='w-10 flex-shrink-0'>
                 <img src={carUtilities2} alt='' />
@@ -384,7 +413,9 @@ const TravelDestinationDetail: FC<ListingStayPageProps> = ({
           <div className='listingSection__wrap relative mt-10 bg-white dark:bg-neutral-900 border border-neutral-100 dark:border-neutral-800 rounded-2xl overflow-hidden hover:shadow-xl transition-shadow '>
             <div className='flex items-center space-x-4 '>
               <div>
-                <h2 className='text-2xl font-semibold'>Entering the UK</h2>
+                <h2 className='text-2xl font-semibold'>
+                  Entering the {destDet && destDet.destinationName}
+                </h2>
               </div>
               <div className='w-10 flex-shrink-0'>
                 <img src={carUtilities2} alt='' />

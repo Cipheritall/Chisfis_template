@@ -37,6 +37,8 @@ const CheckOutPage: FC<CheckOutPageProps> = ({ className = "" }) => {
   const history = useHistory();
   const [formData, setFormData] = useState(null);
 
+  const [isLoading, setIsLoading] = useState(false);
+
   const stripePromise = loadStripe(
     "pk_test_51Jn1M5D6QVbbUe2SEWO6S72rZ4cRrOABtPgcrmpirR8Wd5osZLq4oPKwgMW2QlqcgVeNk1a8ibU7VRlT9paIIQJD00Hgscl9lW"
   );
@@ -45,44 +47,53 @@ const CheckOutPage: FC<CheckOutPageProps> = ({ className = "" }) => {
     return (
       <div className='w-full flex flex-col sm:rounded-2xl sm:border border-neutral-200 dark:border-neutral-700 space-y-6 sm:space-y-8 px-0 sm:p-6 xl:p-8'>
         <div className='flex flex-col sm:flex-row sm:items-center'>
-          <div className='flex-shrink-0 w-full sm:w-40'>
-            <div className=' aspect-w-4 aspect-h-3 sm:aspect-h-4 rounded-2xl overflow-hidden'>
-              <NcImage src='https://images.pexels.com/photos/6373478/pexels-photo-6373478.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940' />
-            </div>
-          </div>
-          <div className='py-5 sm:px-5 space-y-3'>
+          <div className='py-5  space-y-3'>
             <div>
+              <h3 className='text-2xl font-semibold'>Day 5 Test to Release</h3>
               <span className='text-sm text-neutral-500 dark:text-neutral-400 line-clamp-1'>
-                Hotel room in Tokyo, Jappan
+                {formData && formData.testCentreName}
               </span>
-              <span className='text-base font-medium mt-1 block'>
-                The Lounge & Bar
+              <span className='text-sm text-neutral-500 dark:text-neutral-400 line-clamp-1'>
+                {formData && formData.location}
               </span>
             </div>
             <span className='block  text-sm text-neutral-500 dark:text-neutral-400'>
-              2 beds · 2 baths
+              {formData && formData.numberOfPeople} Members
             </span>
             <div className='w-10 border-b border-neutral-200  dark:border-neutral-700'></div>
-            <StartRating />
           </div>
         </div>
         <div className='flex flex-col space-y-4'>
           <h3 className='text-2xl font-semibold'>Price detail</h3>
           <div className='flex justify-between text-neutral-6000 dark:text-neutral-300'>
-            <span>$19 x 3 day</span>
-            <span>$57</span>
+            <span>
+              {formData && formData.price} x{" "}
+              {formData && formData.numberOfPeople} members
+            </span>
+            <span>
+              {formData &&
+                parseInt(formData.price) * formData.numberOfPeople + 15}{" "}
+              $
+            </span>
           </div>
           <div className='flex justify-between text-neutral-6000 dark:text-neutral-300'>
             <span>Service charge</span>
-            <span>$0</span>
+            <span>15$</span>
           </div>
 
           <div className='border-b border-neutral-200 dark:border-neutral-700'></div>
           <div className='flex justify-between font-semibold'>
             <span>Total</span>
-            <span>$57</span>
+            <span>
+              {formData &&
+                parseInt(formData.price) * formData.numberOfPeople + 15}{" "}
+              $
+            </span>
           </div>
         </div>
+        {/* <div className='pt-4'>
+          <ButtonPrimary>Confirm and pay</ButtonPrimary>
+        </div> */}
       </div>
     );
   };
@@ -133,6 +144,8 @@ const CheckOutPage: FC<CheckOutPageProps> = ({ className = "" }) => {
 
     useEffect(() => {
       const loadFormData = () => {
+        setIsLoading(true);
+
         let fd;
         if (history.location.state) {
           // console.clear();
@@ -140,6 +153,7 @@ const CheckOutPage: FC<CheckOutPageProps> = ({ className = "" }) => {
           fd = history.location.state;
           setFormData(fd.billingDet);
         }
+        setIsLoading(false);
       };
 
       loadFormData();
@@ -166,7 +180,9 @@ const CheckOutPage: FC<CheckOutPageProps> = ({ className = "" }) => {
             try {
               setProcessing(true);
 
-              const amount = 10000; //harcode
+              const amount =
+                formData.price * formData.numberOfPeople +
+                formData.serviceCharge; //harcode
               const response = await axios({
                 method: "post",
                 url:
@@ -227,7 +243,7 @@ const CheckOutPage: FC<CheckOutPageProps> = ({ className = "" }) => {
                         );
                       }
 
-                      // history.replace("/payment/success");
+                      history.replace("/");
                     },
                     function (error) {
                       console.log("error");
@@ -453,57 +469,86 @@ const CheckOutPage: FC<CheckOutPageProps> = ({ className = "" }) => {
   };
 
   return (
-    <div className={`nc-CheckOutPage ${className}`} data-nc-id='CheckOutPage'>
-      <main className='container mt-11 mb-24 lg:mb-32 flex flex-col-reverse lg:flex-row'>
-        <div className='w-full lg:w-3/5 xl:w-2/3 lg:pr-10 '>
-          <div className='w-full flex flex-col sm:rounded-2xl sm:border border-neutral-200 dark:border-neutral-700 space-y-8 px-0 sm:p-6 xl:p-8'>
-            <h2 className='text-3xl lg:text-4xl font-semibold'>
-              Confirm and payment
-            </h2>
-            <div className='border-b border-neutral-200 dark:border-neutral-700'></div>
-            <div>
-              <div>
-                <h3 className='text-2xl font-semibold'>Your trip</h3>
-                <NcModal
-                  renderTrigger={(openModal) => (
-                    <span
-                      onClick={() => openModal()}
-                      className='block lg:hidden underline  mt-1 cursor-pointer'>
-                      View booking details
-                    </span>
-                  )}
-                  renderContent={renderSidebar}
-                />
-              </div>
-              <div className='mt-6 border border-neutral-200 dark:border-neutral-700 rounded-3xl flex flex-col sm:flex-row divide-y sm:divide-x sm:divide-y-0 divide-neutral-200 dark:divide-neutral-700'>
-                <div className='flex-1 p-5 flex justify-between space-x-5'>
-                  <div className='flex flex-col'>
-                    <span className='text-sm text-neutral-400'>Date</span>
-                    <span className='mt-1.5 text-lg font-semibold'>
-                      Aug 12 - 16, 2021
-                    </span>
+    <>
+      {!isLoading ? (
+        <div
+          className={`nc-CheckOutPage ${className}`}
+          data-nc-id='CheckOutPage'>
+          <main className='container mt-11 mb-24 lg:mb-32 flex flex-col-reverse lg:flex-row'>
+            <div className='w-full lg:w-3/5 xl:w-2/3 lg:pr-10 '>
+              <div className='w-full flex flex-col sm:rounded-2xl sm:border border-neutral-200 dark:border-neutral-700 space-y-8 px-0 sm:p-6 xl:p-8'>
+                <h2 className='text-3xl lg:text-4xl font-semibold'>
+                  Confirm and payment
+                </h2>
+                <div className='border-b border-neutral-200 dark:border-neutral-700'></div>
+                <div>
+                  <div>
+                    <h3 className='text-2xl font-semibold'>Your Test</h3>
+                    <NcModal
+                      renderTrigger={(openModal) => (
+                        <span
+                          onClick={() => openModal()}
+                          className='block lg:hidden underline  mt-1 cursor-pointer'>
+                          View booking details
+                        </span>
+                      )}
+                      renderContent={renderSidebar}
+                    />
                   </div>
-                  <PencilAltIcon className='w-6 h-6 text-neutral-300 dark:text-neutral-6000' />
-                </div>
-                <div className='flex-1 p-5 flex justify-between space-x-5'>
-                  <div className='flex flex-col'>
-                    <span className='text-sm text-neutral-400'>Guests</span>
-                    <span className='mt-1.5 text-lg font-semibold'>
-                      3 Guests
-                    </span>
+                  <div className='mt-6 border border-neutral-200 dark:border-neutral-700 rounded-3xl flex flex-col sm:flex-row divide-y sm:divide-x sm:divide-y-0 divide-neutral-200 dark:divide-neutral-700'>
+                    <div className='flex-1 p-5 flex justify-between space-x-5'>
+                      <div className='flex flex-col'>
+                        <span className='text-sm text-neutral-400'>Date</span>
+                        <span className='mt-1.5 text-lg font-semibold'>
+                          {formData && formData.appointment_date} <br />{" "}
+                          {formData && formData.time_slot}
+                        </span>
+                      </div>
+                      <PencilAltIcon className='w-6 h-6 text-neutral-300 dark:text-neutral-6000' />
+                    </div>
+                    <div className='flex-1 p-5 flex justify-between space-x-5'>
+                      <div className='flex flex-col'>
+                        <span className='text-sm text-neutral-400'>
+                          Members
+                        </span>
+                        <span className='mt-1.5 text-lg font-semibold'>
+                          {formData && formData.numberOfPeople} Members
+                        </span>
+                      </div>
+                      <PencilAltIcon className='w-6 h-6 text-neutral-300 dark:text-neutral-6000' />
+                    </div>
                   </div>
-                  <PencilAltIcon className='w-6 h-6 text-neutral-300 dark:text-neutral-6000' />
                 </div>
+                <Elements stripe={stripePromise}>
+                  <PaymentForm />
+                </Elements>
               </div>
             </div>
-            <Elements stripe={stripePromise}>
-              <PaymentForm />
-            </Elements>
-          </div>
+            <div className='hidden lg:block flex-grow'>{renderSidebar()}</div>
+          </main>
         </div>
-        <div className='hidden lg:block flex-grow'>{renderSidebar()}</div>
-      </main>
-    </div>
+      ) : (
+        <div style={{ marginLeft: "50%" }} className='py-6'>
+          <svg
+            className='animate-spin -ml-1 mr-3 h-5 w-5'
+            xmlns='http://www.w3.org/2000/svg'
+            fill='none'
+            viewBox='0 0 24 24'>
+            <circle
+              className='opacity-25'
+              cx='12'
+              cy='12'
+              r='10'
+              stroke='currentColor'
+              strokeWidth='3'></circle>
+            <path
+              className='opacity-75'
+              fill='currentColor'
+              d='M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z'></path>
+          </svg>
+        </div>
+      )}
+    </>
   );
 };
 

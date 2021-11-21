@@ -87,7 +87,7 @@ const LocationInput: FC<LocationInputProps> = ({
       setValue(item.city + ", " + item.country);
       onInputDone && onInputDone(item.city + item.country);
       setShowPopover(false);
-      onSelect(item.code);
+      onSelect(item.country);
     }
   };
 

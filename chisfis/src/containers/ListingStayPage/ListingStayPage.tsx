@@ -325,6 +325,7 @@ const ListingStayPage: FC<ListingStayPageProps> = ({
 
           <div className='px-4 py-4 lg:py-0'>
             <button
+              disabled={region ? false : true}
               type='button'
               onClick={searchRegion}
               className='h-14 md:h-16 w-full md:w-16 rounded-full bg-primary-6000 hover:bg-primary-700 flex items-center justify-center text-neutral-50 focus:outline-none'>
@@ -399,7 +400,7 @@ const ListingStayPage: FC<ListingStayPageProps> = ({
                 <div className='flex lg:space-x-4'>
                   <div className='hidden lg:flex space-x-4'>
                     {/* {renderTabsPriceRage()} */}
-                    <TabFilters />
+                    {/* <TabFilters /> */}
                   </div>
                 </div>
               </div>
@@ -512,7 +513,10 @@ const ListingStayPage: FC<ListingStayPageProps> = ({
                 ) : filteredTestCentres.length > 0 ? (
                   filteredTestCentres.map((tc) => (
                     <Link
-                      to='/booking-page'
+                      to={{
+                        pathname: "/booking-page",
+                        state: { testCentre: tc },
+                      }}
                       className={`nc-StayCard group relative bg-white dark:bg-neutral-900 border border-neutral-100 dark:border-neutral-800 rounded-2xl overflow-hidden hover:shadow-xl transition-shadow ${className}`}
                       data-nc-id='StayCard'>
                       <div className={"p-4 space-y-4"}>
@@ -614,11 +618,11 @@ const ListingStayPage: FC<ListingStayPageProps> = ({
                   </h2>
                 )}
               </div>
-              {filteredTestCentres.length > 0 && (
+              {/* {filteredTestCentres.length > 0 && (
                 <div className='flex mt-16 justify-center items-center'>
                   <Pagination />
                 </div>
-              )}
+              )} */}
             </>
           </div>
         ) : null
