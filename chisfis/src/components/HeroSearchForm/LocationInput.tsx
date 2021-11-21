@@ -85,7 +85,7 @@ const LocationInput: FC<LocationInputProps> = ({
     setValue(item.city + ", " + item.country);
     onInputDone && onInputDone(item.city + item.country);
     setShowPopover(false);
-    onSelect(item.country);
+    onSelect(item.city + ", " + item.country);
   };
 
   const renderRecentSearches = () => {

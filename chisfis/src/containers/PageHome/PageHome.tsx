@@ -193,6 +193,10 @@ function PageHome() {
   };
 
   const handleFromChange = (value) => {
+    console.log(
+      "🚀 ~ file: PageHome.tsx ~ line 196 ~ handleFromChange ~ value",
+      value
+    );
     let searchFromResults = [];
     // console.log(sampleAirpots);
     setSearchFromResults(searchFromResults);
@@ -207,10 +211,7 @@ function PageHome() {
           v.country.toLowerCase().startsWith(value.toLowerCase()) ||
           v.name.toLowerCase().startsWith(value.toLowerCase())
       );
-      console.log(
-        "🚀 ~ file: PageHome.tsx ~ line 197 ~ handleFromChange ~ searchFromResults",
-        searchFromResults
-      );
+
       setSearchFromResults(searchFromResults);
     }
   };
