@@ -332,6 +332,7 @@ function PageHome() {
       try {
         const q1 = query(
           collection(db, "TravelDestinations"),
+          where("visits", ">", 10),
           orderBy("visits", "desc")
         );
 
@@ -498,7 +499,7 @@ function PageHome() {
                       <Tab.Panels>
                         <Tab.Panel className='space-y-5'>
                           <div>
-                            <Disclosure>
+                            {/* <Disclosure>
                               {({ open }) => (
                                 <>
                                   <Disclosure.Button className='flex justify-between w-full px-4 py-5 text-sm font-medium text-left text-gray-900 bg-gray-100 rounded-lg hover:bg-gray-200 focus:outline-none focus-visible:ring focus-visible:ring-gray-500 focus-visible:ring-opacity-75'>
@@ -511,7 +512,6 @@ function PageHome() {
                                   </Disclosure.Button>
                                   <Disclosure.Panel className='px-4 pt-4 pb-2 text-sm text-gray-500'>
                                     <div className='grid grid-cols-1 lg:grid-cols-2 gap-y-6 gap-x-10 text-sm text-neutral-700 dark:text-neutral-300 '>
-                                      {/* TIEN ICH 1 */}
                                       {fromTravelRest["TravelRestrictions"].map(
                                         (item) => (
                                           <div
@@ -528,23 +528,26 @@ function PageHome() {
                                   </Disclosure.Panel>
                                 </>
                               )}
-                            </Disclosure>
-                            <Disclosure as='div' className='mt-2'>
-                              {({ open }) => (
-                                <>
-                                  <Disclosure.Button className='flex justify-between w-full px-4 py-5 text-sm font-medium text-left text-gray-900 bg-gray-100 rounded-lg hover:bg-gray-200 focus:outline-none focus-visible:ring focus-visible:ring-gray-500 focus-visible:ring-opacity-75'>
-                                    <span>Travel Restrictions</span>
-                                    <ChevronUpIcon
-                                      className={`${
-                                        open ? "transform rotate-180" : ""
-                                      } w-5 h-5 text-gray-500`}
-                                    />
-                                  </Disclosure.Button>
-                                  <Disclosure.Panel className='px-4 pt-4 pb-2 text-sm text-gray-500'>
-                                    <div className='grid grid-cols-1 lg:grid-cols-2 gap-y-6 gap-x-10 text-sm text-neutral-700 dark:text-neutral-300 '>
-                                      {/* TIEN ICH 1 */}
-                                      {fromTravelRest["TravelRestrictions"].map(
-                                        (item) => (
+                            </Disclosure> */}
+
+                            {!fullyVaccinated && (
+                              <Disclosure as='div' className='mt-2'>
+                                {({ open }) => (
+                                  <>
+                                    <Disclosure.Button className='flex justify-between w-full px-4 py-5 text-sm font-medium text-left text-gray-900 bg-gray-100 rounded-lg hover:bg-gray-200 focus:outline-none focus-visible:ring focus-visible:ring-gray-500 focus-visible:ring-opacity-75'>
+                                      <span>Travel Restrictions</span>
+                                      <ChevronUpIcon
+                                        className={`${
+                                          open ? "transform rotate-180" : ""
+                                        } w-5 h-5 text-gray-500`}
+                                      />
+                                    </Disclosure.Button>
+                                    <Disclosure.Panel className='px-4 pt-4 pb-2 text-sm text-gray-500'>
+                                      <div className='grid grid-cols-1 lg:grid-cols-2 gap-y-6 gap-x-10 text-sm text-neutral-700 dark:text-neutral-300 '>
+                                        {/* TIEN ICH 1 */}
+                                        {fromTravelRest[
+                                          "TravelRestrictions"
+                                        ].map((item) => (
                                           <div
                                             key={item}
                                             className='flex items-center space-x-4 '>
@@ -553,13 +556,14 @@ function PageHome() {
                                             </div>
                                             <span>{item}</span>
                                           </div>
-                                        )
-                                      )}
-                                    </div>
-                                  </Disclosure.Panel>
-                                </>
-                              )}
-                            </Disclosure>
+                                        ))}
+                                      </div>
+                                    </Disclosure.Panel>
+                                  </>
+                                )}
+                              </Disclosure>
+                            )}
+
                             <Disclosure as='div' className='mt-2'>
                               {({ open }) => (
                                 <>
@@ -574,7 +578,7 @@ function PageHome() {
                                   <Disclosure.Panel className='px-4 pt-4 pb-2 text-sm text-gray-500'>
                                     <div className='grid grid-cols-1 lg:grid-cols-2 gap-y-6 gap-x-10 text-sm text-neutral-700 dark:text-neutral-300 '>
                                       {/* TIEN ICH 1 */}
-                                      {fromTravelRest["TravelRestrictions"].map(
+                                      {fromTravelRest["Documents"].map(
                                         (item) => (
                                           <div
                                             key={item}
@@ -605,18 +609,18 @@ function PageHome() {
                                   <Disclosure.Panel className='px-4 pt-4 pb-2 text-sm text-gray-500'>
                                     <div className='grid grid-cols-1 lg:grid-cols-2 gap-y-6 gap-x-10 text-sm text-neutral-700 dark:text-neutral-300 '>
                                       {/* TIEN ICH 1 */}
-                                      {fromTravelRest["TravelRestrictions"].map(
-                                        (item) => (
-                                          <div
-                                            key={item}
-                                            className='flex items-center space-x-4 '>
-                                            <div className='w-10 flex-shrink-0'>
-                                              <img src={carUtilities2} alt='' />
-                                            </div>
-                                            <span>{item}</span>
+                                      {fromTravelRest[
+                                        "AdditionalInformation"
+                                      ].map((item) => (
+                                        <div
+                                          key={item}
+                                          className='flex items-center space-x-4 '>
+                                          <div className='w-10 flex-shrink-0'>
+                                            <img src={carUtilities2} alt='' />
                                           </div>
-                                        )
-                                      )}
+                                          <span>{item}</span>
+                                        </div>
+                                      ))}
                                     </div>
                                   </Disclosure.Panel>
                                 </>
@@ -626,7 +630,7 @@ function PageHome() {
                         </Tab.Panel>
                         <Tab.Panel className='space-y-5'>
                           <div>
-                            <Disclosure>
+                            {/* <Disclosure>
                               {({ open }) => (
                                 <>
                                   <Disclosure.Button className='flex justify-between w-full px-4 py-5 text-sm font-medium text-left text-gray-900 bg-gray-100 rounded-lg hover:bg-gray-200 focus:outline-none focus-visible:ring focus-visible:ring-gray-500 focus-visible:ring-opacity-75'>
@@ -639,7 +643,6 @@ function PageHome() {
                                   </Disclosure.Button>
                                   <Disclosure.Panel className='px-4 pt-4 pb-2 text-sm text-gray-500'>
                                     <div className='grid grid-cols-1 lg:grid-cols-2 gap-y-6 gap-x-10 text-sm text-neutral-700 dark:text-neutral-300 '>
-                                      {/* TIEN ICH 1 */}
                                       {fromTravelRest["TravelRestrictions"].map(
                                         (item) => (
                                           <div
@@ -656,23 +659,26 @@ function PageHome() {
                                   </Disclosure.Panel>
                                 </>
                               )}
-                            </Disclosure>
-                            <Disclosure as='div' className='mt-2'>
-                              {({ open }) => (
-                                <>
-                                  <Disclosure.Button className='flex justify-between w-full px-4 py-5 text-sm font-medium text-left text-gray-900 bg-gray-100 rounded-lg hover:bg-gray-200 focus:outline-none focus-visible:ring focus-visible:ring-gray-500 focus-visible:ring-opacity-75'>
-                                    <span>Travel Restrictions</span>
-                                    <ChevronUpIcon
-                                      className={`${
-                                        open ? "transform rotate-180" : ""
-                                      } w-5 h-5 text-gray-500`}
-                                    />
-                                  </Disclosure.Button>
-                                  <Disclosure.Panel className='px-4 pt-4 pb-2 text-sm text-gray-500'>
-                                    <div className='grid grid-cols-1 lg:grid-cols-2 gap-y-6 gap-x-10 text-sm text-neutral-700 dark:text-neutral-300 '>
-                                      {/* TIEN ICH 1 */}
-                                      {fromTravelRest["TravelRestrictions"].map(
-                                        (item) => (
+                            </Disclosure> */}
+
+                            {!fullyVaccinated && (
+                              <Disclosure as='div' className='mt-2'>
+                                {({ open }) => (
+                                  <>
+                                    <Disclosure.Button className='flex justify-between w-full px-4 py-5 text-sm font-medium text-left text-gray-900 bg-gray-100 rounded-lg hover:bg-gray-200 focus:outline-none focus-visible:ring focus-visible:ring-gray-500 focus-visible:ring-opacity-75'>
+                                      <span>Travel Restrictions</span>
+                                      <ChevronUpIcon
+                                        className={`${
+                                          open ? "transform rotate-180" : ""
+                                        } w-5 h-5 text-gray-500`}
+                                      />
+                                    </Disclosure.Button>
+                                    <Disclosure.Panel className='px-4 pt-4 pb-2 text-sm text-gray-500'>
+                                      <div className='grid grid-cols-1 lg:grid-cols-2 gap-y-6 gap-x-10 text-sm text-neutral-700 dark:text-neutral-300 '>
+                                        {/* TIEN ICH 1 */}
+                                        {fromTravelRest[
+                                          "TravelRestrictions"
+                                        ].map((item) => (
                                           <div
                                             key={item}
                                             className='flex items-center space-x-4 '>
@@ -681,13 +687,14 @@ function PageHome() {
                                             </div>
                                             <span>{item}</span>
                                           </div>
-                                        )
-                                      )}
-                                    </div>
-                                  </Disclosure.Panel>
-                                </>
-                              )}
-                            </Disclosure>
+                                        ))}
+                                      </div>
+                                    </Disclosure.Panel>
+                                  </>
+                                )}
+                              </Disclosure>
+                            )}
+
                             <Disclosure as='div' className='mt-2'>
                               {({ open }) => (
                                 <>
@@ -702,7 +709,7 @@ function PageHome() {
                                   <Disclosure.Panel className='px-4 pt-4 pb-2 text-sm text-gray-500'>
                                     <div className='grid grid-cols-1 lg:grid-cols-2 gap-y-6 gap-x-10 text-sm text-neutral-700 dark:text-neutral-300 '>
                                       {/* TIEN ICH 1 */}
-                                      {fromTravelRest["TravelRestrictions"].map(
+                                      {fromTravelRest["Documents"].map(
                                         (item) => (
                                           <div
                                             key={item}
@@ -733,18 +740,18 @@ function PageHome() {
                                   <Disclosure.Panel className='px-4 pt-4 pb-2 text-sm text-gray-500'>
                                     <div className='grid grid-cols-1 lg:grid-cols-2 gap-y-6 gap-x-10 text-sm text-neutral-700 dark:text-neutral-300 '>
                                       {/* TIEN ICH 1 */}
-                                      {fromTravelRest["TravelRestrictions"].map(
-                                        (item) => (
-                                          <div
-                                            key={item}
-                                            className='flex items-center space-x-4 '>
-                                            <div className='w-10 flex-shrink-0'>
-                                              <img src={carUtilities2} alt='' />
-                                            </div>
-                                            <span>{item}</span>
+                                      {fromTravelRest[
+                                        "AdditionalInformation"
+                                      ].map((item) => (
+                                        <div
+                                          key={item}
+                                          className='flex items-center space-x-4 '>
+                                          <div className='w-10 flex-shrink-0'>
+                                            <img src={carUtilities2} alt='' />
                                           </div>
-                                        )
-                                      )}
+                                          <span>{item}</span>
+                                        </div>
+                                      ))}
                                     </div>
                                   </Disclosure.Panel>
                                 </>

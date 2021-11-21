@@ -58,9 +58,9 @@ const CheckOutPage: FC<CheckOutPageProps> = ({ className = "" }) => {
             </span>
           </div>
         </div>
-        <div className='pt-4'>
+        {/* <div className='pt-4'>
           <ButtonPrimary>Confirm and pay</ButtonPrimary>
-        </div>
+        </div> */}
       </div>
     );
   };
@@ -156,10 +156,11 @@ const CheckOutPage: FC<CheckOutPageProps> = ({ className = "" }) => {
                   <Label>No of people </Label>
                   <Input
                     name='no_of_people'
-                    type='text'
+                    type='number'
                     required={true}
                     onChange={(e) => handleNoOfPeople(e.currentTarget.value)}
                     value={numberOfPeople}
+                    min={1}
                   />
                 </div>
               </div>
