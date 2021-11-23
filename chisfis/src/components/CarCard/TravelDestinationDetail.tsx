@@ -63,6 +63,16 @@ const TravelDestinationDetail: FC<ListingStayPageProps> = ({
     destinationImage: "",
     visits: "",
     id: "",
+    entryReqQueAns: {
+      question1: "",
+      question2: "",
+      question3: "",
+      question4: "",
+      answer1: "",
+      answer2: "",
+      answer3: "",
+      answer4: "",
+    },
   });
   useEffect(() => {
     const loadFormData = async () => {
@@ -113,10 +123,10 @@ const TravelDestinationDetail: FC<ListingStayPageProps> = ({
 
                 <div>
                   <h4 className='text-lg font-semibold'>
-                    Who can travel to {destDet && destDet.destinationName} ?
+                    {destDet && destDet.entryReqQueAns.question1} ?
                   </h4>
                   <span className='block mt-3 text-neutral-500 dark:text-neutral-400'>
-                    Yes 10 days{" "}
+                    {destDet && destDet.entryReqQueAns.answer1}
                   </span>
                 </div>
 
@@ -165,7 +175,7 @@ const TravelDestinationDetail: FC<ListingStayPageProps> = ({
             <div className='grid grid-cols-1 lg:grid-cols-2 gap-y-6 gap-x-10 text-sm text-neutral-700 dark:text-neutral-300 '>
               {/* TIEN ICH 1 */}
 
-              {requirementsData.map((item, index) => (
+              {/* {requirementsData.map((item, index) => (
                 <div key={index} className='flex items-center space-x-4 '>
                   <div className='w-10 flex-shrink-0'>
                     <img src={item.icon} alt='' />
@@ -178,7 +188,66 @@ const TravelDestinationDetail: FC<ListingStayPageProps> = ({
                     </span>
                   </div>
                 </div>
-              ))}
+              ))} */}
+              <div className='flex items-center space-x-4 '>
+                <div className='w-10 flex-shrink-0'>
+                  <img src={carUtilities2} alt='' />
+                </div>
+
+                <div>
+                  <h4 className='text-lg font-semibold'>
+                    {destDet && destDet.entryReqQueAns.question1}
+                  </h4>
+                  <span className='block mt-3 text-neutral-500 dark:text-neutral-400'>
+                    {destDet && destDet.entryReqQueAns.answer1}
+                  </span>
+                </div>
+              </div>
+
+              <div className='flex items-center space-x-4 '>
+                <div className='w-10 flex-shrink-0'>
+                  <img src={carUtilities2} alt='' />
+                </div>
+
+                <div>
+                  <h4 className='text-lg font-semibold'>
+                    {destDet && destDet.entryReqQueAns.question2}
+                  </h4>
+                  <span className='block mt-3 text-neutral-500 dark:text-neutral-400'>
+                    {destDet && destDet.entryReqQueAns.answer2}
+                  </span>
+                </div>
+              </div>
+
+              <div className='flex items-center space-x-4 '>
+                <div className='w-10 flex-shrink-0'>
+                  <img src={carUtilities2} alt='' />
+                </div>
+
+                <div>
+                  <h4 className='text-lg font-semibold'>
+                    {destDet && destDet.entryReqQueAns.question3}
+                  </h4>
+                  <span className='block mt-3 text-neutral-500 dark:text-neutral-400'>
+                    {destDet && destDet.entryReqQueAns.answer3}
+                  </span>
+                </div>
+              </div>
+
+              <div className='flex items-center space-x-4 '>
+                <div className='w-10 flex-shrink-0'>
+                  <img src={carUtilities2} alt='' />
+                </div>
+
+                <div>
+                  <h4 className='text-lg font-semibold'>
+                    {destDet && destDet.entryReqQueAns.question4}
+                  </h4>
+                  <span className='block mt-3 text-neutral-500 dark:text-neutral-400'>
+                    {destDet && destDet.entryReqQueAns.answer4}
+                  </span>
+                </div>
+              </div>
             </div>
           </div>
         </div>
