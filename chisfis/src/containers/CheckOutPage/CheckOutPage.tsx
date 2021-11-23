@@ -71,9 +71,7 @@ const CheckOutPage: FC<CheckOutPageProps> = ({ className = "" }) => {
               {formData && formData.numberOfPeople} members
             </span>
             <span>
-              {formData &&
-                parseInt(formData.price) * formData.numberOfPeople + 15}{" "}
-              $
+              {formData && parseInt(formData.price) * formData.numberOfPeople} $
             </span>
           </div>
           <div className='flex justify-between text-neutral-6000 dark:text-neutral-300'>

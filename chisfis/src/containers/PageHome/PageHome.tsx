@@ -676,7 +676,7 @@ function PageHome() {
                                     <Disclosure.Panel className='px-4 pt-4 pb-2 text-sm text-gray-500'>
                                       <div className='grid grid-cols-1 lg:grid-cols-2 gap-y-6 gap-x-10 text-sm text-neutral-700 dark:text-neutral-300 '>
                                         {/* TIEN ICH 1 */}
-                                        {fromTravelRest[
+                                        {toTravelRest[
                                           "TravelRestrictions"
                                         ].map((item) => (
                                           <div
@@ -709,7 +709,7 @@ function PageHome() {
                                   <Disclosure.Panel className='px-4 pt-4 pb-2 text-sm text-gray-500'>
                                     <div className='grid grid-cols-1 lg:grid-cols-2 gap-y-6 gap-x-10 text-sm text-neutral-700 dark:text-neutral-300 '>
                                       {/* TIEN ICH 1 */}
-                                      {fromTravelRest["Documents"].map(
+                                      {toTravelRest["Documents"].map(
                                         (item) => (
                                           <div
                                             key={item}
@@ -740,7 +740,7 @@ function PageHome() {
                                   <Disclosure.Panel className='px-4 pt-4 pb-2 text-sm text-gray-500'>
                                     <div className='grid grid-cols-1 lg:grid-cols-2 gap-y-6 gap-x-10 text-sm text-neutral-700 dark:text-neutral-300 '>
                                       {/* TIEN ICH 1 */}
-                                      {fromTravelRest[
+                                      {toTravelRest[
                                         "AdditionalInformation"
                                       ].map((item) => (
                                         <div

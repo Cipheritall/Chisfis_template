@@ -11,6 +11,7 @@ import NcImage from "shared/NcImage/NcImage";
 import StartRating from "components/StartRating/StartRating";
 import NcModal from "shared/NcModal/NcModal";
 import { useHistory } from "react-router";
+import moment from "moment";
 
 export interface CheckOutPageProps {
   className?: string;
@@ -129,6 +130,30 @@ const CheckOutPage: FC<CheckOutPageProps> = ({ className = "" }) => {
     loadPageData();
   }, []);
 
+  const [dob, setDob] = useState("");
+  const handleDob = (e) => {
+    setDob(e);
+    let dtToday = new Date();
+
+    let month = (dtToday.getMonth() + 1).toString();
+    let day = dtToday.getDate().toString();
+    let year = dtToday.getFullYear();
+
+    if (parseInt(month) < 10) {
+      month = "0" + month.toString();
+    }
+    if (parseInt(day) < 10) {
+      day = "0" + day.toString();
+    }
+
+    var maxDate = year + "-" + month + "-" + day;
+    console.log(
+      "🚀 ~ file: BookingPage.tsx ~ line 148 ~ handleDob ~ maxDate",
+      maxDate
+    );
+    setDob(maxDate);
+  };
+
   const renderMain = () => {
     return (
       <div className='w-full flex flex-col sm:rounded-2xl sm:border border-neutral-200 dark:border-neutral-700 space-y-8 px-0 sm:p-6 xl:p-8'>
@@ -145,6 +170,7 @@ const CheckOutPage: FC<CheckOutPageProps> = ({ className = "" }) => {
                     type='date'
                     defaultValue='MM/YY'
                     name='appointment_date'
+                    min={moment(new Date()).format("YYYY-MM-DD")}
                     required={true}
                   />
                 </div>
@@ -197,6 +223,10 @@ const CheckOutPage: FC<CheckOutPageProps> = ({ className = "" }) => {
                     type='date'
                     defaultValue='MM/YY'
                     name='dob'
+                    // max='2014-05-15'
+                    max={moment(new Date()).format("YYYY-MM-DD")}
+                    // value={dob}
+                    // onChange={(e) => handleDob(e.currentTarget.value)}
                     required={true}
                   />
                 </div>
